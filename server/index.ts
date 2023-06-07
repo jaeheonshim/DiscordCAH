@@ -21,6 +21,7 @@ app.use((err, req, res, next) => {
       response: [{ content: err.getMessage(), ephemeral: true }],
     });
   } else {
+    console.error(err);
     res.status(200).send({
       response: [
         {

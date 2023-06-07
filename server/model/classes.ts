@@ -21,8 +21,11 @@ export class CAHGame {
 
     timing = {
         beginGameDelay: 10 * 1000,
-        nextRoundDelay: 15 * 1000
+        nextRoundDelay: 15 * 1000,
+        roundDuration: 2 * 60 * 1000
     }
+
+    cardHandCount: number = 7;
 
     deckId: string = "base_us";
     roundNumber: number = 0;
@@ -37,7 +40,7 @@ export class CAHPlayer {
     game: CAHGame;
     points: number = 0;
     ready: boolean;
-    cards: ResponseCard[];
+    cards: ResponseCard[] = [];
     
     constructor(id: string) {
         this.id = id;

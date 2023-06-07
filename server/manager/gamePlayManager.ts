@@ -1,7 +1,7 @@
 import { scheduleJob } from "node-schedule";
 import { CAHError, CAHSuccess } from "../model/cahresponse";
 import { CAHGame, CAHGameStatus } from "../model/classes";
-import { getRandomPromptCard } from "./deckManager";
+import { getRandomPromptCard, getRandomResponseCard } from "./deckManager";
 
 export function isReadyToBeginGame(game: CAHGame) {
     if(game.status != CAHGameStatus.PLAYER_JOIN) return false;
@@ -36,6 +36,21 @@ export function newRound(game: CAHGame) {
     } else {
         const players = Object.values(game.players);
         game.judge = players[Math.floor(Math.random() * players.length)];
+    }
+
+    const usedCards = new Set<string>();
+
+    for(const player of Object.values(game.players)) {
+        if(!player.cards) player.cards = [];
+        for(const card of player.cards) usedCards.add(card.id);
+    }
+
+    for(const player of Object.values(game.players)) {
+        while(player.cards.length < game.cardHandCount) {
+            const card = getRandomResponseCard(game.deckId, usedCards);
+            player.cards.push(card);
+            usedCards.add(card.id);
+        }
     }
 
     return new CAHSuccess("New round started!");

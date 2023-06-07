@@ -52,14 +52,23 @@ function scheduleRoundBegin(client: Client, time, gameId, channelId) {
   scheduleJob(time, async () => {
     try {
       await axios.post("http://localhost:8080/bot/game/newRound", { gameId }).then(async res => {
-        if(!res.data.channelMessage) return;
+        if (!res.data.channelMessage) return;
         const channelMessage = res.data.channelMessage;
-  
+
         const channel = (await client.channels.fetch(channelId) as TextBasedChannel);
-        channel.send(channelMessage);
+        await channel.send(channelMessage);
+
+        const individualMessages = res.data.individualMessages;
+        for (const userId of Object.keys(individualMessages)) {
+          const message = individualMessages[userId];
+          client.users.fetch(userId).then(async user => {
+            await user.send(message);
+          }).catch(e => {});
+        }
       });
-    } catch(e) {
+    } catch (e) {
       // game likely ended before round began
+      console.error(e);
     }
   });
 }

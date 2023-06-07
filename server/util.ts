@@ -28,6 +28,33 @@ export function getPlayerString(game: CAHGame) {
     }, "").trimEnd();
 }
 
+export function getPlayerRoundEmbed(game: CAHGame, playerId: string) {
+    const player = game.players[playerId];
+    const cardLines = [];
+
+    for(let i = 0; i < player.cards.length; ++i) {
+        cardLines.push(`${i+1}. \`${player.cards[i].text}\``);
+    }
+
+    const embed = {
+        title: `Your Cards For Round #${game.roundNumber}`,
+        color: 0xFFFF00,
+        description: `Below are your cards for this round. Don't show then to anyone else!\nTo choose a card, simply click the corresponding button below.`,
+        fields: [
+            {
+                name: "Prompt",
+                value: `\`${game.promptCard.text}\``
+            },
+            {
+                name: "Your cards",
+                value: cardLines.join("\n")
+            }
+        ]
+    }
+
+    return embed;
+}
+
 export function isPlayerCountInsufficient(game: CAHGame): boolean { 
     return Object.values(game.players).length == 0;
 }

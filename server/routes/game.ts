@@ -9,7 +9,7 @@ import {
 } from "../manager/gamePlayerManager";
 import { CAHError } from "../model/cahresponse";
 import { cacheUsername, retrieveUsername } from "../manager/usernameManager";
-import { getPlayerString, isPlayerCountInsufficient } from "../util";
+import { getPlayerRoundEmbed, getPlayerString, isPlayerCountInsufficient } from "../util";
 import { beginGame, isReadyToBeginGame, newRound } from "../manager/gamePlayManager";
 import { CAHGameStatus } from "../model/classes";
 
@@ -253,28 +253,53 @@ gameRouter.post("/newRound", function (req, res) {
         throw new Error("Missing required body param(s).");
 
     const reqGame = retrieveGameById(req.body.gameId);
-    console.log(reqGame);
     if(reqGame.status != CAHGameStatus.PENDING_ROUND_START) {
         throw new Error("Invalid game status for request");
     }
 
     const newRoundResponse = newRound(reqGame);
+    const judgeBeginTime = Date.now() + reqGame.timing.roundDuration;
 
     const newRoundEmbed = {
+        color: 0x0000FF,
         title: `Round #${reqGame.roundNumber}`,
+        description: `**Prompt:**\n\`${reqGame.promptCard.text}\`\n\u200B`,
         fields: [
             {
                 name: "🧐 Judge",
                 value: retrieveUsername(reqGame.judge.id)
             },
             {
-                prompt: "❔ Prompt",
-                value: `\`${reqGame.promptCard.text}\``
+                name: "⌛ Time Remaining",
+                value: `Round ends <t:${Math.round(judgeBeginTime / 1000)}:R>`
+            },
+            { 
+                name: "🧍 Players",
+                value: getPlayerString(reqGame)
             }
         ]
     }
+
+    const individualMessages = {};
+    for(const player of Object.values(reqGame.players)) {
+        if(player.id === reqGame.judge.id) {
+            individualMessages[player.id] = {
+                embeds: [{
+                    title: "You are the judge!",
+                    color: 0xFFFF00,
+                    description: "Sit tight while the other players are submitting their cards. Once all cards have been submitted, you'll have a chance to choose the best one."
+                }]
+            }
+        } else {
+            individualMessages[player.id] = {
+                embeds: [getPlayerRoundEmbed(reqGame, player.id)]
+            }
+        }
+    }
     
     res.json({
-        channelMessage: { content: newRoundResponse.getMessage() }
+        channelMessage: { content: newRoundResponse.getMessage(), embeds: [newRoundEmbed] },
+        individualMessages,
+        judgeBeginTime
     });
 });
