@@ -1,5 +1,7 @@
 export interface CAHResponse {
+    message: string;
 
+    getMessage(): string;
 }
 
 export class CAHError extends Error implements CAHResponse {
@@ -9,12 +11,20 @@ export class CAHError extends Error implements CAHResponse {
         // Set the prototype explicitly.
         Object.setPrototypeOf(this, CAHError.prototype);
     }
+
+    getMessage(): string {
+        return `🛑 **${this.message}**`;
+    }
 }
 
 export class CAHSuccess implements CAHResponse {
-    msg: string;
+    message: string;
 
     constructor(msg: string) {
-       this.msg = msg;
+       this.message = msg;
+    }
+
+    getMessage(): string {
+        return `✅ **${this.message}**`;
     }
 }

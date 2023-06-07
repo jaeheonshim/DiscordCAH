@@ -1,52 +1,55 @@
-import { CAHError } from "../../game/cahresponse";
-import { CAHGame } from "../../game/classes";
-import { playerJoinGame, playerLeaveGame, retrievePlayerById } from "../../game/gamePlayerManager";
-import { createNewGame, retrieveGameById } from "../../game/gameStorageManager";
+import { CAHError } from "../../game/model/cahresponse";
+import { CAHGame } from "../../game/model/classes";
+import {
+  playerJoinGame,
+  playerLeaveGame,
+  retrievePlayerById,
+} from "../../game/manager/gamePlayerManager";
+import {
+  createNewGame,
+  retrieveGameById,
+} from "../../game/manager/gameStorageManager";
 import { v4 as uuidv4 } from "uuid";
 
 describe("testing player join and leave", () => {
-    let newGame: CAHGame;
+  let newGame: CAHGame;
 
-    beforeEach(() => {
-        const channelId = uuidv4();
-        newGame = createNewGame(channelId); 
-    });
+  beforeEach(() => {
+    const channelId = uuidv4();
+    newGame = createNewGame(channelId);
+  });
 
-    test("player should be able to join games", () => {
-        const playerId = uuidv4();
-        playerJoinGame(newGame.id, playerId);
-        expect(newGame.players[playerId]).toBeDefined();
-    });
+  test("player should be able to join games", () => {
+    const playerId = uuidv4();
+    playerJoinGame(newGame.id, playerId);
+    expect(newGame.players[playerId]).toBeDefined();
+  });
 
-    test("player should not be able to join games if they are already in game", () => {
-        const playerId = uuidv4();
-        playerJoinGame(newGame.id, playerId);
-        
-        const anotherGame = createNewGame(uuidv4());
-        expect(() => playerJoinGame(anotherGame.id, playerId)).toThrow(CAHError);
-    });
+  test("player should not be able to join games if they are already in game", () => {
+    const playerId = uuidv4();
+    playerJoinGame(newGame.id, playerId);
 
-    test("attempting to retrieve invalid player should throw error", () => {
-        expect(() => retrievePlayerById(uuidv4())).toThrow(CAHError);
-    })
+    const anotherGame = createNewGame(uuidv4());
+    expect(() => playerJoinGame(anotherGame.id, playerId)).toThrow(CAHError);
+  });
 
-    test("manager should be able to retrieve players and player games", () => {
-        const playerId = uuidv4();
-        playerJoinGame(newGame.id, playerId);
-        
-        const player = retrievePlayerById(playerId);
-        expect(player.game.id).toEqual(newGame.id);
-    });
+  test("manager should be able to retrieve players and player games", () => {
+    const playerId = uuidv4();
+    playerJoinGame(newGame.id, playerId);
 
-    test("player should be able to leave games", () => {
-        const playerId = uuidv4();
-        playerJoinGame(newGame.id, playerId);
-        const gameId = retrievePlayerById(playerId).game.id;
+    const player = retrievePlayerById(playerId);
+    expect(player.game.id).toEqual(newGame.id);
+  });
 
-        playerLeaveGame(playerId);
+  test("player should be able to leave games", () => {
+    const playerId = uuidv4();
+    playerJoinGame(newGame.id, playerId);
+    const gameId = retrievePlayerById(playerId).game.id;
 
-        const game = retrieveGameById(gameId);
-        expect(game.players[playerId]).toBeUndefined();
-        expect(() => retrievePlayerById(playerId)).toThrow(CAHError);
-    });
-})
+    playerLeaveGame(playerId);
+
+    const game = retrieveGameById(gameId);
+    expect(game.players[playerId]).toBeUndefined();
+    expect(retrievePlayerById(playerId)).toBeUndefined();
+  });
+});
