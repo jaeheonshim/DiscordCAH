@@ -2,6 +2,7 @@ import { Client, GatewayIntentBits, Events, Collection, BaseInteraction } from '
 import config from './config.json';
 import path from "node:path";
 import fs from "node:fs";
+import "./deployCommands"
 
 const token = config.token;
 

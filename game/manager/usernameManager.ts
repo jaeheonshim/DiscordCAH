@@ -4,7 +4,7 @@ export function cacheUsername(userId: string, username: string) {
     usernameCache.set(userId, username);
 }
 
-export async function retrieveUsername(userId: string): Promise<string> {
+export function retrieveUsername(userId: string) {
     if(usernameCache.has(userId)) {
         return usernameCache.get(userId);
     } else {

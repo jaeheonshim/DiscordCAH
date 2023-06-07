@@ -5,22 +5,18 @@ import { checkCanSendDM } from "../util";
 import axios from "axios";
 
 export default {
-    cooldown: 30,
     data: new SlashCommandBuilder()
-        .setName("new")
-        .setDescription("Creates a new game in this channel"),
+        .setName("info")
+        .setDescription("Returns information about the game in this channel"),
     async execute(interaction: Interaction) {
         if (!interaction.isChatInputCommand()) return;
         await interaction.deferReply();
 
         await axios
-            .post("http://localhost:8080/bot/game/new", {
+            .post("http://localhost:8080/bot/game/info", {
                 userId: interaction.user.id,
                 username: (interaction.member as GuildMember).nickname,
-                channelId: interaction.channelId,
-                channelName: interaction.channel.name,
-                serverName: interaction.guild.name,
-                displayAvatarURL: interaction.user.displayAvatarURL(),
+                channelId: interaction.channelId
             })
             .then((res) => {
                 if (res.data) {

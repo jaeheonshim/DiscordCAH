@@ -12,7 +12,7 @@ app.listen(port, () => {
   console.log("Server started at port", port);
 });
 
-app.use("/game", gameRouter);
+app.use("/bot/game", gameRouter);
 
 // Error handler
 app.use((err, req, res, next) => {

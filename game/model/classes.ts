@@ -4,6 +4,11 @@ export class CAHGame {
     id: string = uuidv4();
     channelId: string;
     players: Record<string, CAHPlayer> = {};
+
+    details = {
+        serverName: "unknown",
+        channelName: "unknown"
+    }
 }
 
 export class CAHPlayer {
