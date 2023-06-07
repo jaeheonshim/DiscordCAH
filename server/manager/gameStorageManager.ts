@@ -48,7 +48,7 @@ export function deleteGameByChannelId(channelId: string): CAHResponse {
 export function retrieveGameById(gameId: string) {
   const game = gameMap.get(gameId);
 
-  if (!game) {
+  if (!game || game.deleted) {
     throw new CAHError("Game does not exist!");
   }
 

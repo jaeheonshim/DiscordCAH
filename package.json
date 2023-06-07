@@ -12,10 +12,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node-schedule": "^2.1.0",
     "axios": "^1.4.0",
     "body-parser": "^1.20.2",
     "discord.js": "^14.11.0",
     "express": "^4.18.2",
+    "node-schedule": "^2.1.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

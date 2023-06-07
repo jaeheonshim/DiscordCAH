@@ -1,7 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
+import { PromptCard, ResponseCard } from './cards';
 
 export enum CAHGameStatus {
-    PLAYER_JOIN
+    PLAYER_JOIN,
+    PENDING_ROUND_START,
+    PLAYER_SUBMIT_CARD
 }
 
 export class CAHGame {
@@ -15,6 +18,18 @@ export class CAHGame {
         serverName: "unknown",
         channelName: "unknown"
     }
+
+    timing = {
+        beginGameDelay: 10 * 1000,
+        nextRoundDelay: 15 * 1000
+    }
+
+    deckId: string = "base_us";
+    roundNumber: number = 0;
+    promptCard: PromptCard;
+    usedPromptCards: Set<string> = new Set<string>();
+    winner: CAHPlayer;
+    judge: CAHPlayer;
 }
 
 export class CAHPlayer {
@@ -22,6 +37,7 @@ export class CAHPlayer {
     game: CAHGame;
     points: number = 0;
     ready: boolean;
+    cards: ResponseCard[];
     
     constructor(id: string) {
         this.id = id;

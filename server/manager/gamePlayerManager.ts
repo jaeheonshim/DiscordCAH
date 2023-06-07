@@ -6,7 +6,7 @@ const playerMap = new Map<string, CAHPlayer>();
 
 export function playerJoinGame(gameId: string, playerId: string): CAHResponse {
   const game = retrieveGameById(gameId);
-  const player = playerMap.get(playerId) || new CAHPlayer(playerId);
+  const player = new CAHPlayer(playerId);
 
   if (player && player.game && !player.game.deleted) {
     throw new CAHError("Player is already in a game!");

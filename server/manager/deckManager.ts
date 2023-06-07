@@ -54,3 +54,5 @@ export function getRandomResponseCard(id: string, excludeList?: Set<string>): Re
         return filtered[Math.floor(Math.random() * filtered.length)];
     }
 }
+
+loadDeck("base_us", base);
