@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npx ts-node bot/main.ts",
     "test": "jest",
-    "server": "npx ts-node game/index.ts"
+    "server": "npx ts-node server/index.ts"
   },
   "keywords": [],
   "author": "",

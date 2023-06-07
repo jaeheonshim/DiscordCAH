@@ -1,15 +1,15 @@
-import { CAHError } from "../../game/model/cahresponse";
-import { CAHGame } from "../../game/model/classes";
+import { CAHError } from "../../server/model/cahresponse";
+import { CAHGame } from "../../server/model/classes";
 import {
   playerJoinGame,
   playerLeaveGame,
   retrievePlayerById,
-} from "../../game/manager/gamePlayerManager";
+} from "../../server/manager/gamePlayerManager";
 import {
   createNewGame,
   deleteGameById,
   retrieveGameById,
-} from "../../game/manager/gameStorageManager";
+} from "../../server/manager/gameStorageManager";
 import { v4 as uuidv4 } from "uuid";
 
 describe("testing player join and leave", () => {

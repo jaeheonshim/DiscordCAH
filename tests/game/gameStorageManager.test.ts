@@ -5,8 +5,8 @@ import {
   deleteGameById,
   retrieveGameByChannelId,
   retrieveGameById,
-} from "../../game/manager/gameStorageManager";
-import { CAHError } from "../../game/model/cahresponse";
+} from "../../server/manager/gameStorageManager";
+import { CAHError } from "../../server/model/cahresponse";
 
 describe("testing game creation", () => {
   test("created games should be accessible", () => {
