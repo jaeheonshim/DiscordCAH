@@ -136,3 +136,26 @@ gameRouter.post("/end", function (req, res) {
 
     res.json(botResponse);
 });
+
+gameRouter.post("/join", function (req, res) {
+    if (
+        !req.body.channelId ||
+        !req.body.userId ||
+        !req.body.username
+    )
+        throw new Error("Missing required body param(s).");
+
+    const channelId = req.body.channelId;
+    const userId = req.body.userId;
+    const username = req.body.username;
+
+    cacheUsername(userId, username);
+
+    const joinResponse = playerJoinGame(retrieveGameByChannelId(channelId).id, userId);
+    
+    res.json({
+        response: [
+            { content: joinResponse.getMessage(), ephemeral: true }
+        ]
+    });
+});

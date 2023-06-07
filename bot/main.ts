@@ -3,6 +3,7 @@ import config from './config.json';
 import path from "node:path";
 import fs from "node:fs";
 import "./deployCommands"
+import { CAHError } from '../game/model/cahresponse';
 
 const token = config.token;
 
@@ -63,9 +64,17 @@ client.on(Events.InteractionCreate, async (interaction) => {
     } catch (error) {
         console.error(error);
         if (interaction.replied || interaction.deferred) {
-            await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+            if(error instanceof CAHError) {
+                await interaction.followUp({ content: error.getMessage(), ephemeral: true});
+            } else {
+                await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+            }
         } else {
-            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+            if(error instanceof CAHError) {
+                await interaction.reply({ content: error.getMessage(), ephemeral: true});
+            } else {
+                await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+            }
         }
     }
 });
