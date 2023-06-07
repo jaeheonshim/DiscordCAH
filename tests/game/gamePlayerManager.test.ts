@@ -51,7 +51,7 @@ describe("testing player join and leave", () => {
 
     const game = retrieveGameById(gameId);
     expect(game.players[playerId]).toBeUndefined();
-    expect(retrievePlayerById(playerId)).toBeUndefined();
+    expect(() => retrievePlayerById(playerId)).toThrow(CAHError);
   });
 
   test("player should be able to join new games after current game ends", () => {

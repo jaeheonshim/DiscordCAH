@@ -1,0 +1,56 @@
+import base from "../decks/base_us.json";
+import { v4 as uuidv4 } from 'uuid';
+import { PromptCard, ResponseCard } from "../model/cards";
+
+const promptCards = new Map<string, [PromptCard]>();
+const responseCards = new Map<string, [ResponseCard]>();
+
+export function loadDeck(id: string, json) {
+    const prompt = json.prompt;
+    const response = json.response;
+
+    for(const card of prompt) {
+        card.id = uuidv4();
+    }
+
+    for(const card of response) {
+        card.id = uuidv4();
+    }
+
+    promptCards.set(id, prompt);
+    responseCards.set(id, response);
+}
+
+export function getAllPromptCards(id: string) {
+    return promptCards.get(id);
+}
+
+export function getAllResponseCards(id: string) {
+    return responseCards.get(id);
+}
+
+export function getRandomPromptCard(id: string, excludeList?: Set<string>): PromptCard {
+    const prompt = promptCards.get(id);
+    if(!excludeList) return prompt[Math.floor(Math.random() * prompt.length)];
+
+    const filtered = prompt.filter(c => !excludeList.has(c.id));
+
+    if(filtered.length == 0) {
+        return prompt[Math.floor(Math.random() * prompt.length)];
+    } else {
+        return filtered[Math.floor(Math.random() * filtered.length)];
+    }
+}
+
+export function getRandomResponseCard(id: string, excludeList?: Set<string>): ResponseCard {
+    const response = responseCards.get(id);
+    if(!excludeList) return response[Math.floor(Math.random() * response.length)];
+    
+    const filtered = response.filter(c => !excludeList.has(c.id));
+
+    if(filtered.length == 0) {
+        return response[Math.floor(Math.random() * response.length)];
+    } else {
+        return filtered[Math.floor(Math.random() * filtered.length)];
+    }
+}

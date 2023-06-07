@@ -4,6 +4,7 @@ import {
     playerInGame,
     playerJoinGame,
     playerLeaveGame,
+    playerReady,
     retrievePlayerById,
 } from "../manager/gamePlayerManager";
 import { CAHError } from "../model/cahresponse";
@@ -200,4 +201,19 @@ gameRouter.post("/leave", function (req, res) {
     }
 
     res.json(botResponse);
+});
+
+gameRouter.post("/ready", function (req, res) {
+    if (
+        !req.body.channelId ||
+        !req.body.userId ||
+        !req.body.username
+    )
+        throw new Error("Missing required body param(s).");
+
+    const userId = req.body.userId;
+    const username = req.body.username;
+
+    cacheUsername(userId, username);
+
 });
