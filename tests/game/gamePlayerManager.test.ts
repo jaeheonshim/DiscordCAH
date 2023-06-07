@@ -7,6 +7,7 @@ import {
 } from "../../game/manager/gamePlayerManager";
 import {
   createNewGame,
+  deleteGameById,
   retrieveGameById,
 } from "../../game/manager/gameStorageManager";
 import { v4 as uuidv4 } from "uuid";
@@ -51,5 +52,17 @@ describe("testing player join and leave", () => {
     const game = retrieveGameById(gameId);
     expect(game.players[playerId]).toBeUndefined();
     expect(retrievePlayerById(playerId)).toBeUndefined();
+  });
+
+  test("player should be able to join new games after current game ends", () => {
+    const playerId = uuidv4();
+    playerJoinGame(newGame.id, playerId);
+
+    expect(() => playerJoinGame(newGame.id, playerId)).toThrow(CAHError);
+
+    deleteGameById(newGame.id);
+
+    const anotherGame = createNewGame(newGame.channelId);
+    playerJoinGame(anotherGame.id, playerId);
   });
 });

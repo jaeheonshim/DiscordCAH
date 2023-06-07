@@ -5,7 +5,7 @@ import {
   deleteGameById,
   retrieveGameByChannelId,
   retrieveGameById,
-} from "../../game/gameStorageManager";
+} from "../../game/manager/gameStorageManager";
 import { CAHError } from "../../game/model/cahresponse";
 
 describe("testing game creation", () => {

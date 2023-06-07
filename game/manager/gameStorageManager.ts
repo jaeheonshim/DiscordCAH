@@ -30,6 +30,8 @@ export function deleteGameById(gameId: string): CAHResponse {
   gameMap.delete(game.id);
   channelIdMap.delete(game.channelId);
 
+  game.deleted = true;
+
   return new CAHSuccess("Game successfully deleted.");
 }
 

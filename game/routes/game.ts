@@ -1,5 +1,5 @@
 import express from "express";
-import { createNewGame, retrieveGameByChannelId } from "../manager/gameStorageManager";
+import { createNewGame, deleteGameByChannelId, retrieveGameByChannelId } from "../manager/gameStorageManager";
 import {
     playerJoinGame,
     retrievePlayerById,
@@ -26,7 +26,7 @@ gameRouter.post("/new", function (req, res) {
     cacheUsername(userId, username);
 
     const player = retrievePlayerById(userId);
-    if (player && player.game) throw new CAHError("You're already in a game!");
+    if (player && player.game && !player.game.deleted) throw new CAHError("You're already in a game!");
 
     const newGame = createNewGame(channelId);
     const joinResponse = playerJoinGame(newGame.id, userId);
@@ -84,7 +84,7 @@ gameRouter.post("/info", function (req, res) {
                         fields: [
                             {
                                 name: "Server",
-                                value: `\`${game.details.serverName}\`` 
+                                value: `\`${game.details.serverName}\``
                             },
                             {
                                 name: "Channel",
@@ -101,6 +101,38 @@ gameRouter.post("/info", function (req, res) {
             }
         ],
     };
+
+    res.json(botResponse);
+});
+
+gameRouter.post("/end", function (req, res) {
+    if (
+        !req.body.channelId ||
+        !req.body.userId ||
+        !req.body.username
+    )
+        throw new Error("Missing required body param(s).");
+
+    const channelId = req.body.channelId;
+    const userId = req.body.userId;
+    const username = req.body.username;
+
+    cacheUsername(userId, username);
+
+    const deleteResponse = deleteGameByChannelId(channelId);
+
+    const botResponse = {
+        response: [
+            {
+                content: deleteResponse.getMessage(), embeds: [
+                    {
+                        title: "Game Ended",
+                        description: "The game in this channel has been ended by a server administrator."
+                    }
+                ]
+            }
+        ]
+    }
 
     res.json(botResponse);
 });

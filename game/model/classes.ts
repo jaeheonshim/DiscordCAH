@@ -4,6 +4,7 @@ export class CAHGame {
     id: string = uuidv4();
     channelId: string;
     players: Record<string, CAHPlayer> = {};
+    deleted: boolean = false;
 
     details = {
         serverName: "unknown",
