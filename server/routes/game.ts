@@ -1,12 +1,14 @@
 import express from "express";
-import { createNewGame, deleteGameByChannelId, retrieveGameByChannelId } from "../manager/gameStorageManager";
+import { createNewGame, deleteGameByChannelId, deleteGameById, retrieveGameByChannelId } from "../manager/gameStorageManager";
 import {
+    playerInGame,
     playerJoinGame,
+    playerLeaveGame,
     retrievePlayerById,
 } from "../manager/gamePlayerManager";
 import { CAHError } from "../model/cahresponse";
 import { cacheUsername } from "../manager/usernameManager";
-import { getPlayerString } from "../util";
+import { getPlayerString, isPlayerCountInsufficient } from "../util";
 
 export const gameRouter = express.Router();
 
@@ -25,8 +27,7 @@ gameRouter.post("/new", function (req, res) {
 
     cacheUsername(userId, username);
 
-    const player = retrievePlayerById(userId);
-    if (player && player.game && !player.game.deleted) throw new CAHError("You're already in a game!");
+    if (playerInGame(userId)) throw new CAHError("You're already in a game!");
 
     const newGame = createNewGame(channelId);
     const joinResponse = playerJoinGame(newGame.id, userId);
@@ -158,4 +159,45 @@ gameRouter.post("/join", function (req, res) {
             { content: joinResponse.getMessage(), ephemeral: true }
         ]
     });
+});
+
+gameRouter.post("/leave", function (req, res) {
+    if (
+        !req.body.channelId ||
+        !req.body.userId ||
+        !req.body.username
+    )
+        throw new Error("Missing required body param(s).");
+
+    const channelId = req.body.channelId;
+    const userId = req.body.userId;
+    const username = req.body.username;
+
+    cacheUsername(userId, username);
+
+    const player = retrievePlayerById(userId);
+    const leaveResponse = playerLeaveGame(userId);
+
+    const botResponse: any = {
+        response: [
+            {
+                content: leaveResponse.getMessage()
+            }
+        ]
+    }
+
+    if(isPlayerCountInsufficient(player.game)) {
+        deleteGameById(player.game.id);
+        botResponse.channelMessage = {
+            channelId: player.game.channelId,
+            message: {
+                embeds: [{
+                    title: "Game Ended",
+                    description: "The game in this channel has been ended because there aren't enough players."
+                }]
+            }
+        }
+    }
+
+    res.json(botResponse);
 });

@@ -10,3 +10,7 @@ export function getPlayerString(game: CAHGame) {
         return prev + str + "\n";
     }, "").trimEnd();
 }
+
+export function isPlayerCountInsufficient(game: CAHGame): boolean { 
+    return Object.values(game.players).length == 0;
+}
