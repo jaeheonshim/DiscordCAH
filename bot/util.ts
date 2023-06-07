@@ -63,7 +63,7 @@ export async function executeDefaultTextCommandServerRequest(
           const message = res.data.channelMessage.message;
 
           const channel = await interaction.client.channels.fetch(channelId);
-          console.log(channel);
+
           if (channel.isTextBased) {
             await (channel as TextBasedChannel).send(message);
           }
