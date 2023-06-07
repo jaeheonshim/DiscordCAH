@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-enum CAHGameStatus {
+export enum CAHGameStatus {
     PLAYER_JOIN
 }
 
