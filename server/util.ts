@@ -2,6 +2,7 @@ import { retrieveUsername } from "./manager/usernameManager";
 import { CAHGame, CAHGameStatus, CAHPlayer } from "./model/classes";
 import jokes from "./jokes.json";
 import facts from "./funfacts.json";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
@@ -46,6 +47,36 @@ export function getPlayerString(game: CAHGame) {
 
         return prev + str + "\n";
     }, "").trimEnd();
+}
+
+export function getPlayerRoundComponents(game: CAHGame, playerId: string) {
+    const player = game.players[playerId];
+    const rows = [];
+    let row = new ActionRowBuilder();
+
+    for(let i = 0; i < player.cards.length; ++i) {
+        if(i != 0 && i % 5 == 0) {
+            rows.push(row);
+            row = new ActionRowBuilder(); 
+        }
+
+        const selectButton = new ButtonBuilder()
+			.setCustomId(`SUBMIT:${i}`)
+			.setLabel(`${i+1}`)
+			.setStyle(ButtonStyle.Secondary);
+
+        if(player.submitted.includes(player.cards[i])) {
+            selectButton.setDisabled(true);
+        }
+
+        row.addComponents(selectButton);
+    }
+
+    if(row.components.length > 0) {
+        rows.push(row);
+    }
+
+    return rows;
 }
 
 export function getPlayerRoundEmbed(game: CAHGame, playerId: string) {

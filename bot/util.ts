@@ -91,7 +91,9 @@ export function scheduleRoundBegin(client: Client, time, gameId) {
           const message = individualMessages[userId];
           client.users.fetch(userId).then(async user => {
             await user.send(message);
-          }).catch(e => {});
+          }).catch(e => {
+            console.error(e);
+          });
         }
       });
     } catch (e) {

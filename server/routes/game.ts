@@ -9,7 +9,7 @@ import {
 } from "../manager/gamePlayerManager";
 import { CAHError } from "../model/cahresponse";
 import { cacheUsername, retrieveUsername } from "../manager/usernameManager";
-import { getJudgeModal, getPlayerRoundEmbed, getPlayerString, getRoundResultModal, isPlayerCountInsufficient, randomFunFact, randomJoke, shuffle } from "../util";
+import { getJudgeModal, getPlayerRoundComponents, getPlayerRoundEmbed, getPlayerString, getRoundResultModal, isPlayerCountInsufficient, randomFunFact, randomJoke, shuffle } from "../util";
 import { beginGame, haveAllPlayersSubmitted, isReadyToBeginGame, judgeSubmitCard, newRound, playerSubmitCard, startJudgeStage } from "../manager/gamePlayManager";
 import { CAHGameStatus, CAHPlayer } from "../model/classes";
 import { ResponseCard } from "../model/cards";
@@ -294,7 +294,8 @@ gameRouter.post("/newRound", function (req, res) {
             }
         } else {
             individualMessages[player.id] = {
-                embeds: [getPlayerRoundEmbed(reqGame, player.id)]
+                embeds: [getPlayerRoundEmbed(reqGame, player.id)],
+                components: getPlayerRoundComponents(reqGame, player.id)
             }
         }
     }
@@ -332,7 +333,11 @@ gameRouter.post("/submit", function (req, res) {
 
         res.json({
             response: [{
-                content: submitResponse.getMessage()
+                content: submitResponse.getMessage(),
+                embeds: [{
+                    title: "Return to game channel",
+                    description: `<#${game.channelId}>`
+                }]
             }],
             channelMessage: {
                 channelId: game.channelId,
@@ -403,6 +408,7 @@ gameRouter.post("/submit", function (req, res) {
                 },
                 getPlayerRoundEmbed(game, userId)
             ];
+            botResponse.response[0]["components"] = getPlayerRoundComponents(game, userId);
         }
 
         res.json(botResponse);
