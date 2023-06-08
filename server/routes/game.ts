@@ -300,7 +300,10 @@ gameRouter.post("/newRound", function (req, res) {
     }
 
     res.json({
-        channelMessage: { content: newRoundResponse.getMessage(), embeds: [newRoundEmbed] },
+        channelMessage: {
+            channelId: reqGame.channelId,
+            message: { content: newRoundResponse.getMessage(), embeds: [newRoundEmbed] }
+        },
         individualMessages,
         judgeBeginTime
     });
@@ -455,12 +458,19 @@ gameRouter.post("/endRound", function (req, res) {
         throw new Error("Missing required body param(s).");
 
     const game = retrieveGameById(req.body.gameId);
+    game.status = CAHGameStatus.PENDING_ROUND_START;
+    const nextRoundBeginTime = Date.now() + game.timing.nextRoundDelay;
 
     const response = {
         channelMessage: {
             channelId: game.channelId,
-            message: { embeds: [getRoundResultModal(game)] }
+            message: { embeds: [getRoundResultModal(game), {
+                title: "Next Round",
+                description: `The next round will begin <t:${Math.round(nextRoundBeginTime / 1000)}:R>.`
+            }] }
         },
+        roundBeginTime: nextRoundBeginTime,
+        gameId: game.id,
     }
 
     res.json(response);

@@ -38,11 +38,16 @@ export function newRound(game: CAHGame) {
         game.judge = players[Math.floor(Math.random() * players.length)];
     }
 
+    game.winner = null;
+    game.submitted.length = 0;
+
     const usedCards = new Set<string>();
 
     for(const player of Object.values(game.players)) {
-        if(!player.cards) player.cards = [];
+        // clear previous values
         player.submitted.length = 0;
+
+        if(!player.cards) player.cards = [];
         for(const card of player.cards) usedCards.add(card.id);
     }
 
@@ -92,6 +97,7 @@ export function judgeSubmitCard(game: CAHGame, cardIndex: number) {
     const winner: CAHPlayer = card.player;
     game.winner = winner;
     winner.points += 1;
+    game.judge = winner;
 
     game.status = CAHGameStatus.ROUND_END;
 

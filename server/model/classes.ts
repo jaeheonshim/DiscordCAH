@@ -39,7 +39,7 @@ export class CAHGame {
     submitted: {
         cards: ResponseCard[],
         player: CAHPlayer
-    }[];
+    }[] = [];
 }
 
 export class CAHPlayer {

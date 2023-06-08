@@ -4,7 +4,7 @@ import {
   TextBasedChannel
 } from "discord.js";
 import {
-  executeDefaultTextCommandServerRequest
+  executeDefaultTextCommandServerRequest, scheduleRoundBegin
 } from "../util";
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
@@ -57,7 +57,10 @@ export default {
   
             const channel = (await interaction.client.channels.fetch(channelId)) as TextBasedChannel;
             await channel.send(message);
-          })
+
+            const nextRoundBeginTime = data.roundBeginTime;
+            scheduleRoundBegin(interaction.client, nextRoundBeginTime, data.gameId);
+          });
         } catch(e) {
           console.error(e);
         }

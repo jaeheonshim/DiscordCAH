@@ -1,6 +1,7 @@
 import {
   BaseGuildTextChannel,
   BaseInteraction,
+  Client,
   GuildMember,
   Interaction,
   TextBasedChannel,
@@ -8,6 +9,7 @@ import {
 } from "discord.js";
 import { CAHError } from "../server/model/cahresponse";
 import axios from "axios";
+import { scheduleJob } from "node-schedule";
 
 const checkDMCooldown = new Map<string, number>();
 const DM_RECHECK_COOLDOWN = 10 * 60 * 1000; // recheck DM permissions after 10 minutes
@@ -72,4 +74,29 @@ export async function executeDefaultTextCommandServerRequest(
 
       return res.data;
     });
+}
+
+export function scheduleRoundBegin(client: Client, time, gameId) {
+  scheduleJob(time, async () => {
+    try {
+      await axios.post("http://localhost:8080/bot/game/newRound", { gameId }).then(async res => {
+        if (!res.data.channelMessage) return;
+        const channelMessage = res.data.channelMessage;
+
+        const channel = (await client.channels.fetch(channelMessage.channelId) as TextBasedChannel);
+        await channel.send(channelMessage.message);
+
+        const individualMessages = res.data.individualMessages;
+        for (const userId of Object.keys(individualMessages)) {
+          const message = individualMessages[userId];
+          client.users.fetch(userId).then(async user => {
+            await user.send(message);
+          }).catch(e => {});
+        }
+      });
+    } catch (e) {
+      // game likely ended before round began
+      console.error(e);
+    }
+  });
 }
