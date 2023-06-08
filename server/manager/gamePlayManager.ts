@@ -39,6 +39,12 @@ export function newRound(game: CAHGame) {
     }
 
     game.winner = null;
+
+    for(const entry of game.submitted) {
+        const cards = entry.player.cards;
+        const filtered = cards.filter((c) => entry.cards.includes(c));
+        entry.player.cards = filtered;
+    }
     game.submitted.length = 0;
 
     const usedCards = new Set<string>();

@@ -115,7 +115,11 @@ export function getPlayerRoundEmbed(game: CAHGame, playerId: string) {
 }
 
 export function isPlayerCountInsufficient(game: CAHGame): boolean { 
-    return Object.values(game.players).length == 0;
+    if(game.status == CAHGameStatus.PLAYER_JOIN) {
+        return Object.values(game.players).length == 0;
+    } else {
+        return Object.values(game.players).length < 2;
+    }
 }
 
 export function randomJoke(): string {

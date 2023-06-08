@@ -173,13 +173,11 @@ gameRouter.post("/join", function (req, res) {
 
 gameRouter.post("/leave", function (req, res) {
     if (
-        !req.body.channelId ||
         !req.body.userId ||
         !req.body.username
     )
         throw new Error("Missing required body param(s).");
 
-    const channelId = req.body.channelId;
     const userId = req.body.userId;
     const username = req.body.username;
 
@@ -195,7 +193,7 @@ gameRouter.post("/leave", function (req, res) {
             }
         ],
         channelMessage: {
-            channelId: channelId,
+            channelId: player.game.channelId,
             message: { content: `😕 ${username} left the game.` }
         }
     }
@@ -210,6 +208,26 @@ gameRouter.post("/leave", function (req, res) {
                     description: "The game in this channel has been ended because there aren't enough players."
                 }]
             }
+        }
+    }
+
+    if (player.game.status == CAHGameStatus.PLAYER_SUBMIT_CARD || player.game.status == CAHGameStatus.JUDGE_SELECT_CARD) {
+        if (player.id === player.game.judge.id) {
+            player.game.status = CAHGameStatus.PENDING_ROUND_START;
+            const nextRoundBeginTime = Date.now() + player.game.timing.nextRoundDelay;
+
+            botResponse.channelMessage = {
+                channelId: player.game.channelId,
+                message: {
+                    embeds: [{
+                        title: "Judge left game",
+                        description: `The judge left the game, so this round cannot continue. A new round will begin <t:${Math.round(nextRoundBeginTime / 1000)}:R>.`
+                    }]
+                }
+            }
+
+            botResponse.gameId = player.game.id;
+            botResponse.nextRoundBeginTime = nextRoundBeginTime;
         }
     }
 
@@ -336,7 +354,7 @@ gameRouter.post("/submit", function (req, res) {
     const player = retrievePlayerById(userId);
     const game = player.game;
 
-    if(game.judge.id === player.id) {
+    if (game.judge.id === player.id) {
         const submitResponse = judgeSubmitCard(game, index);
         const resultDisplayTime = Date.now() + game.timing.resultDisplayWait;
 
@@ -442,8 +460,8 @@ gameRouter.post("/beginJudging", function (req, res) {
         player: CAHPlayer
     }[] = [];
 
-    for(const player of Object.values(reqGame.players)) {
-        if(player.submitted.length === reqGame.promptCard.pickCount) {
+    for (const player of Object.values(reqGame.players)) {
+        if (player.submitted.length === reqGame.promptCard.pickCount) {
             submitted.push({
                 cards: player.submitted,
                 player: player
@@ -479,10 +497,12 @@ gameRouter.post("/endRound", function (req, res) {
     const response = {
         channelMessage: {
             channelId: game.channelId,
-            message: { embeds: [getRoundResultModal(game), {
-                title: "Next Round",
-                description: `The next round will begin <t:${Math.round(nextRoundBeginTime / 1000)}:R>.`
-            }] }
+            message: {
+                embeds: [getRoundResultModal(game), {
+                    title: "Next Round",
+                    description: `The next round will begin <t:${Math.round(nextRoundBeginTime / 1000)}:R>.`
+                }]
+            }
         },
         roundBeginTime: nextRoundBeginTime,
         gameId: game.id,
