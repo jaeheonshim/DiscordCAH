@@ -24,7 +24,8 @@ export default {
     await checkCanSendDM(interaction);
     await executeDefaultTextCommandServerRequest(
       interaction,
-      "http://localhost:8080/bot/game/join"
+      "http://localhost:8080/bot/game/join",
+      true
     );
   },
 };

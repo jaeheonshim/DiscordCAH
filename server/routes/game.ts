@@ -81,8 +81,7 @@ gameRouter.post("/info", function (req, res) {
 
     const botResponse = {
         response: [
-            {   
-                ephemeral: true,
+            {
                 embeds: [
                     {
                         color: 0x0096FF,
@@ -162,7 +161,13 @@ gameRouter.post("/join", function (req, res) {
     res.json({
         response: [
             { content: joinResponse.getMessage(), ephemeral: true }
-        ]
+        ],
+        channelMessage: {
+            channelId: channelId,
+            message: {
+                content: `👋 ${username} joined the game!`
+            }
+        }
     });
 });
 
@@ -186,9 +191,13 @@ gameRouter.post("/leave", function (req, res) {
     const botResponse: any = {
         response: [
             {
-                content: leaveResponse.getMessage()
+                content: leaveResponse.getMessage(), ephemeral: true
             }
-        ]
+        ],
+        channelMessage: {
+            channelId: channelId,
+            message: { content: `😕 ${username} left the game.` }
+        }
     }
 
     if (isPlayerCountInsufficient(player.game)) {

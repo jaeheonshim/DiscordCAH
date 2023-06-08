@@ -8,6 +8,7 @@ import {
 } from "../util";
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
+import { CAHError } from "../../server/model/cahresponse";
 
 export default {
   data: new SlashCommandBuilder()
@@ -19,10 +20,12 @@ export default {
     .setDMPermission(true),
   async execute(interaction: Interaction) {
     if (!interaction.isChatInputCommand()) return;
+    if(!interaction.channel.isDMBased()) throw new CAHError("This command can only be executed in a direct message channel.");
 
     const data = await executeDefaultTextCommandServerRequest(
       interaction,
       "http://localhost:8080/bot/game/submit",
+      false,
       {
         index: interaction.options.getInteger("number", true) - 1
       }

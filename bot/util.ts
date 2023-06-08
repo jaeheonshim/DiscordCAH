@@ -40,9 +40,10 @@ export async function checkCanSendDM(interaction) {
 export async function executeDefaultTextCommandServerRequest(
   interaction,
   endpoint,
+  ephemeral = false,
   body = {}
 ) {
-  await interaction.deferReply();
+  await interaction.deferReply({ ephemeral: ephemeral });
 
   return await axios
     .post(endpoint, {

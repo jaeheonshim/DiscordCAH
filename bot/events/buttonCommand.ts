@@ -17,7 +17,7 @@ export default {
 
                 switch (customId) {
                     case "JOIN": {
-                        await executeDefaultTextCommandServerRequest(interaction, "http://localhost:8080/bot/game/join");
+                        await executeDefaultTextCommandServerRequest(interaction, "http://localhost:8080/bot/game/join", true);
                         break;
                     }
                     case "BEGIN": {
@@ -55,6 +55,7 @@ async function handleSubmit(interaction: ButtonInteraction) {
     const data = await executeDefaultTextCommandServerRequest(
         interaction,
         "http://localhost:8080/bot/game/submit",
+        false,
         {
             index: parseInt(interaction.customId.split(":")[1])
         }

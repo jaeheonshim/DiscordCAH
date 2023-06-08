@@ -19,7 +19,7 @@ export function playerJoinGame(gameId: string, playerId: string): CAHResponse {
   game.players[playerId] = player;
   player.game = game;
 
-  return new CAHSuccess(`\`${retrieveUsername(playerId)}\` successfully joined the game!`);
+  return new CAHSuccess(`\`Successfully joined game!`);
 }
 
 export function retrievePlayerById(playerId: string): CAHPlayer {
@@ -49,7 +49,7 @@ export function playerLeaveGame(playerId: string): CAHResponse {
   delete game.players[player.id];
   playerMap.delete(player.id);
 
-  return new CAHSuccess(`\`${retrieveUsername(playerId)}\` left the game.`);
+  return new CAHSuccess(`Successfully left game.`);
 }
 
 export function playerReady(playerId: string): CAHResponse {

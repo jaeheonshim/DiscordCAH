@@ -17,7 +17,8 @@ export default {
 
     await executeDefaultTextCommandServerRequest(
       interaction,
-      "http://localhost:8080/bot/game/leave"
+      "http://localhost:8080/bot/game/leave",
+      true
     );
   },
 };
