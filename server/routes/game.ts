@@ -9,7 +9,7 @@ import {
 } from "../manager/gamePlayerManager";
 import { CAHError } from "../model/cahresponse";
 import { cacheUsername, retrieveUsername } from "../manager/usernameManager";
-import { getPlayerRoundEmbed, getPlayerString, isPlayerCountInsufficient } from "../util";
+import { getPlayerRoundEmbed, getPlayerString, isPlayerCountInsufficient, randomJoke } from "../util";
 import { beginGame, isReadyToBeginGame, newRound, playerSubmitCard } from "../manager/gamePlayManager";
 import { CAHGameStatus } from "../model/classes";
 
@@ -287,7 +287,7 @@ gameRouter.post("/newRound", function (req, res) {
                 embeds: [{
                     title: "You are the judge!",
                     color: 0xFFFF00,
-                    description: "Sit tight while the other players are submitting their cards. Once all cards have been submitted, you'll have a chance to choose the best one."
+                    description: `Sit tight while the other players are submitting their cards. Once all cards have been submitted, you'll have a chance to choose the best one.\n\nWhile you wait, how about a joke?\n${randomJoke()}`,
                 }]
             }
         } else {

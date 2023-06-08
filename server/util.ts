@@ -1,5 +1,6 @@
 import { retrieveUsername } from "./manager/usernameManager";
 import { CAHGame, CAHGameStatus, CAHPlayer } from "./model/classes";
+import jokes from "./jokes.json";
 
 function sortPlayers(p1: CAHPlayer, p2: CAHPlayer) {
     if(p2.points == p1.points) {
@@ -65,4 +66,9 @@ export function getPlayerRoundEmbed(game: CAHGame, playerId: string) {
 
 export function isPlayerCountInsufficient(game: CAHGame): boolean { 
     return Object.values(game.players).length == 0;
+}
+
+export function randomJoke(): string {
+    const joke = jokes[Math.floor(Math.random() * jokes.length)];
+    return `Q: \`${joke.setup}\`\nA: \`${joke.punchline}\``;
 }
