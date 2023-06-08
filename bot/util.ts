@@ -51,8 +51,6 @@ export async function executeDefaultTextCommandServerRequest(
       userId: interaction.user.id,
       username: (interaction.member && (interaction.member as GuildMember).nickname) || interaction.user.username,
       channelId: interaction.channelId,
-      channelName: interaction.channel.name,
-      serverName: interaction.guild?.name,
       displayAvatarURL: interaction.user.displayAvatarURL(),
     })
     .then(async (res) => {

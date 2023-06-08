@@ -491,6 +491,8 @@ gameRouter.post("/endRound", function (req, res) {
         throw new Error("Missing required body param(s).");
 
     const game = retrieveGameById(req.body.gameId);
+    if(game.status != CAHGameStatus.PLAYER_SUBMIT_CARD) throw new CAHError("Invalid state for command");
+    
     game.status = CAHGameStatus.PENDING_ROUND_START;
     const nextRoundBeginTime = Date.now() + game.timing.nextRoundDelay;
 
