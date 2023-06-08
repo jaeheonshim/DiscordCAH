@@ -29,6 +29,7 @@ export function newRound(game: CAHGame) {
     if(game.status == CAHGameStatus.PLAYER_JOIN) throw new CAHError("The game must begin before a round starts.");
     game.roundNumber += 1;
     game.promptCard = getRandomPromptCard(game.deckId, game.usedPromptCards);
+    game.usedPromptCards.add(game.promptCard.id);
     game.status = CAHGameStatus.PLAYER_SUBMIT_CARD;
 
     if(game.winner) {

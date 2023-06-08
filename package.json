@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sentry/node": "^7.54.0",
     "@types/node-schedule": "^2.1.0",
     "axios": "^1.4.0",
     "body-parser": "^1.20.2",
