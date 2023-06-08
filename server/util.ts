@@ -1,6 +1,25 @@
 import { retrieveUsername } from "./manager/usernameManager";
 import { CAHGame, CAHGameStatus, CAHPlayer } from "./model/classes";
 import jokes from "./jokes.json";
+import facts from "./funfacts.json";
+
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
 
 function sortPlayers(p1: CAHPlayer, p2: CAHPlayer) {
     if(p2.points == p1.points) {
@@ -71,4 +90,44 @@ export function isPlayerCountInsufficient(game: CAHGame): boolean {
 export function randomJoke(): string {
     const joke = jokes[Math.floor(Math.random() * jokes.length)];
     return `Q: \`${joke.setup}\`\nA: \`${joke.punchline}\``;
+}
+
+export function randomFunFact(): string {
+    const fact = facts.facts[Math.floor(Math.random() * facts.facts.length)];
+    return `\`${fact}\``;
+}
+
+export function getJudgeModal(game: CAHGame) {
+    const submitted = [];
+    for(const player of Object.values(game.players)) {
+        if(player.submitted.length === game.promptCard.pickCount) {
+            submitted.push({
+                cards: player.submitted,
+                player: player.id
+            });
+        }
+    }
+
+    shuffle(submitted);
+
+    const submittedCardsList = [];
+    for(let i = 0; i < submitted.length; ++i) {
+        const cards = submitted[i].cards.reduce((prev, card) => prev + `\`${card.text}\`, `, "");
+        submittedCardsList.push(`${i+1}. ${cards.substring(0, cards.length - 2)}`);
+    }
+
+    return {
+        title: "It's your turn to select the winning cards",
+        description: "Select the card(s) you think are the best for this round. The prompt for this round is displayed below.",
+        fields: [
+            {
+                name: "Prompt",
+                value: `\`${game.promptCard.text}\``
+            },
+            {
+                name: "Submitted Cards",
+                value: submittedCardsList.join("\n")
+            }
+        ]
+    }
 }

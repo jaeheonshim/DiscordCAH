@@ -70,7 +70,26 @@ export function playerSubmitCard(game: CAHGame, player: CAHPlayer, cardIndex: nu
         throw new CAHError("Card with that index not found!");
     }
 
+    if(player.submitted.includes(card)) throw new CAHError("You've already submitted that card!");
+
     player.submitted.push(card);
 
     return new CAHSuccess("Submitted card");
+}
+
+export function haveAllPlayersSubmitted(game: CAHGame) {
+    for(const player of Object.values(game.players)) {
+        if(player.id === game.judge.id) continue;
+        if(player.submitted.length < game.promptCard.pickCount) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+export function startJudgeStage(game: CAHGame) {
+    if(game.status != CAHGameStatus.PLAYER_SUBMIT_CARD) throw new CAHError("Can't start judging stage from this stage");
+
+    game.status = CAHGameStatus.JUDGE_SELECT_CARD;
 }

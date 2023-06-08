@@ -9,8 +9,8 @@ import {
 } from "../manager/gamePlayerManager";
 import { CAHError } from "../model/cahresponse";
 import { cacheUsername, retrieveUsername } from "../manager/usernameManager";
-import { getPlayerRoundEmbed, getPlayerString, isPlayerCountInsufficient, randomJoke } from "../util";
-import { beginGame, isReadyToBeginGame, newRound, playerSubmitCard } from "../manager/gamePlayManager";
+import { getJudgeModal, getPlayerRoundEmbed, getPlayerString, isPlayerCountInsufficient, randomFunFact, randomJoke } from "../util";
+import { beginGame, haveAllPlayersSubmitted, isReadyToBeginGame, newRound, playerSubmitCard, startJudgeStage } from "../manager/gamePlayManager";
 import { CAHGameStatus } from "../model/classes";
 
 export const gameRouter = express.Router();
@@ -80,7 +80,8 @@ gameRouter.post("/info", function (req, res) {
 
     const botResponse = {
         response: [
-            {
+            {   
+                ephemeral: true,
                 embeds: [
                     {
                         color: 0x0096FF,
@@ -327,7 +328,10 @@ gameRouter.post("/submit", function (req, res) {
     const botResponse = {
         response: [
             { content: submitResponse.getMessage() }
-        ]
+        ],
+        allSubmitted: haveAllPlayersSubmitted(game),
+        gameId: game.id,
+        channelId: game.channelId
     };
 
     const cardLines = [];
@@ -348,8 +352,12 @@ gameRouter.post("/submit", function (req, res) {
             description: "You have finished submitting your cards! Sit tight while the other players wrap up.",
             fields: [
                 {
-                    name: "Submitted Cards",
+                    name: "Submitted cards",
                     value: cardLines.join("\n")
+                },
+                {
+                    name: "Return to game channel",
+                    value: `<#${game.channelId}>`
                 }
             ]
         }];
@@ -371,4 +379,30 @@ gameRouter.post("/submit", function (req, res) {
     }
 
     res.json(botResponse);
+});
+
+gameRouter.post("/beginJudging", function (req, res) {
+    if (!req.body.gameId)
+        throw new Error("Missing required body param(s).");
+
+    const reqGame = retrieveGameById(req.body.gameId);
+    startJudgeStage(reqGame);
+
+    const beginJudgingEmbed = {
+        color: 0x0000FF,
+        title: `Judging will now commence!`,
+        description: `The judge, ${retrieveUsername(reqGame.judge.id)}, will now select the winner for this round.\n\nIn the meantime, here's an interesting fact:\n${randomFunFact()}`,
+    }
+
+    const response = {
+        channelMessage: {
+            channelId: reqGame.channelId,
+            message: { embeds: [beginJudgingEmbed] }
+        },
+        individualMessages: {
+            [reqGame.judge.id]: { embeds: [getJudgeModal(reqGame)] }
+        }
+    }
+
+    res.json(response);
 });

@@ -42,7 +42,7 @@ export async function executeDefaultTextCommandServerRequest(
 ) {
   await interaction.deferReply();
 
-  await axios
+  return await axios
     .post(endpoint, {
       ...body,
       userId: interaction.user.id,
@@ -69,5 +69,7 @@ export async function executeDefaultTextCommandServerRequest(
           }
         }
       }
+
+      return res.data;
     });
 }

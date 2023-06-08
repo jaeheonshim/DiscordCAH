@@ -4,7 +4,8 @@ import { PromptCard, ResponseCard } from './cards';
 export enum CAHGameStatus {
     PLAYER_JOIN,
     PENDING_ROUND_START,
-    PLAYER_SUBMIT_CARD
+    PLAYER_SUBMIT_CARD,
+    JUDGE_SELECT_CARD
 }
 
 export class CAHGame {
