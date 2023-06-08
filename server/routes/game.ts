@@ -253,7 +253,7 @@ gameRouter.post("/newRound", function (req, res) {
         throw new Error("Missing required body param(s).");
 
     const reqGame = retrieveGameById(req.body.gameId);
-    if(reqGame.status != CAHGameStatus.PENDING_ROUND_START) {
+    if (reqGame.status != CAHGameStatus.PENDING_ROUND_START) {
         throw new Error("Invalid game status for request");
     }
 
@@ -273,7 +273,7 @@ gameRouter.post("/newRound", function (req, res) {
                 name: "⌛ Time Remaining",
                 value: `Round ends <t:${Math.round(judgeBeginTime / 1000)}:R>`
             },
-            { 
+            {
                 name: "🧍 Players",
                 value: getPlayerString(reqGame)
             }
@@ -281,8 +281,8 @@ gameRouter.post("/newRound", function (req, res) {
     }
 
     const individualMessages = {};
-    for(const player of Object.values(reqGame.players)) {
-        if(player.id === reqGame.judge.id) {
+    for (const player of Object.values(reqGame.players)) {
+        if (player.id === reqGame.judge.id) {
             individualMessages[player.id] = {
                 embeds: [{
                     title: "You are the judge!",
@@ -296,7 +296,7 @@ gameRouter.post("/newRound", function (req, res) {
             }
         }
     }
-    
+
     res.json({
         channelMessage: { content: newRoundResponse.getMessage(), embeds: [newRoundEmbed] },
         individualMessages,
@@ -330,7 +330,13 @@ gameRouter.post("/submit", function (req, res) {
         ]
     };
 
-    if(isFinishedSubmitting) {
+    const cardLines = [];
+
+    for (let i = 0; i < player.submitted.length; ++i) {
+        cardLines.push(`${i + 1}. \`${player.submitted[i].text}\``);
+    }
+
+    if (isFinishedSubmitting) {
         botResponse["channelMessage"] = {
             channelId: game.channelId,
             message: { content: `\`${retrieveUsername(userId)}\` has finished submitting their cards 💯` }
@@ -339,8 +345,29 @@ gameRouter.post("/submit", function (req, res) {
         botResponse.response[0]["embeds"] = [{
             title: "Finished Submitting",
             color: 0x00FF00,
-            description: "You have finished submitting your cards! Sit tight while the other players wrap up."
+            description: "You have finished submitting your cards! Sit tight while the other players wrap up.",
+            fields: [
+                {
+                    name: "Submitted Cards",
+                    value: cardLines.join("\n")
+                }
+            ]
         }];
+    } else {
+        botResponse.response[0]["embeds"] = [
+            {
+                title: "Submit More Cards",
+                color: 0xFFFF00,
+                description: `**You're not done yet!** You still need to submit ${game.promptCard.pickCount - player.submitted.length} more cards.`,
+                fields: [
+                    {
+                        name: "Submitted Cards",
+                        value: cardLines.join("\n")
+                    }
+                ]
+            },
+            getPlayerRoundEmbed(game, userId)
+        ];
     }
 
     res.json(botResponse);

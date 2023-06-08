@@ -33,7 +33,11 @@ export function getPlayerRoundEmbed(game: CAHGame, playerId: string) {
     const cardLines = [];
 
     for(let i = 0; i < player.cards.length; ++i) {
-        cardLines.push(`${i+1}. \`${player.cards[i].text}\``);
+        if(player.submitted.includes(player.cards[i])) {
+            cardLines.push(`${i+1}. ~~\`${player.cards[i].text}\`~~`);
+        } else {
+            cardLines.push(`${i+1}. \`${player.cards[i].text}\``);
+        }
     }
 
     const embed = {
