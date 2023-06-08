@@ -3,7 +3,7 @@ import { CAHGame, CAHGameStatus, CAHPlayer } from "./model/classes";
 import jokes from "./jokes.json";
 import facts from "./funfacts.json";
 
-function shuffle(array) {
+export function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
   
     // While there remain elements to shuffle.
@@ -98,17 +98,7 @@ export function randomFunFact(): string {
 }
 
 export function getJudgeModal(game: CAHGame) {
-    const submitted = [];
-    for(const player of Object.values(game.players)) {
-        if(player.submitted.length === game.promptCard.pickCount) {
-            submitted.push({
-                cards: player.submitted,
-                player: player.id
-            });
-        }
-    }
-
-    shuffle(submitted);
+    const submitted = game.submitted;
 
     const submittedCardsList = [];
     for(let i = 0; i < submitted.length; ++i) {
@@ -118,7 +108,7 @@ export function getJudgeModal(game: CAHGame) {
 
     return {
         title: "It's your turn to select the winning cards",
-        description: "Select the card(s) you think are the best for this round. The prompt for this round is displayed below.",
+        description: "Select the card(s) you think are the best for this round. The prompt for this round is displayed below. Run `/submit` with the corresponding submission number.",
         fields: [
             {
                 name: "Prompt",
@@ -127,6 +117,41 @@ export function getJudgeModal(game: CAHGame) {
             {
                 name: "Submitted Cards",
                 value: submittedCardsList.join("\n")
+            }
+        ]
+    }
+}
+
+export function getRoundResultModal(game: CAHGame) {
+    const winner = game.winner;
+
+    const submitted = game.submitted;
+
+    const submittedCardsList = [];
+    for(let i = 0; i < submitted.length; ++i) {
+        const cards = submitted[i].cards.reduce((prev, card) => prev + `\`${card.text}\`, `, "");
+        submittedCardsList.push(`${cards.substring(0, cards.length - 2)} - ${retrieveUsername(submitted[i].player.id)}`);
+    }
+
+    return {
+        title: "Round Over!",
+        color: 0x00FFFF,
+        fields: [
+            {
+                name: "Prompt",
+                value: `\`${game.promptCard.text}\``
+            },
+            {
+                name: "Winning Submission",
+                value: `${winner.submitted.reduce((prev, card) => prev + `\`${card.text}\`, `, "")} - **${retrieveUsername(winner.id)}**`
+            },
+            {
+                name: "All Submissions",
+                value: submittedCardsList.join("\n")
+            },
+            {
+                name: "Scoreboard",
+                value: getPlayerString(game)
             }
         ]
     }

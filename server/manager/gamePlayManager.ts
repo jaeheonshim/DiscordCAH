@@ -77,6 +77,27 @@ export function playerSubmitCard(game: CAHGame, player: CAHPlayer, cardIndex: nu
     return new CAHSuccess("Submitted card");
 }
 
+export function judgeSubmitCard(game: CAHGame, cardIndex: number) {
+    if(game.status != CAHGameStatus.JUDGE_SELECT_CARD) throw new CAHError("You cannot submit cards right now.");
+
+    let card;
+
+    try {
+        card = game.submitted[cardIndex];
+        if(!card) throw new Error("Nonexistent");
+    } catch(e) {
+        throw new CAHError("Submission with that index not found!");
+    }
+
+    const winner: CAHPlayer = card.player;
+    game.winner = winner;
+    winner.points += 1;
+
+    game.status = CAHGameStatus.ROUND_END;
+
+    return new CAHSuccess("Successfully chose winning submission!");
+}
+
 export function haveAllPlayersSubmitted(game: CAHGame) {
     for(const player of Object.values(game.players)) {
         if(player.id === game.judge.id) continue;

@@ -7,6 +7,7 @@ import {
   executeDefaultTextCommandServerRequest
 } from "../util";
 import axios from "axios";
+import { scheduleJob } from "node-schedule";
 
 export default {
   data: new SlashCommandBuilder()
@@ -46,6 +47,21 @@ export default {
       } catch (e) {
         console.error(e);
       }
+    } else if(data.resultDisplayTime) {
+      scheduleJob(data.resultDisplayTime, async () => {
+        try {
+          axios.post("http://localhost:8080/bot/game/endRound", { gameId: data.gameId }).then(async (res) => {
+            const data = res.data;
+            const channelId = data.channelMessage.channelId;
+            const message = data.channelMessage.message;
+  
+            const channel = (await interaction.client.channels.fetch(channelId)) as TextBasedChannel;
+            await channel.send(message);
+          })
+        } catch(e) {
+          console.error(e);
+        }
+      });
     }
   },
 };

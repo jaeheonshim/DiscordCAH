@@ -5,7 +5,8 @@ export enum CAHGameStatus {
     PLAYER_JOIN,
     PENDING_ROUND_START,
     PLAYER_SUBMIT_CARD,
-    JUDGE_SELECT_CARD
+    JUDGE_SELECT_CARD,
+    ROUND_END
 }
 
 export class CAHGame {
@@ -23,7 +24,8 @@ export class CAHGame {
     timing = {
         beginGameDelay: 10 * 1000,
         nextRoundDelay: 15 * 1000,
-        roundDuration: 2 * 60 * 1000
+        roundDuration: 2 * 60 * 1000,
+        resultDisplayWait: 5 * 1000
     }
 
     cardHandCount: number = 7;
@@ -34,6 +36,10 @@ export class CAHGame {
     usedPromptCards: Set<string> = new Set<string>();
     winner: CAHPlayer;
     judge: CAHPlayer;
+    submitted: {
+        cards: ResponseCard[],
+        player: CAHPlayer
+    }[];
 }
 
 export class CAHPlayer {

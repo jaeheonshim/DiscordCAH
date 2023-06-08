@@ -9,9 +9,10 @@ import {
 } from "../manager/gamePlayerManager";
 import { CAHError } from "../model/cahresponse";
 import { cacheUsername, retrieveUsername } from "../manager/usernameManager";
-import { getJudgeModal, getPlayerRoundEmbed, getPlayerString, isPlayerCountInsufficient, randomFunFact, randomJoke } from "../util";
-import { beginGame, haveAllPlayersSubmitted, isReadyToBeginGame, newRound, playerSubmitCard, startJudgeStage } from "../manager/gamePlayManager";
-import { CAHGameStatus } from "../model/classes";
+import { getJudgeModal, getPlayerRoundEmbed, getPlayerString, getRoundResultModal, isPlayerCountInsufficient, randomFunFact, randomJoke, shuffle } from "../util";
+import { beginGame, haveAllPlayersSubmitted, isReadyToBeginGame, judgeSubmitCard, newRound, playerSubmitCard, startJudgeStage } from "../manager/gamePlayManager";
+import { CAHGameStatus, CAHPlayer } from "../model/classes";
+import { ResponseCard } from "../model/cards";
 
 export const gameRouter = express.Router();
 
@@ -322,63 +323,87 @@ gameRouter.post("/submit", function (req, res) {
     const player = retrievePlayerById(userId);
     const game = player.game;
 
-    const submitResponse = playerSubmitCard(game, player, index);
-    const isFinishedSubmitting = player.submitted.length === game.promptCard.pickCount;
+    if(game.judge.id === player.id) {
+        const submitResponse = judgeSubmitCard(game, index);
+        const resultDisplayTime = Date.now() + game.timing.resultDisplayWait;
 
-    const botResponse = {
-        response: [
-            { content: submitResponse.getMessage() }
-        ],
-        allSubmitted: haveAllPlayersSubmitted(game),
-        gameId: game.id,
-        channelId: game.channelId
-    };
+        res.json({
+            response: [{
+                content: submitResponse.getMessage()
+            }],
+            channelMessage: {
+                channelId: game.channelId,
+                message: {
+                    embeds: [
+                        {
+                            title: "The judge has chosen the winning submission!",
+                            description: `Results will be displayed <t:${Math.round(resultDisplayTime / 1000)}:R>`
+                        }
+                    ]
+                }
+            },
+            resultDisplayTime: resultDisplayTime,
+            gameId: game.id
+        });
+    } else {
+        const submitResponse = playerSubmitCard(game, player, index);
+        const isFinishedSubmitting = player.submitted.length === game.promptCard.pickCount;
 
-    const cardLines = [];
-
-    for (let i = 0; i < player.submitted.length; ++i) {
-        cardLines.push(`${i + 1}. \`${player.submitted[i].text}\``);
-    }
-
-    if (isFinishedSubmitting) {
-        botResponse["channelMessage"] = {
-            channelId: game.channelId,
-            message: { content: `\`${retrieveUsername(userId)}\` has finished submitting their cards 💯` }
+        const botResponse = {
+            response: [
+                { content: submitResponse.getMessage() }
+            ],
+            allSubmitted: haveAllPlayersSubmitted(game),
+            gameId: game.id,
+            channelId: game.channelId
         };
 
-        botResponse.response[0]["embeds"] = [{
-            title: "Finished Submitting",
-            color: 0x00FF00,
-            description: "You have finished submitting your cards! Sit tight while the other players wrap up.",
-            fields: [
-                {
-                    name: "Submitted cards",
-                    value: cardLines.join("\n")
-                },
-                {
-                    name: "Return to game channel",
-                    value: `<#${game.channelId}>`
-                }
-            ]
-        }];
-    } else {
-        botResponse.response[0]["embeds"] = [
-            {
-                title: "Submit More Cards",
-                color: 0xFFFF00,
-                description: `**You're not done yet!** You still need to submit ${game.promptCard.pickCount - player.submitted.length} more cards.`,
+        const cardLines = [];
+
+        for (let i = 0; i < player.submitted.length; ++i) {
+            cardLines.push(`${i + 1}. \`${player.submitted[i].text}\``);
+        }
+
+        if (isFinishedSubmitting) {
+            botResponse["channelMessage"] = {
+                channelId: game.channelId,
+                message: { content: `\`${retrieveUsername(userId)}\` has finished submitting their cards 💯` }
+            };
+
+            botResponse.response[0]["embeds"] = [{
+                title: "Finished Submitting",
+                color: 0x00FF00,
+                description: "You have finished submitting your cards! Sit tight while the other players wrap up.",
                 fields: [
                     {
-                        name: "Submitted Cards",
+                        name: "Submitted cards",
                         value: cardLines.join("\n")
+                    },
+                    {
+                        name: "Return to game channel",
+                        value: `<#${game.channelId}>`
                     }
                 ]
-            },
-            getPlayerRoundEmbed(game, userId)
-        ];
-    }
+            }];
+        } else {
+            botResponse.response[0]["embeds"] = [
+                {
+                    title: "Submit More Cards",
+                    color: 0xFFFF00,
+                    description: `**You're not done yet!** You still need to submit ${game.promptCard.pickCount - player.submitted.length} more cards.`,
+                    fields: [
+                        {
+                            name: "Submitted Cards",
+                            value: cardLines.join("\n")
+                        }
+                    ]
+                },
+                getPlayerRoundEmbed(game, userId)
+            ];
+        }
 
-    res.json(botResponse);
+        res.json(botResponse);
+    }
 });
 
 gameRouter.post("/beginJudging", function (req, res) {
@@ -394,6 +419,23 @@ gameRouter.post("/beginJudging", function (req, res) {
         description: `The judge, ${retrieveUsername(reqGame.judge.id)}, will now select the winner for this round.\n\nIn the meantime, here's an interesting fact:\n${randomFunFact()}`,
     }
 
+    const submitted: {
+        cards: ResponseCard[],
+        player: CAHPlayer
+    }[] = [];
+
+    for(const player of Object.values(reqGame.players)) {
+        if(player.submitted.length === reqGame.promptCard.pickCount) {
+            submitted.push({
+                cards: player.submitted,
+                player: player
+            });
+        }
+    }
+
+    shuffle(submitted);
+    reqGame.submitted = submitted;
+
     const response = {
         channelMessage: {
             channelId: reqGame.channelId,
@@ -402,6 +444,23 @@ gameRouter.post("/beginJudging", function (req, res) {
         individualMessages: {
             [reqGame.judge.id]: { embeds: [getJudgeModal(reqGame)] }
         }
+    }
+
+    res.json(response);
+});
+
+
+gameRouter.post("/endRound", function (req, res) {
+    if (!req.body.gameId)
+        throw new Error("Missing required body param(s).");
+
+    const game = retrieveGameById(req.body.gameId);
+
+    const response = {
+        channelMessage: {
+            channelId: game.channelId,
+            message: { embeds: [getRoundResultModal(game)] }
+        },
     }
 
     res.json(response);
