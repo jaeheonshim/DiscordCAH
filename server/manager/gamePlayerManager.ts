@@ -1,6 +1,7 @@
 import { CAHError, CAHResponse, CAHSuccess } from "../model/cahresponse";
 import { CAHPlayer } from "../model/classes";
 import { retrieveGameById } from "./gameStorageManager";
+import { retrieveUsername } from "./usernameManager";
 
 const playerMap = new Map<string, CAHPlayer>();
 
@@ -18,7 +19,7 @@ export function playerJoinGame(gameId: string, playerId: string): CAHResponse {
   game.players[playerId] = player;
   player.game = game;
 
-  return new CAHSuccess("Successfully joined game!");
+  return new CAHSuccess(`\`${retrieveUsername(playerId)}\` successfully joined the game!`);
 }
 
 export function retrievePlayerById(playerId: string): CAHPlayer {
@@ -48,12 +49,12 @@ export function playerLeaveGame(playerId: string): CAHResponse {
   delete game.players[player.id];
   playerMap.delete(player.id);
 
-  return new CAHSuccess("Successfully left game.");
+  return new CAHSuccess(`\`${retrieveUsername(playerId)}\` left the game.`);
 }
 
 export function playerReady(playerId: string): CAHResponse {
   const player = retrievePlayerById(playerId);
   player.ready = true;
 
-  return new CAHSuccess("Ready to begin!");
+  return new CAHSuccess(`\`${retrieveUsername(playerId)}\` is ready to begin! (${Object.values(player.game.players).filter(p => p.ready).length}/${Object.values(player.game.players).length})`);
 }

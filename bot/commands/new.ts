@@ -50,8 +50,9 @@ export default {
                             .setStyle(ButtonStyle.Primary);
 
                         const startButton = new ButtonBuilder()
-                            .setCustomId("START")
-                            .setLabel("Start Game")
+                            .setCustomId("BEGIN")
+                            .setLabel("Ready to Begin")
+                            .setEmoji("✅")
                             .setStyle(ButtonStyle.Success);
 
                         const row = new ActionRowBuilder()
