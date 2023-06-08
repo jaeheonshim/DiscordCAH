@@ -37,19 +37,19 @@ export async function checkCanSendDM(interaction) {
 
 export async function executeDefaultTextCommandServerRequest(
   interaction,
-  endpoint
+  endpoint,
+  body = {}
 ) {
   await interaction.deferReply();
 
   await axios
     .post(endpoint, {
+      ...body,
       userId: interaction.user.id,
-      username:
-        (interaction.member as GuildMember).nickname ||
-        interaction.user.username,
+      username: (interaction.member && (interaction.member as GuildMember).nickname) || interaction.user.username,
       channelId: interaction.channelId,
       channelName: interaction.channel.name,
-      serverName: interaction.guild.name,
+      serverName: interaction.guild?.name,
       displayAvatarURL: interaction.user.displayAvatarURL(),
     })
     .then(async (res) => {

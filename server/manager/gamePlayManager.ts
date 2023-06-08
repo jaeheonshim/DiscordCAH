@@ -1,6 +1,6 @@
 import { scheduleJob } from "node-schedule";
 import { CAHError, CAHSuccess } from "../model/cahresponse";
-import { CAHGame, CAHGameStatus } from "../model/classes";
+import { CAHGame, CAHGameStatus, CAHPlayer } from "../model/classes";
 import { getRandomPromptCard, getRandomResponseCard } from "./deckManager";
 
 export function isReadyToBeginGame(game: CAHGame) {
@@ -42,6 +42,7 @@ export function newRound(game: CAHGame) {
 
     for(const player of Object.values(game.players)) {
         if(!player.cards) player.cards = [];
+        player.submitted.length = 0;
         for(const card of player.cards) usedCards.add(card.id);
     }
 
@@ -54,4 +55,22 @@ export function newRound(game: CAHGame) {
     }
 
     return new CAHSuccess("New round started!");
+}
+
+export function playerSubmitCard(game: CAHGame, player: CAHPlayer, cardIndex: number) {
+    if(player.id === game.judge.id) throw new CAHError("The judge cannot submit cards during this stage.");
+    if(game.status != CAHGameStatus.PLAYER_SUBMIT_CARD) throw new CAHError("You cannot submit cards right now.");
+    if(player.submitted.length === game.promptCard.pickCount) throw new CAHError("You have already submitted your cards for this round.");
+
+    let card;
+
+    try {
+        card = player.cards[cardIndex];
+    } catch(e) {
+        throw new CAHError("Card with that index not found!");
+    }
+
+    player.submitted.push(card);
+
+    return new CAHSuccess("Submitted card");
 }

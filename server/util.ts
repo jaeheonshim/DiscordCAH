@@ -48,6 +48,10 @@ export function getPlayerRoundEmbed(game: CAHGame, playerId: string) {
             {
                 name: "Your cards",
                 value: cardLines.join("\n")
+            },
+            {
+                name: "Status",
+                value: `${player.submitted.length} out of ${game.promptCard.pickCount} cards submitted.`
             }
         ]
     }

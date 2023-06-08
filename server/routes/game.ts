@@ -10,7 +10,7 @@ import {
 import { CAHError } from "../model/cahresponse";
 import { cacheUsername, retrieveUsername } from "../manager/usernameManager";
 import { getPlayerRoundEmbed, getPlayerString, isPlayerCountInsufficient } from "../util";
-import { beginGame, isReadyToBeginGame, newRound } from "../manager/gamePlayManager";
+import { beginGame, isReadyToBeginGame, newRound, playerSubmitCard } from "../manager/gamePlayManager";
 import { CAHGameStatus } from "../model/classes";
 
 export const gameRouter = express.Router();
@@ -302,4 +302,46 @@ gameRouter.post("/newRound", function (req, res) {
         individualMessages,
         judgeBeginTime
     });
+});
+
+gameRouter.post("/submit", function (req, res) {
+    if (
+        !req.body.channelId ||
+        !req.body.userId ||
+        req.body.index === undefined
+    )
+        throw new Error("Missing required body param(s).");
+
+    const userId = req.body.userId;
+    const index = req.body.index;
+    const username = req.body.username;
+
+    cacheUsername(userId, username);
+
+    const player = retrievePlayerById(userId);
+    const game = player.game;
+
+    const submitResponse = playerSubmitCard(game, player, index);
+    const isFinishedSubmitting = player.submitted.length === game.promptCard.pickCount;
+
+    const botResponse = {
+        response: [
+            { content: submitResponse.getMessage() }
+        ]
+    };
+
+    if(isFinishedSubmitting) {
+        botResponse["channelMessage"] = {
+            channelId: game.channelId,
+            message: { content: `\`${retrieveUsername(userId)}\` has finished submitting their cards 💯` }
+        };
+
+        botResponse.response[0]["embeds"] = [{
+            title: "Finished Submitting",
+            color: 0x00FF00,
+            description: "You have finished submitting your cards! Sit tight while the other players wrap up."
+        }];
+    }
+
+    res.json(botResponse);
 });

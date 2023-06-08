@@ -41,6 +41,7 @@ export class CAHPlayer {
     points: number = 0;
     ready: boolean;
     cards: ResponseCard[] = [];
+    submitted: ResponseCard[] = [];
     
     constructor(id: string) {
         this.id = id;
