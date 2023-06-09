@@ -7,7 +7,6 @@ import {
 } from "discord.js";
 import config from "./config.json" assert { type: "json" };
 import fs from "node:fs";
-import "./deployCommands.js";
 import { CAHError } from "../server/model/cahresponse.js";
 import * as Sentry from "@sentry/node";
 import axios from "axios";
