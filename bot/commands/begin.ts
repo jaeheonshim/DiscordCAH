@@ -7,10 +7,10 @@ import {
 } from "discord.js";
 import {
   executeDefaultTextCommandServerRequest, scheduleRoundBegin
-} from "../util";
+} from "../util.js";
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
-import { retrieveGameByChannelId } from "../../server/manager/gameStorageManager";
+import { retrieveGameByChannelId } from "../../server/manager/gameStorageManager.js";
 
 export default {
   cooldown: 10,
@@ -20,7 +20,7 @@ export default {
     .setDMPermission(false),
   async execute(interaction: Interaction) {
     if (!interaction.isChatInputCommand()) return;
-    
+
     await interaction.deferReply();
 
     await axios

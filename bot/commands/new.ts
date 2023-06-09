@@ -7,12 +7,12 @@ import {
     ButtonStyle,
     ActionRowBuilder,
 } from "discord.js";
-import { CAHError } from "../../server/model/cahresponse";
-import { playerJoinGame } from "../../server/manager/gamePlayerManager";
+import { CAHError } from "../../server/model/cahresponse.js";
+import { playerJoinGame } from "../../server/manager/gamePlayerManager.js";
 import {
     checkCanSendDM,
     executeDefaultTextCommandServerRequest,
-} from "../util";
+} from "../util.js";
 import axios from "axios";
 
 export default {

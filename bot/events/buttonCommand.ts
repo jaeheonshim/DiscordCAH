@@ -1,5 +1,5 @@
 import { BaseInteraction, ButtonInteraction, Events, GuildMember, TextBasedChannel } from "discord.js";
-import { executeDefaultTextCommandServerRequest, scheduleRoundBegin } from "../util";
+import { executeDefaultTextCommandServerRequest, scheduleRoundBegin } from "../util.js";
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
 import * as Sentry from "@sentry/node";

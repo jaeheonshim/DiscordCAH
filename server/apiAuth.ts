@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import config from "./config.json";
+import config from "./config.json" assert {type: "json"};
 
 export default function tokenAuth(req: Request, res: Response, next: NextFunction): void {
     if(!req.headers.authorization || req.headers.authorization.split(' ').length != 2) {

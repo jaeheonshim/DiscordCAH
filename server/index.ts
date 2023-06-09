@@ -1,9 +1,9 @@
 import express from "express";
-import { gameRouter } from "./routes/game";
+import { gameRouter } from "./routes/game.js";
 import bodyParser from "body-parser";
-import { CAHError } from "./model/cahresponse";
+import { CAHError } from "./model/cahresponse.js";
 import * as Sentry from "@sentry/node";
-import tokenAuth from "./apiAuth";
+import tokenAuth from "./apiAuth.js";
 
 const app = express();
 const port = 8080;

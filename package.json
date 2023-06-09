@@ -2,15 +2,17 @@
   "name": "DiscordCAHJS",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "bot": "npx ts-node bot/main.ts",
-    "server": "npx ts-node server/index.ts",
+    "clean": "tsc --build --clean",
+    "build": "tsc --project tsconfig.json",
+    "start:bot": "npm run build && node dist/bot/index.js",
+    "start:server": "npm run build && node dist/server/index.js",
     "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
     "@sentry/node": "^7.54.0",
     "@types/node-schedule": "^2.1.0",

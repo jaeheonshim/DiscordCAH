@@ -1,18 +1,18 @@
 import express from "express";
-import { createNewGame, deleteGameByChannelId, deleteGameById, retrieveGameByChannelId, retrieveGameById } from "../manager/gameStorageManager";
+import { createNewGame, deleteGameByChannelId, deleteGameById, retrieveGameByChannelId, retrieveGameById } from "../manager/gameStorageManager.js";
 import {
     playerInGame,
     playerJoinGame,
     playerLeaveGame,
     playerReady,
     retrievePlayerById,
-} from "../manager/gamePlayerManager";
-import { CAHError } from "../model/cahresponse";
-import { cacheUsername, retrieveUsername } from "../manager/usernameManager";
-import { getJudgeModal, getPlayerRoundComponents, getPlayerRoundEmbed, getPlayerString, getRoundResultModal, isPlayerCountInsufficient, randomFunFact, randomJoke, shuffle } from "../util";
-import { beginGame, haveAllPlayersSubmitted, isReadyToBeginGame, judgeSubmitCard, newRound, playerSubmitCard, startJudgeStage } from "../manager/gamePlayManager";
-import { CAHGameStatus, CAHPlayer } from "../model/classes";
-import { ResponseCard } from "../model/cards";
+} from "../manager/gamePlayerManager.js";
+import { CAHError } from "../model/cahresponse.js";
+import { cacheUsername, retrieveUsername } from "../manager/usernameManager.js";
+import { getJudgeModal, getPlayerRoundComponents, getPlayerRoundEmbed, getPlayerString, getRoundResultModal, isPlayerCountInsufficient, randomFunFact, randomJoke, shuffle } from "../util.js";
+import { beginGame, haveAllPlayersSubmitted, isReadyToBeginGame, judgeSubmitCard, newRound, playerSubmitCard, startJudgeStage } from "../manager/gamePlayManager.js";
+import { CAHGameStatus, CAHPlayer } from "../model/classes.js";
+import { ResponseCard } from "../model/cards.js";
 import * as Sentry from "@sentry/node";
 
 export const gameRouter = express.Router();
@@ -334,7 +334,7 @@ gameRouter.post("/newRound", function (req, res) {
     }
 
     const individualMessages = {};
-    for (const player of Object.values(reqGame.players)) {
+    for (const player of Object.values<CAHPlayer>(reqGame.players)) {
         if (player.id === reqGame.judge.id) {
             individualMessages[player.id] = {
                 embeds: [{
@@ -489,7 +489,7 @@ gameRouter.post("/beginJudging", function (req, res) {
         player: CAHPlayer
     }[] = [];
 
-    for (const player of Object.values(reqGame.players)) {
+    for (const player of Object.values<CAHPlayer>(reqGame.players)) {
         if (player.submitted.length === reqGame.promptCard.pickCount) {
             submitted.push({
                 cards: player.submitted,

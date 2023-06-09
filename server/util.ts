@@ -1,7 +1,7 @@
-import { retrieveUsername } from "./manager/usernameManager";
-import { CAHGame, CAHGameStatus, CAHPlayer } from "./model/classes";
-import jokes from "./jokes.json";
-import facts from "./funfacts.json";
+import { retrieveUsername } from "./manager/usernameManager.js";
+import { CAHGame, CAHGameStatus, CAHPlayer } from "./model/classes.js";
+import jokes from "./jokes.json" assert {type: "json"};
+import facts from "./funfacts.json" assert {type: "json"};
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export function shuffle(array) {

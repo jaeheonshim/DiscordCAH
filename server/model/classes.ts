@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { PromptCard, ResponseCard } from './cards';
+import { PromptCard, ResponseCard } from './cards.js';
 
 export enum CAHGameStatus {
     PLAYER_JOIN,

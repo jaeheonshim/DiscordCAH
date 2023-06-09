@@ -1,7 +1,7 @@
 import { scheduleJob } from "node-schedule";
-import { CAHError, CAHSuccess } from "../model/cahresponse";
-import { CAHGame, CAHGameStatus, CAHPlayer } from "../model/classes";
-import { getRandomPromptCard, getRandomResponseCard } from "./deckManager";
+import { CAHError, CAHSuccess } from "../model/cahresponse.js";
+import { CAHGame, CAHGameStatus, CAHPlayer } from "../model/classes.js";
+import { getRandomPromptCard, getRandomResponseCard } from "./deckManager.js";
 
 export function isReadyToBeginGame(game: CAHGame) {
     if(game.status != CAHGameStatus.PLAYER_JOIN) return false;

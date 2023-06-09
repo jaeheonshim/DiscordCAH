@@ -1,7 +1,7 @@
-import { CAHError, CAHResponse, CAHSuccess } from "../model/cahresponse";
-import { CAHPlayer } from "../model/classes";
-import { retrieveGameById } from "./gameStorageManager";
-import { retrieveUsername } from "./usernameManager";
+import { CAHError, CAHResponse, CAHSuccess } from "../model/cahresponse.js";
+import { CAHPlayer } from "../model/classes.js";
+import { retrieveGameById } from "./gameStorageManager.js";
+import { retrieveUsername } from "./usernameManager.js";
 
 const playerMap = new Map<string, CAHPlayer>();
 

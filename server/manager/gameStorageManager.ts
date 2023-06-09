@@ -1,5 +1,5 @@
-import { CAHError, CAHResponse, CAHSuccess } from "../model/cahresponse";
-import { CAHGame, CAHPlayer } from "../model/classes";
+import { CAHError, CAHResponse, CAHSuccess } from "../model/cahresponse.js";
+import { CAHGame, CAHPlayer } from "../model/classes.js";
 
 const gameMap = new Map<string, CAHGame>();
 const channelIdMap = new Map<string, string>();

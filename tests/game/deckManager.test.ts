@@ -1,5 +1,5 @@
 import { getAllPromptCards, getAllResponseCards, getRandomPromptCard, getRandomResponseCard, loadDeck } from "../../server/manager/deckManager";
-import test_deck from "../../server/decks/test.json";
+import test_deck from "../../server/decks/test.json" assert {type: "json"};
 
 describe("test getting random cards", () => {
     beforeAll(() => {
@@ -23,7 +23,7 @@ describe("test getting random cards", () => {
 
     test("getRandomResponseCard should not return excluded cards", () => {
         const exclude = new Set<string>();
-        const allResponseCards = getAllResponseCards("test");
+        const allResponseCards = getAllResponseCards("test")!;
         
         for(let i = 0; i < allResponseCards.length - 1; ++i) {
             exclude.add(allResponseCards[i].id);
@@ -37,7 +37,7 @@ describe("test getting random cards", () => {
 
     test("getRandomPromptCard should not return excluded cards", () => {
         const exclude = new Set<string>();
-        const allPromptCards = getAllPromptCards("test");
+        const allPromptCards = getAllPromptCards("test")!;
         
         for(let i = 0; i < allPromptCards.length - 1; ++i) {
             exclude.add(allPromptCards[i].id);
@@ -51,7 +51,7 @@ describe("test getting random cards", () => {
 
     test("getRandomPromptCard should return a card if all cards are excluded", () => {
         const exclude = new Set<string>();
-        const allPromptCards = getAllPromptCards("test");
+        const allPromptCards = getAllPromptCards("test")!;
         
         for(let i = 0; i < allPromptCards.length; ++i) {
             exclude.add(allPromptCards[i].id);
@@ -63,7 +63,7 @@ describe("test getting random cards", () => {
 
     test("getRandomResponseCard should return a card if all cards are excluded", () => {
         const exclude = new Set<string>();
-        const allResponseCards = getAllResponseCards("test");
+        const allResponseCards = getAllResponseCards("test")!;
         
         for(let i = 0; i < allResponseCards.length; ++i) {
             exclude.add(allResponseCards[i].id);

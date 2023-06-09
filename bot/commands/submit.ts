@@ -6,10 +6,10 @@ import {
 import {
   beginJudging,
   executeDefaultTextCommandServerRequest, scheduleRoundBegin
-} from "../util";
+} from "../util.js";
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
-import { CAHError } from "../../server/model/cahresponse";
+import { CAHError } from "../../server/model/cahresponse.js";
 import * as Sentry from "@sentry/node";
 
 export default {

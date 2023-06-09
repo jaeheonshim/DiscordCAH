@@ -130,3 +130,5 @@ dist
 .pnp.*
 
 bot/config.json
+
+.dist

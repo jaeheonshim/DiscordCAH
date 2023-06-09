@@ -1,6 +1,15 @@
 {
-    "compilerOptions": {
-      "esModuleInterop": true,
-      "resolveJsonModule": true
-    }
+  "compilerOptions": {
+    "target": "ES2022",
+    "esModuleInterop": true,
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "module": "ESNext"
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "tests"
+  ]
 }

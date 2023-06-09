@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, Interaction, GuildMember, PermissionFlagsBits } from "discord.js";
-import { executeDefaultTextCommandServerRequest } from "../util";
+import { executeDefaultTextCommandServerRequest } from "../util.js";
 
 export default {
     data: new SlashCommandBuilder()

@@ -4,7 +4,7 @@ import {
 } from "discord.js";
 import {
   executeDefaultTextCommandServerRequest, scheduleRoundBegin
-} from "../util";
+} from "../util.js";
 
 export default {
   cooldown: 10,

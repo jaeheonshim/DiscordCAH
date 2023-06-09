@@ -1,6 +1,6 @@
-import base from "../decks/base_us.json";
+import base from "../decks/base_us.json" assert {type: "json"};
 import { v4 as uuidv4 } from 'uuid';
-import { PromptCard, ResponseCard } from "../model/cards";
+import { PromptCard, ResponseCard } from "../model/cards.js";
 
 const promptCards = new Map<string, [PromptCard]>();
 const responseCards = new Map<string, [ResponseCard]>();

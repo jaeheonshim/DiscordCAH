@@ -5,20 +5,24 @@ import {
   Collection,
   BaseInteraction,
 } from "discord.js";
-import config from "./config.json";
-import path from "node:path";
+import config from "./config.json" assert { type: "json" };
 import fs from "node:fs";
-import "./deployCommands";
-import { CAHError } from "../server/model/cahresponse";
-import * as Sentry from "@sentry/node"
+import "./deployCommands.js";
+import { CAHError } from "../server/model/cahresponse.js";
+import * as Sentry from "@sentry/node";
 import axios from "axios";
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 Sentry.init({
   dsn: "https://50e6331e22374ce5932d547293aae7af@o573198.ingest.sentry.io/4505326774124544",
   tracesSampleRate: 1.0,
 });
 
-axios.defaults.headers.common['Authorization'] = `Bearer ${config.apiToken}`;
+axios.defaults.headers.common["Authorization"] = `Bearer ${config.apiToken}`;
 
 const token = config.token;
 
@@ -31,11 +35,11 @@ client.cooldowns = new Collection();
 const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs
   .readdirSync(commandsPath)
-  .filter((file) => file.endsWith(".ts"));
+  .filter((file) => file.endsWith(".js"));
 
 for (const file of commandFiles) {
-  const filePath = path.join(commandsPath, file);
-  const command = require(filePath).default;
+  const filePath = "file://" + path.join(commandsPath, file);
+  const command: any = (await import(filePath)).default;
   // Set a new item in the Collection with the key as the command name and the value as the exported module
   if ("data" in command && "execute" in command) {
     client.commands.set(command.data.name, command);
@@ -50,12 +54,12 @@ for (const file of commandFiles) {
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs
   .readdirSync(eventsPath)
-  .filter((file) => file.endsWith(".ts"));
+  .filter((file) => file.endsWith(".js"));
 
 for (const file of eventFiles) {
-  const filePath = path.join(eventsPath, file);
-  const event = require(filePath).default;
-  
+  const filePath = "file://" + path.join(eventsPath, file);
+  const event = (await import(filePath)).default;
+
   if ("name" in event && "execute" in event) {
     client.on(event.name, event.execute);
   } else {

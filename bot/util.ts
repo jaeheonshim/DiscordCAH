@@ -7,7 +7,7 @@ import {
   TextBasedChannel,
   User,
 } from "discord.js";
-import { CAHError } from "../server/model/cahresponse";
+import { CAHError } from "../server/model/cahresponse.js";
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
 import * as Sentry from "@sentry/node";
