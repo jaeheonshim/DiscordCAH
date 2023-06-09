@@ -25,7 +25,7 @@ apiRouter.get("/games", function (req, res) {
 
 apiRouter.get("/game/:id", function (req, res) {
     const gameId = req.params.id;
-    const game: any = getGameMap().get(gameId);
+    const game: any = {...getGameMap().get(gameId)};
     
     if(!game) {
         res.sendStatus(404);
