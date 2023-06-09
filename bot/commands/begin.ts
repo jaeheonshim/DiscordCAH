@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
 import { retrieveGameByChannelId } from "../../server/manager/gameStorageManager.js";
+import config from "../config.json" assert {type: "json"};
 
 export default {
   cooldown: 10,
@@ -24,7 +25,7 @@ export default {
     await interaction.deferReply();
 
     await axios
-      .post("http://localhost:8080/bot/game/ready", {
+      .post(config.apiEndpoint + "/bot/game/ready", {
         userId: interaction.user.id,
         username:
           (interaction.member as GuildMember).nickname ||

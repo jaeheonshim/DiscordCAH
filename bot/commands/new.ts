@@ -14,6 +14,7 @@ import {
     executeDefaultTextCommandServerRequest,
 } from "../util.js";
 import axios from "axios";
+import config from "../config.json" assert {type: "json"};
 
 export default {
     cooldown: 30,
@@ -28,7 +29,7 @@ export default {
         await checkCanSendDM(interaction);
 
         await axios
-            .post("http://localhost:8080/bot/game/new", {
+            .post(config.apiEndpoint + "/bot/game/new", {
                 userId: interaction.user.id,
                 username:
                     (interaction.member as GuildMember).nickname ||

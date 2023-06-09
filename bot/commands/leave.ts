@@ -5,6 +5,7 @@ import {
 import {
   executeDefaultTextCommandServerRequest, scheduleRoundBegin
 } from "../util.js";
+import config from "../config.json" assert {type: "json"};
 
 export default {
   cooldown: 10,
@@ -16,7 +17,7 @@ export default {
 
     const data = await executeDefaultTextCommandServerRequest(
       interaction,
-      "http://localhost:8080/bot/game/leave",
+      config.apiEndpoint + "/bot/game/leave",
       true
     );
 

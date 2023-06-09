@@ -4,6 +4,7 @@ import axios from "axios";
 import { scheduleJob } from "node-schedule";
 import * as Sentry from "@sentry/node";
 import { sendMessageToChannel, sendMessageToUser } from "../shardMessaging.js";
+import config from "../config.json" assert {type: "json"};
 
 export default {
     name: Events.InteractionCreate,
@@ -28,13 +29,13 @@ export default {
 
                 switch (customId) {
                     case "JOIN": {
-                        await executeDefaultTextCommandServerRequest(interaction, "http://localhost:8080/bot/game/join", true);
+                        await executeDefaultTextCommandServerRequest(interaction, config.apiEndpoint + "/bot/game/join", true);
                         break;
                     }
                     case "BEGIN": {
                         await interaction.deferReply();
                         await axios
-                            .post("http://localhost:8080/bot/game/ready", {
+                            .post(config.apiEndpoint + "/bot/game/ready", {
                                 userId: interaction.user.id,
                                 username:
                                     (interaction.member as GuildMember).nickname ||
@@ -68,7 +69,7 @@ export default {
 async function handleSubmit(interaction: ButtonInteraction) {
     const data = await executeDefaultTextCommandServerRequest(
         interaction,
-        "http://localhost:8080/bot/game/submit",
+        config.apiEndpoint + "/bot/game/submit",
         false,
         {
             index: parseInt(interaction.customId.split(":")[1])
@@ -76,7 +77,7 @@ async function handleSubmit(interaction: ButtonInteraction) {
     );
 
     if (data.allSubmitted) {
-        await axios.post("http://localhost:8080/bot/game/beginJudging", { gameId: data.gameId }).then(async res => {
+        await axios.post(config.apiEndpoint + "/bot/game/beginJudging", { gameId: data.gameId }).then(async res => {
             if (!res.data.channelMessage) return;
             const channelMessage = res.data.channelMessage;
 

@@ -4,9 +4,10 @@ import bodyParser from "body-parser";
 import { CAHError } from "./model/cahresponse.js";
 import * as Sentry from "@sentry/node";
 import tokenAuth from "./apiAuth.js";
+import config from "./config.json" assert {type: "json"};
 
 const app = express();
-const port = 8080;
+const port = config.port;
 
 Sentry.init({
   dsn: "https://84a64a7b5d2b4d608bc273694acfe251@o573198.ingest.sentry.io/4505326077149184",

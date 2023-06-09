@@ -12,6 +12,7 @@ import axios from "axios";
 import { scheduleJob } from "node-schedule";
 import * as Sentry from "@sentry/node";
 import { sendMessageToChannel, sendMessageToUser } from "./shardMessaging.js";
+import config from "./config.json" assert {type: "json"};
 
 const checkDMCooldown = new Map<string, number>();
 const DM_RECHECK_COOLDOWN = 60 * 60 * 1000; // recheck DM permissions after 60 minutes
@@ -82,7 +83,7 @@ export async function executeDefaultTextCommandServerRequest(
 }
 
 export async function beginJudging(client: Client, gameId, validRoundNumber?) {
-  await axios.post("http://localhost:8080/bot/game/beginJudging", { gameId, validRoundNumber }).then(async res => {
+  await axios.post(config.apiEndpoint + "/bot/game/beginJudging", { gameId, validRoundNumber }).then(async res => {
     if (!res.data.channelMessage) return;
     const channelMessage = res.data.channelMessage;
 
@@ -101,7 +102,7 @@ export async function beginJudging(client: Client, gameId, validRoundNumber?) {
 export function scheduleRoundBegin(client: Client, time, gameId) {
   scheduleJob(time, async () => {
     try {
-      await axios.post("http://localhost:8080/bot/game/newRound", { gameId }).then(async res => {
+      await axios.post(config.apiEndpoint + "/bot/game/newRound", { gameId }).then(async res => {
         if (!res.data.channelMessage) return;
         const channelMessage = res.data.channelMessage;
 

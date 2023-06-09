@@ -1,5 +1,6 @@
 import { SlashCommandBuilder, Interaction, GuildMember, PermissionFlagsBits } from "discord.js";
 import { executeDefaultTextCommandServerRequest } from "../util.js";
+import config from "../config.json" assert {type: "json"};
 
 export default {
     data: new SlashCommandBuilder()
@@ -9,6 +10,6 @@ export default {
         .setDMPermission(false),
     async execute(interaction: Interaction) {
         if (!interaction.isChatInputCommand()) return;
-        await executeDefaultTextCommandServerRequest(interaction, "http://localhost:8080/bot/game/end");
+        await executeDefaultTextCommandServerRequest(interaction, config.apiEndpoint + "/bot/game/end");
     },
 };

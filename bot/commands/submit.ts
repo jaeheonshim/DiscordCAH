@@ -12,6 +12,7 @@ import { scheduleJob } from "node-schedule";
 import { CAHError } from "../../server/model/cahresponse.js";
 import * as Sentry from "@sentry/node";
 import { sendMessageToChannel } from "../shardMessaging.js";
+import config from "../config.json" assert {type: "json"};
 
 export default {
   data: new SlashCommandBuilder()
@@ -27,7 +28,7 @@ export default {
 
     const data = await executeDefaultTextCommandServerRequest(
       interaction,
-      "http://localhost:8080/bot/game/submit",
+      config.apiEndpoint + "/bot/game/submit",
       false,
       {
         index: interaction.options.getInteger("number", true) - 1
@@ -39,7 +40,7 @@ export default {
     } else if(data.resultDisplayTime) {
       scheduleJob(data.resultDisplayTime, async () => {
         try {
-          axios.post("http://localhost:8080/bot/game/endRound", { gameId: data.gameId }).then(async (res) => {
+          axios.post(config.apiEndpoint + "/bot/game/endRound", { gameId: data.gameId }).then(async (res) => {
             const data = res.data;
             const channelId = data.channelMessage.channelId;
             const message = data.channelMessage.message;

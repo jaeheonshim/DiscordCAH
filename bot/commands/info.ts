@@ -6,6 +6,7 @@ import {
   executeDefaultTextCommandServerRequest,
 } from "../util.js";
 import axios from "axios";
+import config from "../config.json" assert {type: "json"};
 
 export default {
   data: new SlashCommandBuilder()
@@ -16,7 +17,7 @@ export default {
     if (!interaction.isChatInputCommand()) return;
     await executeDefaultTextCommandServerRequest(
       interaction,
-      "http://localhost:8080/bot/game/info"
+      config.apiEndpoint + "/bot/game/info"
     );
   },
 };

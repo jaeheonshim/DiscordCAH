@@ -1,3 +1,4 @@
 {
-    "apiToken": "G7HWUppAAL63ruBUKMSaeFJH8Cw2apm4c6xnATcxZgVAmfXcSQYEQWxV6Kb3uJmnX2BBAGmPDsTApV2eXByuUFHkjUpYhzUq"
+    "apiToken": "G7HWUppAAL63ruBUKMSaeFJH8Cw2apm4c6xnATcxZgVAmfXcSQYEQWxV6Kb3uJmnX2BBAGmPDsTApV2eXByuUFHkjUpYhzUq",
+    "port": 8080
 }

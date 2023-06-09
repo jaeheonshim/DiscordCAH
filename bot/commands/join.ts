@@ -11,6 +11,7 @@ import {
   executeDefaultTextCommandServerRequest,
 } from "../util.js";
 import axios from "axios";
+import config from "../config.json" assert {type: "json"};
 
 export default {
   cooldown: 10,
@@ -24,7 +25,7 @@ export default {
     await checkCanSendDM(interaction);
     await executeDefaultTextCommandServerRequest(
       interaction,
-      "http://localhost:8080/bot/game/join",
+      config.apiEndpoint + "/bot/game/join",
       true
     );
   },
