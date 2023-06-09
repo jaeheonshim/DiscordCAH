@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx ts-node bot/main.ts",
-    "test": "jest",
-    "server": "npx ts-node server/index.ts"
+    "bot": "npx ts-node bot/main.ts",
+    "server": "npx ts-node server/index.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
