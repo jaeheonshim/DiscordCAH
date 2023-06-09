@@ -23,9 +23,9 @@ export class CAHGame {
 
     timing = {
         beginGameDelay: 10 * 1000,
-        nextRoundDelay: 15 * 1000,
+        nextRoundDelay: 35 * 1000,
         roundDuration: 2 * 60 * 1000,
-        resultDisplayWait: 5 * 1000
+        resultDisplayWait: 10 * 1000
     }
 
     cardHandCount: number = 7;

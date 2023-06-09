@@ -249,7 +249,7 @@ gameRouter.post("/leave", function (req, res) {
     if (player.game.status == CAHGameStatus.PLAYER_SUBMIT_CARD || player.game.status == CAHGameStatus.JUDGE_SELECT_CARD) {
         if (player.id === player.game.judge.id) {
             player.game.status = CAHGameStatus.PENDING_ROUND_START;
-            const nextRoundBeginTime = Date.now() + player.game.timing.nextRoundDelay;
+            const nextRoundBeginTime = Date.now() + player.game.timing.beginGameDelay;
 
             botResponse.channelMessage = {
                 channelId: player.game.channelId,
