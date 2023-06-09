@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "discordcah:server",
+            "script": "npm",
+            "args" : "start:server"
+        }
+    ]
+}

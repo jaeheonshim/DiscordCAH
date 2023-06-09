@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "discordcah:bot",
+            "script": "npm",
+            "args" : "start:bot"
+        }
+    ]
+}
