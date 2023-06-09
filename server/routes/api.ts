@@ -1,6 +1,7 @@
 import express from "express";
 import { getGameMap } from "../manager/gameStorageManager.js";
-import { CAHGame } from "../model/classes.js";
+import { CAHGame, CAHGameStatus, CAHPlayer } from "../model/classes.js";
+import { retrieveUsername } from "../manager/usernameManager.js";
 
 export const apiRouter = express.Router();
 
@@ -14,10 +15,29 @@ apiRouter.get("/games", function (req, res) {
             channelId: game.channelId,
             details: game.details,
             playerCount: game.players.length,
-            status: game.status,
+            status: CAHGameStatus[game.status],
             roundNumber: game.roundNumber
         })
     }
 
     res.json(gameSummaries);
+});
+
+apiRouter.get("/game/:id", function (req, res) {
+    const gameId = req.params.id;
+    const game: any = getGameMap().get(gameId);
+    
+    if(!game) {
+        res.sendStatus(404);
+        return;
+    }
+
+    for(const player of Object.values<CAHPlayer>(game.players)) {
+        player["username"] = retrieveUsername(player.id);
+        delete player["game"];
+    }
+
+    game.status = CAHGameStatus[game.status];
+
+    res.json(game);
 });
