@@ -180,9 +180,10 @@ gameRouter.post("/join", function (req, res) {
 
     cacheUsername(userId, username);
 
-    const joinResponse = playerJoinGame(retrieveGameByChannelId(channelId).id, userId);
+    const game = retrieveGameByChannelId(channelId);
+    const joinResponse = playerJoinGame(game.id, userId);
 
-    res.json({
+    const botResponse: any = {
         response: [
             { content: joinResponse.getMessage(), ephemeral: true }
         ],
@@ -192,7 +193,17 @@ gameRouter.post("/join", function (req, res) {
                 content: `👋 ${username} joined the game!`
             }
         }
-    });
+    }
+
+    if(game.status == CAHGameStatus.PLAYER_SUBMIT_CARD) {
+        botResponse.individualMessages = {};
+        botResponse.individualMessages[userId] = {
+            embeds: [getPlayerRoundEmbed(game, userId)],
+            components: getPlayerRoundComponents(game, userId)
+        }
+    }
+
+    res.json(botResponse);
 });
 
 gameRouter.post("/leave", function (req, res) {
@@ -473,7 +484,10 @@ gameRouter.post("/beginJudging", function (req, res) {
     const reqGame = retrieveGameById(req.body.gameId);
 
     if (req.body.validRoundNumber) {
-        if (reqGame.roundNumber != req.body.validRoundNumber) res.status(200).send();
+        if (reqGame.status != CAHGameStatus.PLAYER_SUBMIT_CARD || reqGame.roundNumber != req.body.validRoundNumber) {
+            res.status(200).send();
+            return;
+        }
     }
 
     startJudgeStage(reqGame);

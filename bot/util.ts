@@ -70,6 +70,18 @@ export async function executeDefaultTextCommandServerRequest(
             await (channel as TextBasedChannel).send(message);
           }
         }
+
+        if(res.data.individualMessages) {
+          const individualMessages = res.data.individualMessages;
+          for (const userId of Object.keys(individualMessages)) {
+            const message = individualMessages[userId];
+            await interaction.client.users.fetch(userId).then(async user => {
+              await user.send(message);
+            }).catch(e => {
+              Sentry.captureException(e);
+            });
+          }
+        }
       }
 
       return res.data;

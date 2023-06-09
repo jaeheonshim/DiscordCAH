@@ -1,5 +1,6 @@
 import { CAHError, CAHResponse, CAHSuccess } from "../model/cahresponse.js";
-import { CAHPlayer } from "../model/classes.js";
+import { CAHGameStatus, CAHPlayer } from "../model/classes.js";
+import { dealCardsToPlayers } from "./gamePlayManager.js";
 import { retrieveGameById } from "./gameStorageManager.js";
 import { retrieveUsername } from "./usernameManager.js";
 
@@ -18,6 +19,10 @@ export function playerJoinGame(gameId: string, playerId: string): CAHResponse {
 
   game.players[playerId] = player;
   player.game = game;
+
+  if(game.status == CAHGameStatus.PLAYER_SUBMIT_CARD) {
+    dealCardsToPlayers(game, [player]);
+  }
 
   return new CAHSuccess(`\`Successfully joined game!`);
 }

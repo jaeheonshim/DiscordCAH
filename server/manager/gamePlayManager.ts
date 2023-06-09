@@ -48,6 +48,12 @@ export function newRound(game: CAHGame) {
     }
     game.submitted.length = 0;
 
+    dealCardsToPlayers(game, Object.values(game.players));
+
+    return new CAHSuccess("New round started!");
+}
+
+export function dealCardsToPlayers(game: CAHGame, players: CAHPlayer[]) {
     const usedCards = new Set<string>();
 
     for(const player of Object.values(game.players)) {
@@ -58,15 +64,13 @@ export function newRound(game: CAHGame) {
         for(const card of player.cards) usedCards.add(card.id);
     }
 
-    for(const player of Object.values(game.players)) {
+    for(const player of Object.values(players)) {
         while(player.cards.length < game.cardHandCount) {
             const card = getRandomResponseCard(game.deckId, usedCards);
             player.cards.push(card);
             usedCards.add(card.id);
         }
     }
-
-    return new CAHSuccess("New round started!");
 }
 
 export function playerSubmitCard(game: CAHGame, player: CAHPlayer, cardIndex: number) {
