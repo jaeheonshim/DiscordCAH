@@ -3,6 +3,7 @@ import { executeDefaultTextCommandServerRequest, scheduleRoundBegin } from "../u
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
 import * as Sentry from "@sentry/node";
+import { sendMessageToChannel, sendMessageToUser } from "../shardMessaging.js";
 
 export default {
     name: Events.InteractionCreate,
@@ -79,14 +80,12 @@ async function handleSubmit(interaction: ButtonInteraction) {
             if (!res.data.channelMessage) return;
             const channelMessage = res.data.channelMessage;
 
-            const channel = (await interaction.client.channels.fetch(channelMessage.channelId) as TextBasedChannel);
-            await channel.send(channelMessage.message);
+            await sendMessageToChannel(interaction.client, channelMessage.channelId, channelMessage.message);
+
             const individualMessages = res.data.individualMessages;
             for (const userId of Object.keys(individualMessages)) {
                 const message = individualMessages[userId];
-                interaction.client.users.fetch(userId).then(async user => {
-                    await user.send(message);
-                }).catch(e => { });
+                await sendMessageToUser(interaction.client, userId, message);
             }
         });
     }

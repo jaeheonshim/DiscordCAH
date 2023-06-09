@@ -11,6 +11,7 @@ import axios from "axios";
 import { scheduleJob } from "node-schedule";
 import { CAHError } from "../../server/model/cahresponse.js";
 import * as Sentry from "@sentry/node";
+import { sendMessageToChannel } from "../shardMessaging.js";
 
 export default {
   data: new SlashCommandBuilder()
@@ -43,8 +44,7 @@ export default {
             const channelId = data.channelMessage.channelId;
             const message = data.channelMessage.message;
   
-            const channel = (await interaction.client.channels.fetch(channelId)) as TextBasedChannel;
-            await channel.send(message);
+            await sendMessageToChannel(interaction.client, channelId, message);
 
             const nextRoundBeginTime = data.roundBeginTime;
             scheduleRoundBegin(interaction.client, nextRoundBeginTime, data.gameId);

@@ -11,6 +11,7 @@ import { CAHError } from "../server/model/cahresponse.js";
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
 import * as Sentry from "@sentry/node";
+import { sendMessageToChannel, sendMessageToUser } from "./shardMessaging.js";
 
 const checkDMCooldown = new Map<string, number>();
 const DM_RECHECK_COOLDOWN = 60 * 60 * 1000; // recheck DM permissions after 60 minutes
@@ -64,22 +65,14 @@ export async function executeDefaultTextCommandServerRequest(
           const channelId = res.data.channelMessage.channelId;
           const message = res.data.channelMessage.message;
 
-          const channel = await interaction.client.channels.fetch(channelId);
-
-          if (channel.isTextBased) {
-            await (channel as TextBasedChannel).send(message);
-          }
+          await sendMessageToChannel(interaction.client, channelId, message);
         }
 
         if(res.data.individualMessages) {
           const individualMessages = res.data.individualMessages;
           for (const userId of Object.keys(individualMessages)) {
             const message = individualMessages[userId];
-            await interaction.client.users.fetch(userId).then(async user => {
-              await user.send(message);
-            }).catch(e => {
-              Sentry.captureException(e);
-            });
+            await sendMessageToUser(interaction.client, userId, message);
           }
         }
       }
@@ -93,17 +86,13 @@ export async function beginJudging(client: Client, gameId, validRoundNumber?) {
     if (!res.data.channelMessage) return;
     const channelMessage = res.data.channelMessage;
 
-    const channel = (await client.channels.fetch(channelMessage.channelId) as TextBasedChannel);
-    await channel.send(channelMessage.message);
+    await sendMessageToChannel(client, channelMessage.channelId, channelMessage.message);
+
     const individualMessages = res.data.individualMessages;
     if (individualMessages) {
       for (const userId of Object.keys(individualMessages)) {
         const message = individualMessages[userId];
-        client.users.fetch(userId).then(async user => {
-          await user.send(message);
-        }).catch(e => {
-          Sentry.captureException(e);
-        });
+        await sendMessageToUser(client, userId, message);
       }
     }
   });
@@ -116,17 +105,12 @@ export function scheduleRoundBegin(client: Client, time, gameId) {
         if (!res.data.channelMessage) return;
         const channelMessage = res.data.channelMessage;
 
-        const channel = (await client.channels.fetch(channelMessage.channelId) as TextBasedChannel);
-        await channel.send(channelMessage.message);
+        await sendMessageToChannel(client, channelMessage.channelId, channelMessage.message);
 
         const individualMessages = res.data.individualMessages;
         for (const userId of Object.keys(individualMessages)) {
           const message = individualMessages[userId];
-          client.users.fetch(userId).then(async user => {
-            await user.send(message);
-          }).catch(e => {
-            Sentry.captureException(e);
-          });
+          await sendMessageToUser(client, userId, message);
         }
 
         const judgeBeginTime = res.data.judgeBeginTime;
@@ -136,6 +120,7 @@ export function scheduleRoundBegin(client: Client, time, gameId) {
       });
     } catch (e) {
       // game likely ended before round began
+      console.error("A scheduled event error occurred. Error has been reported to sentry.");
       Sentry.captureException(e);
     }
   });
