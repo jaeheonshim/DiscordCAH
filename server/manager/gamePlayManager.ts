@@ -32,7 +32,7 @@ export function newRound(game: CAHGame) {
     game.usedPromptCards.add(game.promptCard.id);
     game.status = CAHGameStatus.PLAYER_SUBMIT_CARD;
 
-    if(game.winner) {
+    if(game.winner && Object.keys(game.players).includes(game.winner.id)) {
         game.judge = game.winner;
     } else {
         const players = Object.values(game.players);
