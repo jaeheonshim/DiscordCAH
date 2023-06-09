@@ -1,6 +1,7 @@
 import { Collection, Events } from "discord.js";
 import { client } from "../main";
 import { CAHError } from "../../server/model/cahresponse";
+import * as Sentry from "@sentry/node"
 
 export default {
     name: Events.InteractionCreate,
@@ -40,10 +41,21 @@ export default {
         timestamps.set(interaction.user.id, now);
         setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
 
+        const transaction = Sentry.startTransaction({
+            name: `/${command.data.name}`
+        });
+
+        Sentry.setUser({
+            id: interaction.user.id,
+            username: interaction.user.username
+        });
+
         try {
             await command.execute(interaction);
         } catch (error) {
-            console.error(error);
+            console.error("A slash command error occurred. Error has been reported to sentry.");
+            Sentry.captureException(error);
+
             if (interaction.replied || interaction.deferred) {
                 if (error instanceof CAHError) {
                     await interaction.followUp({
@@ -52,7 +64,7 @@ export default {
                     });
                 } else {
                     await interaction.followUp({
-                        content: "There was an error while executing this command!",
+                        content: "There was a backend error while executing this command. This error has been reported and will be investigated shortly. Sorry for the inconvenience.",
                         ephemeral: true,
                     });
                 }
@@ -69,6 +81,9 @@ export default {
                     });
                 }
             }
+        } finally {
+            transaction.finish();
+            Sentry.setUser(null);
         }
     }
 }

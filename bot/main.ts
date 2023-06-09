@@ -10,6 +10,12 @@ import path from "node:path";
 import fs from "node:fs";
 import "./deployCommands";
 import { CAHError } from "../server/model/cahresponse";
+import * as Sentry from "@sentry/node"
+
+Sentry.init({
+  dsn: "https://50e6331e22374ce5932d547293aae7af@o573198.ingest.sentry.io/4505326774124544",
+  tracesSampleRate: 1.0,
+});
 
 const token = config.token;
 

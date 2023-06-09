@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
 import { CAHError } from "../../server/model/cahresponse";
+import * as Sentry from "@sentry/node";
 
 export default {
   data: new SlashCommandBuilder()
@@ -33,11 +34,7 @@ export default {
     );
 
     if(data.allSubmitted) {
-      try {
-        await beginJudging(interaction.client, data.gameId);
-      } catch (e) {
-        console.error(e);
-      }
+      await beginJudging(interaction.client, data.gameId);
     } else if(data.resultDisplayTime) {
       scheduleJob(data.resultDisplayTime, async () => {
         try {
@@ -53,7 +50,8 @@ export default {
             scheduleRoundBegin(interaction.client, nextRoundBeginTime, data.gameId);
           });
         } catch(e) {
-          console.error(e);
+          console.error("A scheduler error occurred (endpoint: endRound). Error has been reported to sentry.");
+          Sentry.captureException(e);
         }
       });
     }

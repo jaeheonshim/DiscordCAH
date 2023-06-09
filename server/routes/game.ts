@@ -13,11 +13,34 @@ import { getJudgeModal, getPlayerRoundComponents, getPlayerRoundEmbed, getPlayer
 import { beginGame, haveAllPlayersSubmitted, isReadyToBeginGame, judgeSubmitCard, newRound, playerSubmitCard, startJudgeStage } from "../manager/gamePlayManager";
 import { CAHGameStatus, CAHPlayer } from "../model/classes";
 import { ResponseCard } from "../model/cards";
+import * as Sentry from "@sentry/node";
 
 export const gameRouter = express.Router();
 
+// add context
+gameRouter.use((req, res, next) => {
+    const messageContext = {
+        channelId: req.body.channelId,
+        userId: req.body.userId,
+        username: req.body.username || (req.body.userId ? retrieveUsername(req.body.userId) : undefined),
+
+    }
+    Sentry.setContext("message", messageContext);
+
+    try {
+        let player: CAHPlayer;
+        if(req.body.userId && (player = retrievePlayerById(req.body.userId))) {
+            Sentry.setContext("game", player.game);
+        }
+    } catch(e) {
+        // ignore
+    }
+
+    next();
+})
+  
+
 gameRouter.post("/new", function (req, res) {
-    throw new Error("Test Error");
     if (
         !req.body.channelId ||
         !req.body.userId ||

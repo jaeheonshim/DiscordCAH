@@ -10,6 +10,7 @@ import {
 import { CAHError } from "../server/model/cahresponse";
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
+import * as Sentry from "@sentry/node";
 
 const checkDMCooldown = new Map<string, number>();
 const DM_RECHECK_COOLDOWN = 10 * 60 * 1000; // recheck DM permissions after 10 minutes
@@ -89,7 +90,7 @@ export async function beginJudging(client: Client, gameId, validRoundNumber?) {
         client.users.fetch(userId).then(async user => {
           await user.send(message);
         }).catch(e => {
-          console.error(e);
+          Sentry.captureException(e);
         });
       }
     }
@@ -112,7 +113,7 @@ export function scheduleRoundBegin(client: Client, time, gameId) {
           client.users.fetch(userId).then(async user => {
             await user.send(message);
           }).catch(e => {
-            console.error(e);
+            Sentry.captureException(e);
           });
         }
 
@@ -123,7 +124,7 @@ export function scheduleRoundBegin(client: Client, time, gameId) {
       });
     } catch (e) {
       // game likely ended before round began
-      console.error(e);
+      Sentry.captureException(e);
     }
   });
 }

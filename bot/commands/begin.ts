@@ -20,7 +20,7 @@ export default {
     .setDMPermission(false),
   async execute(interaction: Interaction) {
     if (!interaction.isChatInputCommand()) return;
-
+    
     await interaction.deferReply();
 
     await axios
