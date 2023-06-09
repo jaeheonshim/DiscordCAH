@@ -447,6 +447,11 @@ gameRouter.post("/beginJudging", function (req, res) {
         throw new Error("Missing required body param(s).");
 
     const reqGame = retrieveGameById(req.body.gameId);
+
+    if (req.body.validRoundNumber) {
+        if (reqGame.roundNumber != req.body.validRoundNumber) res.status(200).send();
+    }
+
     startJudgeStage(reqGame);
 
     const beginJudgingEmbed = {
@@ -472,6 +477,28 @@ gameRouter.post("/beginJudging", function (req, res) {
     shuffle(submitted);
     reqGame.submitted = submitted;
 
+    if (reqGame.submitted.length == 0) {
+        // if nobody submitted a card, end the game
+        const deleteResponse = deleteGameById(reqGame.id);
+
+        const botResponse = {
+            channelMessage: {
+                channelId: reqGame.channelId,
+                message: {
+                    embeds: [
+                        {
+                            title: "Game Ended",
+                            description: "The game in this channel ended because nobody submitted a card."
+                        }
+                    ]
+                }
+            }
+        }
+
+        res.json(botResponse);
+        return;
+    }
+
     const response = {
         channelMessage: {
             channelId: reqGame.channelId,
@@ -491,8 +518,7 @@ gameRouter.post("/endRound", function (req, res) {
         throw new Error("Missing required body param(s).");
 
     const game = retrieveGameById(req.body.gameId);
-    if(game.status != CAHGameStatus.PLAYER_SUBMIT_CARD) throw new CAHError("Invalid state for command");
-    
+
     game.status = CAHGameStatus.PENDING_ROUND_START;
     const nextRoundBeginTime = Date.now() + game.timing.nextRoundDelay;
 

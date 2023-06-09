@@ -4,6 +4,7 @@ import {
   TextBasedChannel
 } from "discord.js";
 import {
+  beginJudging,
   executeDefaultTextCommandServerRequest, scheduleRoundBegin
 } from "../util";
 import axios from "axios";
@@ -33,20 +34,7 @@ export default {
 
     if(data.allSubmitted) {
       try {
-        await axios.post("http://localhost:8080/bot/game/beginJudging", { gameId: data.gameId }).then(async res => {
-          if (!res.data.channelMessage) return;
-          const channelMessage = res.data.channelMessage;
-  
-          const channel = (await interaction.client.channels.fetch(channelMessage.channelId) as TextBasedChannel);
-          await channel.send(channelMessage.message);
-          const individualMessages = res.data.individualMessages;
-          for (const userId of Object.keys(individualMessages)) {
-            const message = individualMessages[userId];
-            interaction.client.users.fetch(userId).then(async user => {
-              await user.send(message);
-            }).catch(e => {});
-          }
-        });
+        await beginJudging(interaction.client, data.gameId);
       } catch (e) {
         console.error(e);
       }

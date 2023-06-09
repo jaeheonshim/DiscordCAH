@@ -75,6 +75,27 @@ export async function executeDefaultTextCommandServerRequest(
     });
 }
 
+export async function beginJudging(client: Client, gameId, validRoundNumber?) {
+  await axios.post("http://localhost:8080/bot/game/beginJudging", { gameId, validRoundNumber }).then(async res => {
+    if (!res.data.channelMessage) return;
+    const channelMessage = res.data.channelMessage;
+
+    const channel = (await client.channels.fetch(channelMessage.channelId) as TextBasedChannel);
+    await channel.send(channelMessage.message);
+    const individualMessages = res.data.individualMessages;
+    if (individualMessages) {
+      for (const userId of Object.keys(individualMessages)) {
+        const message = individualMessages[userId];
+        client.users.fetch(userId).then(async user => {
+          await user.send(message);
+        }).catch(e => {
+          console.error(e);
+        });
+      }
+    }
+  });
+}
+
 export function scheduleRoundBegin(client: Client, time, gameId) {
   scheduleJob(time, async () => {
     try {
@@ -94,6 +115,11 @@ export function scheduleRoundBegin(client: Client, time, gameId) {
             console.error(e);
           });
         }
+
+        const judgeBeginTime = res.data.judgeBeginTime;
+        scheduleJob(judgeBeginTime, async () => {
+          await beginJudging(client, gameId);
+        });
       });
     } catch (e) {
       // game likely ended before round began
