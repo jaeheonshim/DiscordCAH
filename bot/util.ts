@@ -13,7 +13,7 @@ import { scheduleJob } from "node-schedule";
 import * as Sentry from "@sentry/node";
 
 const checkDMCooldown = new Map<string, number>();
-const DM_RECHECK_COOLDOWN = 10 * 60 * 1000; // recheck DM permissions after 10 minutes
+const DM_RECHECK_COOLDOWN = 60 * 60 * 1000; // recheck DM permissions after 60 minutes
 
 export async function checkCanSendDM(interaction) {
   const cooldown = checkDMCooldown.get(interaction.user.id);

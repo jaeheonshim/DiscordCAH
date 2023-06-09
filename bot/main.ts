@@ -11,11 +11,14 @@ import fs from "node:fs";
 import "./deployCommands";
 import { CAHError } from "../server/model/cahresponse";
 import * as Sentry from "@sentry/node"
+import axios from "axios";
 
 Sentry.init({
   dsn: "https://50e6331e22374ce5932d547293aae7af@o573198.ingest.sentry.io/4505326774124544",
   tracesSampleRate: 1.0,
 });
+
+axios.defaults.headers.common['Authorization'] = `Bearer ${config.apiToken}`;
 
 const token = config.token;
 
