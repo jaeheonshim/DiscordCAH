@@ -5,6 +5,7 @@ import { CAHError } from "./model/cahresponse.js";
 import * as Sentry from "@sentry/node";
 import tokenAuth from "./apiAuth.js";
 import config from "./config.json" assert {type: "json"};
+import { apiRouter } from "./routes/api.js";
 
 const app = express();
 const port = config.port;
@@ -36,6 +37,7 @@ app.listen(port, () => {
 });
 
 app.use("/bot/game", tokenAuth, gameRouter);
+app.use("/api", tokenAuth, apiRouter);
 
 app.use(Sentry.Handlers.errorHandler({
   shouldHandleError: (error) => !(error instanceof CAHError) 

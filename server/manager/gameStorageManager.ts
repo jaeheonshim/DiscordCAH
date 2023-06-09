@@ -4,6 +4,10 @@ import { CAHGame, CAHPlayer } from "../model/classes.js";
 const gameMap = new Map<string, CAHGame>();
 const channelIdMap = new Map<string, string>();
 
+export function getGameMap(): Map<string, CAHGame> {
+  return gameMap;
+}
+
 export function createNewGame(channelId: string): CAHGame {
   const gameId = channelIdMap.get(channelId);
   if (gameId) {
