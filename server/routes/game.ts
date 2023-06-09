@@ -368,7 +368,8 @@ gameRouter.post("/newRound", function (req, res) {
             message: { content: newRoundResponse.getMessage(), embeds: [newRoundEmbed] }
         },
         individualMessages,
-        judgeBeginTime
+        judgeBeginTime,
+        roundNumber: reqGame.roundNumber
     });
 });
 

@@ -115,7 +115,7 @@ export function scheduleRoundBegin(client: Client, time, gameId) {
 
         const judgeBeginTime = res.data.judgeBeginTime;
         scheduleJob(judgeBeginTime, async () => {
-          await beginJudging(client, gameId);
+          await beginJudging(client, gameId, res.data.roundNumber);
         });
       });
     } catch (e) {
