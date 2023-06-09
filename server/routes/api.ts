@@ -2,6 +2,7 @@ import express from "express";
 import { getGameMap } from "../manager/gameStorageManager.js";
 import { CAHGame, CAHGameStatus, CAHPlayer } from "../model/classes.js";
 import { retrieveUsername } from "../manager/usernameManager.js";
+import clone from "clone";
 
 export const apiRouter = express.Router();
 
@@ -25,7 +26,8 @@ apiRouter.get("/games", function (req, res) {
 
 apiRouter.get("/game/:id", function (req, res) {
     const gameId = req.params.id;
-    const game: any = {...getGameMap().get(gameId)};
+    const game: any = clone(getGameMap().get(gameId));
+    game.players = game.players;
     
     if(!game) {
         res.sendStatus(404);
