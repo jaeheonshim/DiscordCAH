@@ -17,6 +17,7 @@ import { ResponseCard } from "../model/cards";
 export const gameRouter = express.Router();
 
 gameRouter.post("/new", function (req, res) {
+    throw new Error("Test Error");
     if (
         !req.body.channelId ||
         !req.body.userId ||

@@ -2,9 +2,30 @@ import express from "express";
 import { gameRouter } from "./routes/game";
 import bodyParser from "body-parser";
 import { CAHError } from "./model/cahresponse";
+import * as Sentry from "@sentry/node";
 
 const app = express();
 const port = 8080;
+
+Sentry.init({
+  dsn: "https://84a64a7b5d2b4d608bc273694acfe251@o573198.ingest.sentry.io/4505326077149184",
+  integrations: [
+    // enable HTTP calls tracing
+    new Sentry.Integrations.Http({ tracing: true }),
+    // enable Express.js middleware tracing
+    new Sentry.Integrations.Express({ app }),
+    // Automatically instrument Node.js libraries and frameworks
+    ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
+  ],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
+
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
 
 app.use(bodyParser.json());
 
@@ -14,6 +35,10 @@ app.listen(port, () => {
 
 app.use("/bot/game", gameRouter);
 
+app.use(Sentry.Handlers.errorHandler({
+  shouldHandleError: (error) => !(error instanceof CAHError) 
+}));
+
 // Error handler
 app.use((err, req, res, next) => {
   if (err instanceof CAHError) {
@@ -21,7 +46,7 @@ app.use((err, req, res, next) => {
       response: [{ content: err.getMessage(), ephemeral: true }],
     });
   } else {
-    console.error(err);
+    console.error("A server error occurred. Error has been reported to sentry.");
     res.status(200).send({
       response: [
         {
