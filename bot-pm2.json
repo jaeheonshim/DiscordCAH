@@ -3,7 +3,7 @@
         {
             "name": "discordcah:bot",
             "script": "npm",
-            "args" : "start:bot"
+            "args" : "run start:bot"
         }
     ]
 }
