@@ -42,6 +42,8 @@ export default {
         try {
           axios.post(config.apiEndpoint + "/bot/game/endRound", { gameId: data.gameId }).then(async (res) => {
             const data = res.data;
+            if(!data.channelMessage) return;
+            
             const channelId = data.channelMessage.channelId;
             const message = data.channelMessage.message;
   
