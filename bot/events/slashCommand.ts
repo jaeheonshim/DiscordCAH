@@ -60,31 +60,35 @@ export default {
       );
       Sentry.captureException(error);
 
-      if (interaction.replied || interaction.deferred) {
-        if (error instanceof CAHError) {
-          await interaction.followUp({
-            content: error.getMessage(),
-            ephemeral: true,
-          });
+      try {
+        if (interaction.replied || interaction.deferred) {
+          if (error instanceof CAHError) {
+            await interaction.followUp({
+              content: error.getMessage(),
+              ephemeral: true,
+            });
+          } else {
+            await interaction.followUp({
+              content:
+                "There was a backend error while executing this command. This error has been reported and will be investigated shortly. Sorry for the inconvenience.",
+              ephemeral: true,
+            });
+          }
         } else {
-          await interaction.followUp({
-            content:
-              "There was a backend error while executing this command. This error has been reported and will be investigated shortly. Sorry for the inconvenience.",
-            ephemeral: true,
-          });
+          if (error instanceof CAHError) {
+            await interaction.reply({
+              content: error.getMessage(),
+              ephemeral: true,
+            });
+          } else {
+            await interaction.reply({
+              content: "There was an error while executing this command!",
+              ephemeral: true,
+            });
+          }
         }
-      } else {
-        if (error instanceof CAHError) {
-          await interaction.reply({
-            content: error.getMessage(),
-            ephemeral: true,
-          });
-        } else {
-          await interaction.reply({
-            content: "There was an error while executing this command!",
-            ephemeral: true,
-          });
-        }
+      } catch(e) {
+        Sentry.captureException(error);
       }
     } finally {
       transaction.finish();
