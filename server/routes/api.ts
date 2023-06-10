@@ -27,7 +27,6 @@ apiRouter.get("/games", function (req, res) {
 apiRouter.get("/game/:id", function (req, res) {
     const gameId = req.params.id;
     const game: any = clone(getGameMap().get(gameId));
-    game.players = game.players;
     
     if(!game) {
         res.sendStatus(404);
