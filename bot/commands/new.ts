@@ -35,7 +35,7 @@ export default {
                     (interaction.member as GuildMember).nickname ||
                     interaction.user.username,
                 channelId: interaction.channelId,
-                channelName: interaction.channel.name,
+                channelName: interaction.channel ? interaction.channel.name : undefined,
                 serverName: interaction.guild.name,
                 displayAvatarURL: interaction.user.displayAvatarURL(),
             })
