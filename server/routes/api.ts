@@ -38,7 +38,10 @@ apiRouter.get("/game/:id", function (req, res) {
         delete player["game"];
     }
 
-    delete game.judge["game"];
+    if(game.judge) {
+        delete game.judge["game"];
+    }
+
     game.status = CAHGameStatus[game.status];
 
     res.json(game);
