@@ -33,6 +33,10 @@ export default {
                         },
                         fields: [
                             {
+                                name: "User ID",
+                                value: interaction.user.id
+                            },
+                            {
                                 name: "Feedback Content",
                                 value: feedback
                             }
