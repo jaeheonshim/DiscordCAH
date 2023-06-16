@@ -59,6 +59,7 @@ gameRouter.post("/new", function (req, res) {
 
     const newGame = createNewGame(channelId);
     const joinResponse = playerJoinGame(newGame.id, userId);
+    newGame.creatorId = userId;
 
     if (req.body.channelName) newGame.details.channelName = req.body.channelName;
     if (req.body.serverName) newGame.details.serverName = req.body.serverName;

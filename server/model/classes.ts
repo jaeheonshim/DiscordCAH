@@ -12,6 +12,7 @@ export enum CAHGameStatus {
 export class CAHGame {
     id: string = uuidv4();
     channelId: string;
+    creatorId: string;
     players: Record<string, CAHPlayer> = {};
     deleted: boolean = false;
     status: CAHGameStatus = CAHGameStatus.PLAYER_JOIN;
