@@ -61,6 +61,8 @@ gameRouter.post("/new", function (req, res) {
     const joinResponse = playerJoinGame(newGame.id, userId);
     newGame.creatorId = userId;
 
+    newGame.recordInteraction();
+
     if (req.body.channelName) newGame.details.channelName = req.body.channelName;
     if (req.body.serverName) newGame.details.serverName = req.body.serverName;
 
@@ -184,6 +186,7 @@ gameRouter.post("/join", function (req, res) {
     const game = retrieveGameByChannelId(channelId);
     const joinResponse = playerJoinGame(game.id, userId);
 
+    
     const botResponse: any = {
         response: [
             { content: joinResponse.getMessage(), ephemeral: true }
@@ -195,7 +198,7 @@ gameRouter.post("/join", function (req, res) {
             }
         }
     }
-
+    
     if(game.status == CAHGameStatus.PLAYER_SUBMIT_CARD) {
         botResponse.individualMessages = {};
         botResponse.individualMessages[userId] = {
@@ -203,7 +206,8 @@ gameRouter.post("/join", function (req, res) {
             components: getPlayerRoundComponents(game, userId)
         }
     }
-
+    
+    game.recordInteraction();
     res.json(botResponse);
 });
 
@@ -267,6 +271,7 @@ gameRouter.post("/leave", function (req, res) {
         }
     }
 
+    player.game.recordInteraction();
     res.json(botResponse);
 });
 
@@ -311,28 +316,30 @@ gameRouter.post("/ready", function (req, res) {
             ]
         });
     }
+
+    game.recordInteraction();
 });
 
 gameRouter.post("/newRound", function (req, res) {
     if (!req.body.gameId)
         throw new Error("Missing required body param(s).");
 
-    const reqGame = retrieveGameById(req.body.gameId);
-    if (reqGame.status != CAHGameStatus.PENDING_ROUND_START) {
+    const game = retrieveGameById(req.body.gameId);
+    if (game.status != CAHGameStatus.PENDING_ROUND_START) {
         throw new Error("Invalid game status for request");
     }
 
-    const newRoundResponse = newRound(reqGame);
-    const judgeBeginTime = Date.now() + reqGame.timing.roundDuration;
+    const newRoundResponse = newRound(game);
+    const judgeBeginTime = Date.now() + game.timing.roundDuration;
 
     const newRoundEmbed = {
         color: 0x0000FF,
-        title: `Round #${reqGame.roundNumber}`,
-        description: `**Prompt:**\n\`${reqGame.promptCard.text}\`\n\u200B`,
+        title: `Round #${game.roundNumber}`,
+        description: `**Prompt:**\n\`${game.promptCard.text}\`\n\u200B`,
         fields: [
             {
                 name: "🧐 Judge",
-                value: retrieveUsername(reqGame.judge.id)
+                value: retrieveUsername(game.judge.id)
             },
             {
                 name: "⌛ Time Remaining",
@@ -340,14 +347,14 @@ gameRouter.post("/newRound", function (req, res) {
             },
             {
                 name: "🧍 Players",
-                value: getPlayerString(reqGame)
+                value: getPlayerString(game)
             }
         ]
     }
 
     const individualMessages = {};
-    for (const player of Object.values<CAHPlayer>(reqGame.players)) {
-        if (player.id === reqGame.judge.id) {
+    for (const player of Object.values<CAHPlayer>(game.players)) {
+        if (player.id === game.judge.id) {
             individualMessages[player.id] = {
                 embeds: [{
                     title: "You are the judge!",
@@ -357,21 +364,23 @@ gameRouter.post("/newRound", function (req, res) {
             }
         } else {
             individualMessages[player.id] = {
-                embeds: [getPlayerRoundEmbed(reqGame, player.id)],
-                components: getPlayerRoundComponents(reqGame, player.id)
+                embeds: [getPlayerRoundEmbed(game, player.id)],
+                components: getPlayerRoundComponents(game, player.id)
             }
         }
     }
 
     res.json({
         channelMessage: {
-            channelId: reqGame.channelId,
+            channelId: game.channelId,
             message: { content: newRoundResponse.getMessage(), embeds: [newRoundEmbed] }
         },
         individualMessages,
         judgeBeginTime,
-        roundNumber: reqGame.roundNumber
+        roundNumber: game.roundNumber
     });
+
+    game.recordInteraction();
 });
 
 gameRouter.post("/submit", function (req, res) {
@@ -477,27 +486,29 @@ gameRouter.post("/submit", function (req, res) {
 
         res.json(botResponse);
     }
+
+    game.recordInteraction();
 });
 
 gameRouter.post("/beginJudging", function (req, res) {
     if (!req.body.gameId)
         throw new Error("Missing required body param(s).");
 
-    const reqGame = retrieveGameById(req.body.gameId);
+    const game = retrieveGameById(req.body.gameId);
 
     if (req.body.validRoundNumber) {
-        if (reqGame.status != CAHGameStatus.PLAYER_SUBMIT_CARD || reqGame.roundNumber != req.body.validRoundNumber) {
+        if (game.status != CAHGameStatus.PLAYER_SUBMIT_CARD || game.roundNumber != req.body.validRoundNumber) {
             res.status(200).send();
             return;
         }
     }
 
-    startJudgeStage(reqGame);
+    startJudgeStage(game);
 
     const beginJudgingEmbed = {
         color: 0x0000FF,
         title: `Judging will now commence!`,
-        description: `The judge, ${retrieveUsername(reqGame.judge.id)}, will now select the winner for this round.\n\nIn the meantime, here's an interesting fact:\n${randomFunFact()}`,
+        description: `The judge, ${retrieveUsername(game.judge.id)}, will now select the winner for this round.\n\nIn the meantime, here's an interesting fact:\n${randomFunFact()}`,
     }
 
     const submitted: {
@@ -505,8 +516,8 @@ gameRouter.post("/beginJudging", function (req, res) {
         player: CAHPlayer
     }[] = [];
 
-    for (const player of Object.values<CAHPlayer>(reqGame.players)) {
-        if (player.submitted.length === reqGame.promptCard.pickCount) {
+    for (const player of Object.values<CAHPlayer>(game.players)) {
+        if (player.submitted.length === game.promptCard.pickCount) {
             submitted.push({
                 cards: player.submitted,
                 player: player
@@ -515,15 +526,15 @@ gameRouter.post("/beginJudging", function (req, res) {
     }
 
     shuffle(submitted);
-    reqGame.submitted = submitted;
+    game.submitted = submitted;
 
-    if (reqGame.submitted.length == 0) {
+    if (game.submitted.length == 0) {
         // if nobody submitted a card, end the game
-        const deleteResponse = deleteGameById(reqGame.id);
+        const deleteResponse = deleteGameById(game.id);
 
         const botResponse = {
             channelMessage: {
-                channelId: reqGame.channelId,
+                channelId: game.channelId,
                 message: {
                     embeds: [
                         {
@@ -541,15 +552,16 @@ gameRouter.post("/beginJudging", function (req, res) {
 
     const response = {
         channelMessage: {
-            channelId: reqGame.channelId,
+            channelId: game.channelId,
             message: { embeds: [beginJudgingEmbed] }
         },
         individualMessages: {
-            [reqGame.judge.id]: { embeds: [getJudgeModal(reqGame)] }
+            [game.judge.id]: { embeds: [getJudgeModal(game)] }
         }
     }
 
     res.json(response);
+    game.recordInteraction();
 });
 
 
@@ -577,4 +589,5 @@ gameRouter.post("/endRound", function (req, res) {
     }
 
     res.json(response);
+    game.recordInteraction();
 });

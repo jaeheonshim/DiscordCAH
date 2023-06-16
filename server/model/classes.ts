@@ -41,6 +41,9 @@ export class CAHGame {
         cards: ResponseCard[],
         player: CAHPlayer
     }[] = [];
+
+    lastInteraction: Number;
+    recordInteraction = () => this.lastInteraction = Date.now();
 }
 
 export class CAHPlayer {
