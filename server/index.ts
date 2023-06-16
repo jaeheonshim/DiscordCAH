@@ -65,6 +65,10 @@ app.use((err, req, res, next) => {
                   name: "Additional Message",
                   value: err.message || "No message.",
                 },
+                {
+                  name: "Report Issue",
+                  value: "If you'd like to report this issue, you may do so by using the command `/contact`. Please provide as much information about the situation as possible."
+                }
               ],
             },
           ],
