@@ -24,7 +24,7 @@ export default {
     .setDMPermission(true),
   async execute(interaction: Interaction) {
     if (!interaction.isChatInputCommand()) return;
-    if(!interaction.channel.isDMBased()) throw new CAHError("This command can only be executed in a direct message channel.");
+    if(!interaction.channel || !interaction.channel.isDMBased()) throw new CAHError("This command can only be executed in a direct message channel.");
 
     const data = await executeDefaultTextCommandServerRequest(
       interaction,
