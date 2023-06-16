@@ -188,6 +188,9 @@ export function getRoundResultModal(game: CAHGame) {
                 name: "Scoreboard",
                 value: getPlayerString(game)
             }
-        ]
+        ],
+        footer: {
+            text: "Have any feedback for the bot? If you'd like to request a feature or report an issue, contact the developer using /contact"
+        }
     }
 }

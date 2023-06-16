@@ -80,6 +80,9 @@ gameRouter.post("/new", function (req, res) {
                         description:
                             "To join this game, run `/join` inside this channel. Before joining, make sure you aren't in any other games.\n\nThe game will begin once all players are ready. **Once you're ready to begin, make sure to let the bot know by running `/begin`**!",
                         timestamp: new Date().toISOString(),
+                        footer: {
+                            text: "If you ever encounter issues during the game, please feel free to notify the developer using /contact"
+                        }
                     },
                 ],
             },
