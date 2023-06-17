@@ -42,7 +42,7 @@ export class CAHGame {
         player: CAHPlayer
     }[] = [];
 
-    lastInteraction: Number;
+    lastInteraction: number;
     recordInteraction = () => this.lastInteraction = Date.now();
 }
 

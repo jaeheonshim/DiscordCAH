@@ -1,5 +1,7 @@
+import { scheduleJob } from "node-schedule";
 import { CAHError, CAHResponse, CAHSuccess } from "../model/cahresponse.js";
 import { CAHGame, CAHPlayer } from "../model/classes.js";
+import config from "../config.json" assert {type: "json"};
 
 const gameMap = new Map<string, CAHGame>();
 const channelIdMap = new Map<string, string>();
@@ -68,3 +70,15 @@ export function retrieveGameByChannelId(channelId: string) {
 
   return retrieveGameById(gameId);
 }
+
+// Scheduler to delete inactive games
+scheduleJob("*/5 * * * *", () => {
+  for(const gameId of getGameMap().keys()) {
+    const game = gameMap.get(gameId);
+    const timeSinceLastInteraction = Date.now() - game.lastInteraction;
+
+    if(timeSinceLastInteraction > config.maximumGameInactiveDuration) {
+      deleteGameById(game.id);
+    }
+  }
+});
