@@ -1,11 +1,9 @@
+import { Interaction, SlashCommandBuilder } from "discord.js";
 import {
-  Interaction,
-  SlashCommandBuilder
-} from "discord.js";
-import {
-  executeDefaultTextCommandServerRequest, scheduleRoundBegin
-} from "../util.js";
-import config from "../config.json" assert {type: "json"};
+  executeDefaultTextCommandServerRequest,
+  scheduleRoundBegin,
+} from "../util/util.js";
+import config from "../config.json" assert { type: "json" };
 
 export default {
   cooldown: 10,
@@ -21,8 +19,12 @@ export default {
       true
     );
 
-    if(data.gameId) {
-      scheduleRoundBegin(interaction.client, data.nextRoundBeginTime, data.gameId);
+    if (data.gameId) {
+      scheduleRoundBegin(
+        interaction.client,
+        data.nextRoundBeginTime,
+        data.gameId
+      );
     }
   },
 };

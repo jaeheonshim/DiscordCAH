@@ -9,9 +9,9 @@ import { playerJoinGame } from "../../server/manager/gamePlayerManager.js";
 import {
   checkCanSendDM,
   executeDefaultTextCommandServerRequest,
-} from "../util.js";
+} from "../util/util.js";
 import axios from "axios";
-import config from "../config.json" assert {type: "json"};
+import config from "../config.json" assert { type: "json" };
 
 export default {
   cooldown: 10,

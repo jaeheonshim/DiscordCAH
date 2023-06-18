@@ -7,12 +7,12 @@ import {
   TextBasedChannel,
   User,
 } from "discord.js";
-import { CAHError } from "../server/model/cahresponse.js";
+import { CAHError } from "../../server/model/cahresponse.js";
 import axios from "axios";
 import { scheduleJob } from "node-schedule";
 import * as Sentry from "@sentry/node";
 import { sendMessageToChannel, sendMessageToUser } from "./shardMessaging.js";
-import config from "./config.json" assert {type: "json"};
+import config from "../config.json" assert { type: "json" };
 
 const checkDMCooldown = new Map<string, number>();
 const DM_RECHECK_COOLDOWN = 60 * 60 * 1000; // recheck DM permissions after 60 minutes
@@ -52,7 +52,9 @@ export async function executeDefaultTextCommandServerRequest(
     .post(endpoint, {
       ...body,
       userId: interaction.user.id,
-      username: (interaction.member && (interaction.member as GuildMember).nickname) || interaction.user.username,
+      username:
+        (interaction.member && (interaction.member as GuildMember).nickname) ||
+        interaction.user.username,
       channelId: interaction.channelId,
       displayAvatarURL: interaction.user.displayAvatarURL(),
     })
@@ -69,7 +71,7 @@ export async function executeDefaultTextCommandServerRequest(
           await sendMessageToChannel(interaction.client, channelId, message);
         }
 
-        if(res.data.individualMessages) {
+        if (res.data.individualMessages) {
           const individualMessages = res.data.individualMessages;
           for (const userId of Object.keys(individualMessages)) {
             const message = individualMessages[userId];
@@ -83,45 +85,62 @@ export async function executeDefaultTextCommandServerRequest(
 }
 
 export async function beginJudging(client: Client, gameId, validRoundNumber?) {
-  await axios.post(config.apiEndpoint + "/bot/game/beginJudging", { gameId, validRoundNumber }).then(async res => {
-    if (!res.data.channelMessage) return;
-    const channelMessage = res.data.channelMessage;
+  await axios
+    .post(config.apiEndpoint + "/bot/game/beginJudging", {
+      gameId,
+      validRoundNumber,
+    })
+    .then(async (res) => {
+      if (!res.data.channelMessage) return;
+      const channelMessage = res.data.channelMessage;
 
-    await sendMessageToChannel(client, channelMessage.channelId, channelMessage.message);
+      await sendMessageToChannel(
+        client,
+        channelMessage.channelId,
+        channelMessage.message
+      );
 
-    const individualMessages = res.data.individualMessages;
-    if (individualMessages) {
-      for (const userId of Object.keys(individualMessages)) {
-        const message = individualMessages[userId];
-        await sendMessageToUser(client, userId, message);
+      const individualMessages = res.data.individualMessages;
+      if (individualMessages) {
+        for (const userId of Object.keys(individualMessages)) {
+          const message = individualMessages[userId];
+          await sendMessageToUser(client, userId, message);
+        }
       }
-    }
-  });
+    });
 }
 
 export function scheduleRoundBegin(client: Client, time, gameId) {
   scheduleJob(time, async () => {
     try {
-      await axios.post(config.apiEndpoint + "/bot/game/newRound", { gameId }).then(async res => {
-        if (!res.data.channelMessage) return;
-        const channelMessage = res.data.channelMessage;
+      await axios
+        .post(config.apiEndpoint + "/bot/game/newRound", { gameId })
+        .then(async (res) => {
+          if (!res.data.channelMessage) return;
+          const channelMessage = res.data.channelMessage;
 
-        await sendMessageToChannel(client, channelMessage.channelId, channelMessage.message);
+          await sendMessageToChannel(
+            client,
+            channelMessage.channelId,
+            channelMessage.message
+          );
 
-        const individualMessages = res.data.individualMessages;
-        for (const userId of Object.keys(individualMessages)) {
-          const message = individualMessages[userId];
-          await sendMessageToUser(client, userId, message);
-        }
+          const individualMessages = res.data.individualMessages;
+          for (const userId of Object.keys(individualMessages)) {
+            const message = individualMessages[userId];
+            await sendMessageToUser(client, userId, message);
+          }
 
-        const judgeBeginTime = res.data.judgeBeginTime;
-        scheduleJob(judgeBeginTime, async () => {
-          await beginJudging(client, gameId, res.data.roundNumber);
+          const judgeBeginTime = res.data.judgeBeginTime;
+          scheduleJob(judgeBeginTime, async () => {
+            await beginJudging(client, gameId, res.data.roundNumber);
+          });
         });
-      });
     } catch (e) {
       // game likely ended before round began
-      console.error("A scheduled event error occurred. Error has been reported to sentry.");
+      console.error(
+        "A scheduled event error occurred. Error has been reported to sentry."
+      );
       Sentry.captureException(e);
     }
   });

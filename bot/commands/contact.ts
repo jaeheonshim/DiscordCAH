@@ -9,7 +9,7 @@ import {
   TextInputStyle,
 } from "discord.js";
 import config from "../config.json" assert { type: "json" };
-import { executeDefaultTextCommandServerRequest } from "../util.js";
+import { executeDefaultTextCommandServerRequest } from "../util/util.js";
 
 export default {
   data: new SlashCommandBuilder()
