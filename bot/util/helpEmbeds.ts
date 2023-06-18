@@ -3,6 +3,12 @@ import { APIEmbed } from "discord.js";
 export const mainHelpEmbed: APIEmbed = {
   title: `Cards Against Humanity Help`,
   description: `Welcome to the Cards Against Humanity Discord bot!\n\nThis bot can be a bit confusing at first, so use these help messages to find your way around. If you need any extra help, feel free to join our support server for more assistance (invite below).`,
+  fields: [
+    {
+        name: "IMPORTANT NOTE",
+        value: "This bot must be able to send you direct messages in order to function properly. If the bot isn't working as expected, the **first thing you should do is make sure that everyone playing the game has enabled server DMs (Server Name -> Privacy Settings -> Direct Messages)**"
+    }
+  ],
   footer: {
     text: `If you ever find any issues with the bot or wish to request new features, contact the developer using the /contact command.`,
   },
