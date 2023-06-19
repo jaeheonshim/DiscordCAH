@@ -6,6 +6,7 @@ import {
   TextBasedChannel,
 } from "discord.js";
 import {
+  checkCanSendDM,
   executeDefaultTextCommandServerRequest,
   scheduleRoundBegin,
 } from "../util/util.js";
@@ -18,6 +19,7 @@ import {
 } from "../util/shardMessaging.js";
 import config from "../config.json" assert { type: "json" };
 import { creatingAGame, endingTheGame, gameplay, joiningAGame, startingTheGame } from "../util/helpEmbeds.js";
+import { CAHError } from "../../server/model/cahresponse.js";
 
 export default {
   name: Events.InteractionCreate,
@@ -42,6 +44,8 @@ export default {
 
         switch (customId) {
           case "JOIN": {
+            await checkCanSendDM(interaction);
+
             await executeDefaultTextCommandServerRequest(
               interaction,
               config.apiEndpoint + "/bot/game/join",
@@ -85,10 +89,17 @@ export default {
           }
         }
       } catch (e) {
-        console.error(
-          "A button command error occurred. Error has been reported to sentry."
-        );
-        Sentry.captureException(e);
+        if (e instanceof CAHError) {
+          await interaction.reply({
+            content: e.getMessage(),
+            ephemeral: true,
+          });
+        } else {
+          console.error(
+            "A button command error occurred. Error has been reported to sentry."
+          );
+          Sentry.captureException(e);
+        }
       } finally {
         transaction.finish();
       }

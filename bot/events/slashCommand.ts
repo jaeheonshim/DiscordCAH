@@ -55,10 +55,15 @@ export default {
     try {
       await command.execute(interaction);
     } catch (error) {
-      console.error(
-        "A slash command error occurred. Error has been reported to sentry."
-      );
-      Sentry.captureException(error);
+      /**
+       * We should not report CAHErrors - CAHErrors are generally thrown when the user makes a mistake.
+       */
+      if(!(error instanceof CAHError)) {
+        console.error(
+          "A slash command error occurred. Error has been reported to sentry."
+        );
+        Sentry.captureException(error);
+      }
 
       try {
         if (interaction.replied || interaction.deferred) {

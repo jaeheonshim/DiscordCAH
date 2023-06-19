@@ -15,7 +15,7 @@ import { sendMessageToChannel, sendMessageToUser } from "./shardMessaging.js";
 import config from "../config.json" assert { type: "json" };
 
 const checkDMCooldown = new Map<string, number>();
-const DM_RECHECK_COOLDOWN = 60 * 60 * 1000; // recheck DM permissions after 60 minutes
+const DM_RECHECK_COOLDOWN = 120 * 60 * 1000; // recheck DM permissions after 120 minutes
 
 export async function checkCanSendDM(interaction) {
   const cooldown = checkDMCooldown.get(interaction.user.id);
