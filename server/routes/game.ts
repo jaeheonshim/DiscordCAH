@@ -14,6 +14,8 @@ import { beginGame, haveAllPlayersSubmitted, isReadyToBeginGame, judgeSubmitCard
 import { CAHGameStatus, CAHPlayer } from "../model/classes.js";
 import { ResponseCard } from "../model/cards.js";
 import * as Sentry from "@sentry/node";
+import { incrementUserStatistic } from "../database/users.js";
+import { UserStatistic } from "../model/user.js";
 
 export const gameRouter = express.Router();
 
@@ -40,7 +42,7 @@ gameRouter.use((req, res, next) => {
 })
   
 
-gameRouter.post("/new", function (req, res) {
+gameRouter.post("/new", async function (req, res) {
     if (
         !req.body.channelId ||
         !req.body.userId ||
@@ -91,6 +93,8 @@ gameRouter.post("/new", function (req, res) {
     };
 
     res.json(botResponse);
+
+    await incrementUserStatistic(userId, UserStatistic.gamesCreated);
 });
 
 gameRouter.post("/info", function (req, res) {
