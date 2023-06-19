@@ -16,12 +16,14 @@
   "dependencies": {
     "@sentry/node": "^7.54.0",
     "@types/clone": "^2.1.1",
+    "@types/mongoose": "^5.11.97",
     "@types/node-schedule": "^2.1.0",
     "axios": "^1.4.0",
     "body-parser": "^1.20.2",
     "clone": "^2.1.2",
     "discord.js": "^14.11.0",
     "express": "^4.18.2",
+    "mongoose": "^7.3.0",
     "node-schedule": "^2.1.1",
     "uuid": "^9.0.0"
   },

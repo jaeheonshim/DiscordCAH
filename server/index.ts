@@ -6,6 +6,7 @@ import * as Sentry from "@sentry/node";
 import tokenAuth from "./apiAuth.js";
 import config from "./config.json" assert {type: "json"};
 import { apiRouter } from "./routes/api.js";
+import { connect } from "mongoose";
 
 const app = express();
 const port = config.port;
@@ -26,6 +27,9 @@ Sentry.init({
   // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
 });
+
+// mongodb initialization
+connect(config.mongodbURI);
 
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
