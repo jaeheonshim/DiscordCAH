@@ -11,6 +11,6 @@ const userSchema = new Schema<IUser>({
         totalPoints: {type: Number, default: 0}, // total rounds this player has won
     },
     isLegacy: {type: Boolean, default: false}
-});
+}, { timestamps: true });
 
 export const User = model<IUser>("User", userSchema);

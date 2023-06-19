@@ -1,4 +1,5 @@
 import base from "../decks/base_us.json" assert {type: "json"};
+import apples from "../decks/apples.json" assert {type: "json"};
 import { v4 as uuidv4 } from 'uuid';
 import { PromptCard, ResponseCard } from "../model/cards.js";
 
@@ -56,3 +57,4 @@ export function getRandomResponseCard(id: string, excludeList?: Set<string>): Re
 }
 
 loadDeck("base_us", base);
+loadDeck("apples", apples);

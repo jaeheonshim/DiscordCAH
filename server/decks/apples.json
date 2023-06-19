@@ -1,0 +1,3240 @@
+{
+    "prompt": [
+        {
+            "text": "awkward",
+            "pickCount": 1
+        },
+        {
+            "text": "cowardly",
+            "pickCount": 1
+        },
+        {
+            "text": "delightful",
+            "pickCount": 1
+        },
+        {
+            "text": "boring",
+            "pickCount": 1
+        },
+        {
+            "text": "absurd",
+            "pickCount": 1
+        },
+        {
+            "text": "chunky",
+            "pickCount": 1
+        },
+        {
+            "text": "dangerous",
+            "pickCount": 1
+        },
+        {
+            "text": "busy",
+            "pickCount": 1
+        },
+        {
+            "text": "crazed",
+            "pickCount": 1
+        },
+        {
+            "text": "cuddly",
+            "pickCount": 1
+        },
+        {
+            "text": "cute",
+            "pickCount": 1
+        },
+        {
+            "text": "dainty",
+            "pickCount": 1
+        },
+        {
+            "text": "dead",
+            "pickCount": 1
+        },
+        {
+            "text": "cosmic",
+            "pickCount": 1
+        },
+        {
+            "text": "appetizing",
+            "pickCount": 1
+        },
+        {
+            "text": "creative",
+            "pickCount": 1
+        },
+        {
+            "text": "deadly",
+            "pickCount": 1
+        },
+        {
+            "text": "addictive",
+            "pickCount": 1
+        },
+        {
+            "text": "adorable",
+            "pickCount": 1
+        },
+        {
+            "text": "cold",
+            "pickCount": 1
+        },
+        {
+            "text": "cranky",
+            "pickCount": 1
+        },
+        {
+            "text": "bold",
+            "pickCount": 1
+        },
+        {
+            "text": "brilliant",
+            "pickCount": 1
+        },
+        {
+            "text": "calm",
+            "pickCount": 1
+        },
+        {
+            "text": "delicate",
+            "pickCount": 1
+        },
+        {
+            "text": "arrogant",
+            "pickCount": 1
+        },
+        {
+            "text": "bright",
+            "pickCount": 1
+        },
+        {
+            "text": "ancient",
+            "pickCount": 1
+        },
+        {
+            "text": "casual",
+            "pickCount": 1
+        },
+        {
+            "text": "charismatic",
+            "pickCount": 1
+        },
+        {
+            "text": "comical",
+            "pickCount": 1
+        },
+        {
+            "text": "cool",
+            "pickCount": 1
+        },
+        {
+            "text": "annoying",
+            "pickCount": 1
+        },
+        {
+            "text": "clean",
+            "pickCount": 1
+        },
+        {
+            "text": "cosmopolitan",
+            "pickCount": 1
+        },
+        {
+            "text": "cruel",
+            "pickCount": 1
+        },
+        {
+            "text": "aged",
+            "pickCount": 1
+        },
+        {
+            "text": "American",
+            "pickCount": 1
+        },
+        {
+            "text": "animated",
+            "pickCount": 1
+        },
+        {
+            "text": "awesome",
+            "pickCount": 1
+        },
+        {
+            "text": "believable",
+            "pickCount": 1
+        },
+        {
+            "text": "bogus",
+            "pickCount": 1
+        },
+        {
+            "text": "classic",
+            "pickCount": 1
+        },
+        {
+            "text": "crazy",
+            "pickCount": 1
+        },
+        {
+            "text": "delicious",
+            "pickCount": 1
+        },
+        {
+            "text": "corrupt",
+            "pickCount": 1
+        },
+        {
+            "text": "charming",
+            "pickCount": 1
+        },
+        {
+            "text": "cheesy",
+            "pickCount": 1
+        },
+        {
+            "text": "chewy",
+            "pickCount": 1
+        },
+        {
+            "text": "comfortable",
+            "pickCount": 1
+        },
+        {
+            "text": "complicated",
+            "pickCount": 1
+        },
+        {
+            "text": "confused",
+            "pickCount": 1
+        },
+        {
+            "text": "courageous",
+            "pickCount": 1
+        },
+        {
+            "text": "boisterous",
+            "pickCount": 1
+        },
+        {
+            "text": "clueless",
+            "pickCount": 1
+        },
+        {
+            "text": "colorful",
+            "pickCount": 1
+        },
+        {
+            "text": "creepy",
+            "pickCount": 1
+        },
+        {
+            "text": "disturbing",
+            "pickCount": 1
+        },
+        {
+            "text": "dramatic",
+            "pickCount": 1
+        },
+        {
+            "text": "exhausting",
+            "pickCount": 1
+        },
+        {
+            "text": "hard-working",
+            "pickCount": 1
+        },
+        {
+            "text": "healthy",
+            "pickCount": 1
+        },
+        {
+            "text": "honorable",
+            "pickCount": 1
+        },
+        {
+            "text": "innocent",
+            "pickCount": 1
+        },
+        {
+            "text": "insulting",
+            "pickCount": 1
+        },
+        {
+            "text": "naîve",
+            "pickCount": 1
+        },
+        {
+            "text": "shallow",
+            "pickCount": 1
+        },
+        {
+            "text": "silly",
+            "pickCount": 1
+        },
+        {
+            "text": "smelly",
+            "pickCount": 1
+        },
+        {
+            "text": "unbelievable",
+            "pickCount": 1
+        },
+        {
+            "text": "explosive",
+            "pickCount": 1
+        },
+        {
+            "text": "extreme",
+            "pickCount": 1
+        },
+        {
+            "text": "glamorous",
+            "pickCount": 1
+        },
+        {
+            "text": "rare",
+            "pickCount": 1
+        },
+        {
+            "text": "repulsive",
+            "pickCount": 1
+        },
+        {
+            "text": "risky",
+            "pickCount": 1
+        },
+        {
+            "text": "spunky",
+            "pickCount": 1
+        },
+        {
+            "text": "unnatural",
+            "pickCount": 1
+        },
+        {
+            "text": "dignified",
+            "pickCount": 1
+        },
+        {
+            "text": "eccentric",
+            "pickCount": 1
+        },
+        {
+            "text": "fabulous",
+            "pickCount": 1
+        },
+        {
+            "text": "foreign",
+            "pickCount": 1
+        },
+        {
+            "text": "funky",
+            "pickCount": 1
+        },
+        {
+            "text": "heartless",
+            "pickCount": 1
+        },
+        {
+            "text": "hot",
+            "pickCount": 1
+        },
+        {
+            "text": "inspirational",
+            "pickCount": 1
+        },
+        {
+            "text": "legendary",
+            "pickCount": 1
+        },
+        {
+            "text": "misunderstood",
+            "pickCount": 1
+        },
+        {
+            "text": "nasty",
+            "pickCount": 1
+        },
+        {
+            "text": "obnoxious",
+            "pickCount": 1
+        },
+        {
+            "text": "painful",
+            "pickCount": 1
+        },
+        {
+            "text": "primitive",
+            "pickCount": 1
+        },
+        {
+            "text": "radical",
+            "pickCount": 1
+        },
+        {
+            "text": "revolutionary",
+            "pickCount": 1
+        },
+        {
+            "text": "scary",
+            "pickCount": 1
+        },
+        {
+            "text": "sharp",
+            "pickCount": 1
+        },
+        {
+            "text": "technological",
+            "pickCount": 1
+        },
+        {
+            "text": "tough",
+            "pickCount": 1
+        },
+        {
+            "text": "trustworthy",
+            "pickCount": 1
+        },
+        {
+            "text": "unforgettable",
+            "pickCount": 1
+        },
+        {
+            "text": "frazzled",
+            "pickCount": 1
+        },
+        {
+            "text": "global",
+            "pickCount": 1
+        },
+        {
+            "text": "intelligent",
+            "pickCount": 1
+        },
+        {
+            "text": "loud",
+            "pickCount": 1
+        },
+        {
+            "text": "pathetic",
+            "pickCount": 1
+        },
+        {
+            "text": "rough",
+            "pickCount": 1
+        },
+        {
+            "text": "smooth",
+            "pickCount": 1
+        },
+        {
+            "text": "weird",
+            "pickCount": 1
+        },
+        {
+            "text": "depressing",
+            "pickCount": 1
+        },
+        {
+            "text": "European",
+            "pickCount": 1
+        },
+        {
+            "text": "expensive",
+            "pickCount": 1
+        },
+        {
+            "text": "principled",
+            "pickCount": 1
+        },
+        {
+            "text": "relaxing",
+            "pickCount": 1
+        },
+        {
+            "text": "sexy",
+            "pickCount": 1
+        },
+        {
+            "text": "unscrupulous",
+            "pickCount": 1
+        },
+        {
+            "text": "visionary",
+            "pickCount": 1
+        },
+        {
+            "text": "woebegone",
+            "pickCount": 1
+        },
+        {
+            "text": "exciting",
+            "pickCount": 1
+        },
+        {
+            "text": "fancy",
+            "pickCount": 1
+        },
+        {
+            "text": "flirtatious",
+            "pickCount": 1
+        },
+        {
+            "text": "frivolous",
+            "pickCount": 1
+        },
+        {
+            "text": "influential",
+            "pickCount": 1
+        },
+        {
+            "text": "juicy",
+            "pickCount": 1
+        },
+        {
+            "text": "natural",
+            "pickCount": 1
+        },
+        {
+            "text": "stereotyped",
+            "pickCount": 1
+        },
+        {
+            "text": "unusual",
+            "pickCount": 1
+        },
+        {
+            "text": "virtuous",
+            "pickCount": 1
+        },
+        {
+            "text": "desperate",
+            "pickCount": 1
+        },
+        {
+            "text": "dysfunctional",
+            "pickCount": 1
+        },
+        {
+            "text": "distinguished",
+            "pickCount": 1
+        },
+        {
+            "text": "dreamy",
+            "pickCount": 1
+        },
+        {
+            "text": "earthy",
+            "pickCount": 1
+        },
+        {
+            "text": "filthy",
+            "pickCount": 1
+        },
+        {
+            "text": "frightening",
+            "pickCount": 1
+        },
+        {
+            "text": "furious",
+            "pickCount": 1
+        },
+        {
+            "text": "idiotic",
+            "pickCount": 1
+        },
+        {
+            "text": "scenic",
+            "pickCount": 1
+        },
+        {
+            "text": "stunning",
+            "pickCount": 1
+        },
+        {
+            "text": "sweet",
+            "pickCount": 1
+        },
+        {
+            "text": "temperamental",
+            "pickCount": 1
+        },
+        {
+            "text": "graceful",
+            "pickCount": 1
+        },
+        {
+            "text": "horrifying",
+            "pickCount": 1
+        },
+        {
+            "text": "insane",
+            "pickCount": 1
+        },
+        {
+            "text": "manly",
+            "pickCount": 1
+        },
+        {
+            "text": "mystical",
+            "pickCount": 1
+        },
+        {
+            "text": "overwhelming",
+            "pickCount": 1
+        },
+        {
+            "text": "popular",
+            "pickCount": 1
+        },
+        {
+            "text": "refined",
+            "pickCount": 1
+        },
+        {
+            "text": "rich",
+            "pickCount": 1
+        },
+        {
+            "text": "senseless",
+            "pickCount": 1
+        },
+        {
+            "text": "sensitive",
+            "pickCount": 1
+        },
+        {
+            "text": "shocking",
+            "pickCount": 1
+        },
+        {
+            "text": "spooky",
+            "pickCount": 1
+        },
+        {
+            "text": "demanding",
+            "pickCount": 1
+        },
+        {
+            "text": "emotional",
+            "pickCount": 1
+        },
+        {
+            "text": "dirty",
+            "pickCount": 1
+        },
+        {
+            "text": "elitist",
+            "pickCount": 1
+        },
+        {
+            "text": "friendly",
+            "pickCount": 1
+        },
+        {
+            "text": "glorious",
+            "pickCount": 1
+        },
+        {
+            "text": "goody-goody",
+            "pickCount": 1
+        },
+        {
+            "text": "important",
+            "pickCount": 1
+        },
+        {
+            "text": "industrious",
+            "pickCount": 1
+        },
+        {
+            "text": "melodramatic",
+            "pickCount": 1
+        },
+        {
+            "text": "patriotic",
+            "pickCount": 1
+        },
+        {
+            "text": "realistic",
+            "pickCount": 1
+        },
+        {
+            "text": "responsible",
+            "pickCount": 1
+        },
+        {
+            "text": "sappy",
+            "pickCount": 1
+        },
+        {
+            "text": "shiny",
+            "pickCount": 1
+        },
+        {
+            "text": "snappy",
+            "pickCount": 1
+        },
+        {
+            "text": "spicy",
+            "pickCount": 1
+        },
+        {
+            "text": "wild",
+            "pickCount": 1
+        },
+        {
+            "text": "eternal",
+            "pickCount": 1
+        },
+        {
+            "text": "fantastic",
+            "pickCount": 1
+        },
+        {
+            "text": "feminine",
+            "pickCount": 1
+        },
+        {
+            "text": "fuzzy",
+            "pickCount": 1
+        },
+        {
+            "text": "ordinary",
+            "pickCount": 1
+        },
+        {
+            "text": "peaceful",
+            "pickCount": 1
+        },
+        {
+            "text": "radiant",
+            "pickCount": 1
+        },
+        {
+            "text": "saintly",
+            "pickCount": 1
+        },
+        {
+            "text": "speedy",
+            "pickCount": 1
+        },
+        {
+            "text": "tame",
+            "pickCount": 1
+        },
+        {
+            "text": "touchy-feely",
+            "pickCount": 1
+        },
+        {
+            "text": "zany",
+            "pickCount": 1
+        },
+        {
+            "text": "fragrant",
+            "pickCount": 1
+        },
+        {
+            "text": "handsome",
+            "pickCount": 1
+        },
+        {
+            "text": "funny",
+            "pickCount": 1
+        },
+        {
+            "text": "irresistible",
+            "pickCount": 1
+        },
+        {
+            "text": "luscious",
+            "pickCount": 1
+        },
+        {
+            "text": "magical",
+            "pickCount": 1
+        },
+        {
+            "text": "masculine",
+            "pickCount": 1
+        },
+        {
+            "text": "miserable",
+            "pickCount": 1
+        },
+        {
+            "text": "odd",
+            "pickCount": 1
+        },
+        {
+            "text": "offensice",
+            "pickCount": 1
+        },
+        {
+            "text": "playful",
+            "pickCount": 1
+        },
+        {
+            "text": "puffy",
+            "pickCount": 1
+        },
+        {
+            "text": "ridiculous",
+            "pickCount": 1
+        },
+        {
+            "text": "spiritual",
+            "pickCount": 1
+        },
+        {
+            "text": "sultry",
+            "pickCount": 1
+        },
+        {
+            "text": "talented",
+            "pickCount": 1
+        },
+        {
+            "text": "worldly",
+            "pickCount": 1
+        },
+        {
+            "text": "intense",
+            "pickCount": 1
+        },
+        {
+            "text": "meek",
+            "pickCount": 1
+        },
+        {
+            "text": "outrageous",
+            "pickCount": 1
+        },
+        {
+            "text": "pure",
+            "pickCount": 1
+        },
+        {
+            "text": "shy",
+            "pickCount": 1
+        },
+        {
+            "text": "soft",
+            "pickCount": 1
+        },
+        {
+            "text": "hopeless",
+            "pickCount": 1
+        },
+        {
+            "text": "neat",
+            "pickCount": 1
+        },
+        {
+            "text": "neglected",
+            "pickCount": 1
+        },
+        {
+            "text": "normal",
+            "pickCount": 1
+        },
+        {
+            "text": "organic",
+            "pickCount": 1
+        },
+        {
+            "text": "perfect",
+            "pickCount": 1
+        },
+        {
+            "text": "philosophical",
+            "pickCount": 1
+        },
+        {
+            "text": "phony",
+            "pickCount": 1
+        },
+        {
+            "text": "smart",
+            "pickCount": 1
+        },
+        {
+            "text": "timeless",
+            "pickCount": 1
+        },
+        {
+            "text": "useless",
+            "pickCount": 1
+        },
+        {
+            "text": "wicked",
+            "pickCount": 1
+        },
+        {
+            "text": "dull",
+            "pickCount": 1
+        },
+        {
+            "text": "harmful",
+            "pickCount": 1
+        },
+        {
+            "text": "hilarious",
+            "pickCount": 1
+        },
+        {
+            "text": "lovable",
+            "pickCount": 1
+        },
+        {
+            "text": "lucky",
+            "pickCount": 1
+        },
+        {
+            "text": "nerdy",
+            "pickCount": 1
+        },
+        {
+            "text": "sensual",
+            "pickCount": 1
+        },
+        {
+            "text": "swift",
+            "pickCount": 1
+        },
+        {
+            "text": "unhealthy",
+            "pickCount": 1
+        },
+        {
+            "text": "violent",
+            "pickCount": 1
+        },
+        {
+            "text": "easy",
+            "pickCount": 1
+        },
+        {
+            "text": "fake",
+            "pickCount": 1
+        },
+        {
+            "text": "glitzy",
+            "pickCount": 1
+        },
+        {
+            "text": "powerful",
+            "pickCount": 1
+        },
+        {
+            "text": "quiet",
+            "pickCount": 1
+        },
+        {
+            "text": "selfish",
+            "pickCount": 1
+        },
+        {
+            "text": "witty",
+            "pickCount": 1
+        },
+        {
+            "text": "exquisite",
+            "pickCount": 1
+        },
+        {
+            "text": "fresh",
+            "pickCount": 1
+        },
+        {
+            "text": "haunting",
+            "pickCount": 1
+        },
+        {
+            "text": "hostile",
+            "pickCount": 1
+        },
+        {
+            "text": "irritating",
+            "pickCount": 1
+        },
+        {
+            "text": "lazy",
+            "pickCount": 1
+        },
+        {
+            "text": "luxurious",
+            "pickCount": 1
+        },
+        {
+            "text": "mischievous",
+            "pickCount": 1
+        },
+        {
+            "text": "mysterious",
+            "pickCount": 1
+        },
+        {
+            "text": "profound",
+            "pickCount": 1
+        },
+        {
+            "text": "refreshing",
+            "pickCount": 1
+        },
+        {
+            "text": "squeaky clean",
+            "pickCount": 1
+        },
+        {
+            "text": "twisted",
+            "pickCount": 1
+        },
+        {
+            "text": "unreal",
+            "pickCount": 1
+        }
+    ],
+    "response": [
+        {
+            "text": "hair transplants"
+        },
+        {
+            "text": "a car crash"
+        },
+        {
+            "text": "chain letters"
+        },
+        {
+            "text": "chickens"
+        },
+        {
+            "text": "playing chess"
+        },
+        {
+            "text": "leaf blowers"
+        },
+        {
+            "text": "a honeymoon"
+        },
+        {
+            "text": "money"
+        },
+        {
+            "text": "my parents' house"
+        },
+        {
+            "text": "AIDS"
+        },
+        {
+            "text": "Albert Einstein"
+        },
+        {
+            "text": "falling down"
+        },
+        {
+            "text": "flat tire"
+        },
+        {
+            "text": "Michelangelo"
+        },
+        {
+            "text": "Alfred Hitchcock"
+        },
+        {
+            "text": "kilts"
+        },
+        {
+            "text": "Michele Pfeifer"
+        },
+        {
+            "text": "Microsoft"
+        },
+        {
+            "text": "stun guns"
+        },
+        {
+            "text": "Helen Keller"
+        },
+        {
+            "text": "Australian outback"
+        },
+        {
+            "text": "Keanu Reeves"
+        },
+        {
+            "text": "magic tricks"
+        },
+        {
+            "text": "Sunday drivers"
+        },
+        {
+            "text": "Norman Rockwell"
+        },
+        {
+            "text": "chorus girls"
+        },
+        {
+            "text": "hairballs"
+        },
+        {
+            "text": "a morgue"
+        },
+        {
+            "text": "clowns"
+        },
+        {
+            "text": "Joan of Arc"
+        },
+        {
+            "text": "the sunrise"
+        },
+        {
+            "text": "a schoolbus"
+        },
+        {
+            "text": "conspiracy theories"
+        },
+        {
+            "text": "John F Kennedy"
+        },
+        {
+            "text": "Japan"
+        },
+        {
+            "text": "Cindy Crawford"
+        },
+        {
+            "text": "alien abductions"
+        },
+        {
+            "text": "Casablanca"
+        },
+        {
+            "text": "a locker room"
+        },
+        {
+            "text": "lollipops"
+        },
+        {
+            "text": "Mahatma Gandhi"
+        },
+        {
+            "text": "family reunions"
+        },
+        {
+            "text": "Chinatown"
+        },
+        {
+            "text": "apple pie"
+        },
+        {
+            "text": "chains"
+        },
+        {
+            "text": "hockey"
+        },
+        {
+            "text": "baby showers"
+        },
+        {
+            "text": "log cabins"
+        },
+        {
+            "text": "Count Dracula"
+        },
+        {
+            "text": "ninjas"
+        },
+        {
+            "text": "carnival workers"
+        },
+        {
+            "text": "grave robbers"
+        },
+        {
+            "text": "amputations"
+        },
+        {
+            "text": "a full moon"
+        },
+        {
+            "text": "Claude Monet"
+        },
+        {
+            "text": "Hawaii"
+        },
+        {
+            "text": "cockroaches"
+        },
+        {
+            "text": "morticians"
+        },
+        {
+            "text": "a treehouse"
+        },
+        {
+            "text": "Hillary Rodham Clinton"
+        },
+        {
+            "text": "commuting"
+        },
+        {
+            "text": "Confucius"
+        },
+        {
+            "text": "HMOs"
+        },
+        {
+            "text": "tree huggers"
+        },
+        {
+            "text": "pond scum"
+        },
+        {
+            "text": "Nobel Peace Prize"
+        },
+        {
+            "text": "remote controls"
+        },
+        {
+            "text": "crawl space"
+        },
+        {
+            "text": "Cinco de Mayo"
+        },
+        {
+            "text": "Jodie Foster"
+        },
+        {
+            "text": "Clint Eastwood"
+        },
+        {
+            "text": "homeless shelters"
+        },
+        {
+            "text": "Americans"
+        },
+        {
+            "text": "a high school bathroom"
+        },
+        {
+            "text": "Muhammad Ali"
+        },
+        {
+            "text": "Hiroshima - 1945"
+        },
+        {
+            "text": "Katharine Hepburn"
+        },
+        {
+            "text": "Hollywood"
+        },
+        {
+            "text": "William Shakespeare"
+        },
+        {
+            "text": "freedom"
+        },
+        {
+            "text": "bad haircut"
+        },
+        {
+            "text": "Japanese"
+        },
+        {
+            "text": "musicals"
+        },
+        {
+            "text": "my sixteenth birthday"
+        },
+        {
+            "text": "poison ivy"
+        },
+        {
+            "text": "gym teachers"
+        },
+        {
+            "text": "King Arthur"
+        },
+        {
+            "text": "Cleopatra"
+        },
+        {
+            "text": "Challenger explosion"
+        },
+        {
+            "text": "corn on the cob"
+        },
+        {
+            "text": "Backstreet Boys"
+        },
+        {
+            "text": "babies"
+        },
+        {
+            "text": "the universe"
+        },
+        {
+            "text": "a cheap motel"
+        },
+        {
+            "text": "cholesterol"
+        },
+        {
+            "text": "school cafeteria"
+        },
+        {
+            "text": "caffeine"
+        },
+        {
+            "text": "cold pizza"
+        },
+        {
+            "text": "Adam Sandler"
+        },
+        {
+            "text": "Babe Ruth"
+        },
+        {
+            "text": "Corvettes"
+        },
+        {
+            "text": "Abraham Lincoln"
+        },
+        {
+            "text": "computers"
+        },
+        {
+            "text": "airline food"
+        },
+        {
+            "text": "Cary Grant"
+        },
+        {
+            "text": "Clark Gable"
+        },
+        {
+            "text": "a haunted house"
+        },
+        {
+            "text": "mold"
+        },
+        {
+            "text": "having an operation"
+        },
+        {
+            "text": "hangnails"
+        },
+        {
+            "text": "apples"
+        },
+        {
+            "text": "having a baby"
+        },
+        {
+            "text": "Adolf Hitler"
+        },
+        {
+            "text": "China"
+        },
+        {
+            "text": "The Titanic"
+        },
+        {
+            "text": "The Vietnam Memorial"
+        },
+        {
+            "text": "UV rays"
+        },
+        {
+            "text": "choir boys"
+        },
+        {
+            "text": "Greenpeace"
+        },
+        {
+            "text": "a dozen red roses"
+        },
+        {
+            "text": "jelly beans"
+        },
+        {
+            "text": "angry hornets"
+        },
+        {
+            "text": "coconuts"
+        },
+        {
+            "text": "leather"
+        },
+        {
+            "text": "a sunset"
+        },
+        {
+            "text": "chimpanzees"
+        },
+        {
+            "text": "computer hackers"
+        },
+        {
+            "text": "construction workers"
+        },
+        {
+            "text": "Regis Philbin"
+        },
+        {
+            "text": "killer whales"
+        },
+        {
+            "text": "gravity"
+        },
+        {
+            "text": "Andy Warhol"
+        },
+        {
+            "text": "leeches"
+        },
+        {
+            "text": "armed robbery"
+        },
+        {
+            "text": "local police"
+        },
+        {
+            "text": "Al Pacino"
+        },
+        {
+            "text": "bull fight"
+        },
+        {
+            "text": "cleaning the bathroom"
+        },
+        {
+            "text": "assembly lines"
+        },
+        {
+            "text": "a nine iron"
+        },
+        {
+            "text": "communists"
+        },
+        {
+            "text": "Atlantis"
+        },
+        {
+            "text": "Jupiter"
+        },
+        {
+            "text": "a used car lot"
+        },
+        {
+            "text": "bad dogs"
+        },
+        {
+            "text": "freckles"
+        },
+        {
+            "text": "Russia"
+        },
+        {
+            "text": "truck stops"
+        },
+        {
+            "text": "Saddam Hussein"
+        },
+        {
+            "text": "republicans"
+        },
+        {
+            "text": "The Wright Brothers"
+        },
+        {
+            "text": "oral surgery"
+        },
+        {
+            "text": "toys"
+        },
+        {
+            "text": "Quentin Tarantino"
+        },
+        {
+            "text": "the 1970s"
+        },
+        {
+            "text": "Swiss chocolate"
+        },
+        {
+            "text": "Homphrey Bogart"
+        },
+        {
+            "text": "icebergs"
+        },
+        {
+            "text": "black velvet"
+        },
+        {
+            "text": "wine tasting"
+        },
+        {
+            "text": "bottled water"
+        },
+        {
+            "text": "boxing"
+        },
+        {
+            "text": "Paris"
+        },
+        {
+            "text": "The Land of Oz"
+        },
+        {
+            "text": "Israel"
+        },
+        {
+            "text": "men"
+        },
+        {
+            "text": "mud"
+        },
+        {
+            "text": "Demi Moore"
+        },
+        {
+            "text": "horseback riding"
+        },
+        {
+            "text": "Bill Clinton"
+        },
+        {
+            "text": "birdwatching"
+        },
+        {
+            "text": "Jacques Cousteau"
+        },
+        {
+            "text": "bonbons"
+        },
+        {
+            "text": "loan sharks"
+        },
+        {
+            "text": "lobster"
+        },
+        {
+            "text": "root beer floats"
+        },
+        {
+            "text": "toes"
+        },
+        {
+            "text": "Mexico"
+        },
+        {
+            "text": "sailors"
+        },
+        {
+            "text": "Jennifer Lopez"
+        },
+        {
+            "text": "cheesecake"
+        },
+        {
+            "text": "milk"
+        },
+        {
+            "text": "Cher"
+        },
+        {
+            "text": "Steve Martin"
+        },
+        {
+            "text": "Cesar Chávez"
+        },
+        {
+            "text": "NYPD"
+        },
+        {
+            "text": "Prince Charming"
+        },
+        {
+            "text": "telemarketers"
+        },
+        {
+            "text": "Frank Lloyd Wright"
+        },
+        {
+            "text": "The 1960s"
+        },
+        {
+            "text": "pigeons"
+        },
+        {
+            "text": "Rush Limbaugh"
+        },
+        {
+            "text": "bongos"
+        },
+        {
+            "text": "my refrigerator"
+        },
+        {
+            "text": "my mind"
+        },
+        {
+            "text": "Los Angeles"
+        },
+        {
+            "text": "cults"
+        },
+        {
+            "text": "bombs"
+        },
+        {
+            "text": "exorcism"
+        },
+        {
+            "text": "vampires"
+        },
+        {
+            "text": "the CIA"
+        },
+        {
+            "text": "Gila monsters"
+        },
+        {
+            "text": "Mel Gibson"
+        },
+        {
+            "text": "Starry Night"
+        },
+        {
+            "text": "houseguests"
+        },
+        {
+            "text": "high school reunions"
+        },
+        {
+            "text": "bagpipes"
+        },
+        {
+            "text": "lightning"
+        },
+        {
+            "text": "women's soccer"
+        },
+        {
+            "text": "New York City"
+        },
+        {
+            "text": "Lucille Ball"
+        },
+        {
+            "text": "machine guns"
+        },
+        {
+            "text": "The Cold War"
+        },
+        {
+            "text": "barbed wire"
+        },
+        {
+            "text": "The Marx Brothers"
+        },
+        {
+            "text": "South Park"
+        },
+        {
+            "text": "Danny DeVito"
+        },
+        {
+            "text": "Batman"
+        },
+        {
+            "text": "the first day of school"
+        },
+        {
+            "text": "silk"
+        },
+        {
+            "text": "Jesse Ventura"
+        },
+        {
+            "text": "Tibet"
+        },
+        {
+            "text": "pro wrestling"
+        },
+        {
+            "text": "trailer parks"
+        },
+        {
+            "text": "reading a book"
+        },
+        {
+            "text": "bungee jumping"
+        },
+        {
+            "text": "surfing the net"
+        },
+        {
+            "text": "boyfriends"
+        },
+        {
+            "text": "television"
+        },
+        {
+            "text": "Salvador Dali"
+        },
+        {
+            "text": "The 21st century"
+        },
+        {
+            "text": "fur"
+        },
+        {
+            "text": "fuzz"
+        },
+        {
+            "text": "the everglades"
+        },
+        {
+            "text": "in a coma"
+        },
+        {
+            "text": "mardi gras"
+        },
+        {
+            "text": "earthquakes"
+        },
+        {
+            "text": "spam"
+        },
+        {
+            "text": "Italy"
+        },
+        {
+            "text": "Waco, Texas"
+        },
+        {
+            "text": "Jack Nicholson"
+        },
+        {
+            "text": "Darth Vader"
+        },
+        {
+            "text": "gossip"
+        },
+        {
+            "text": "hot lava"
+        },
+        {
+            "text": "Bill Murray"
+        },
+        {
+            "text": "blood"
+        },
+        {
+            "text": "body odor"
+        },
+        {
+            "text": "losing your job"
+        },
+        {
+            "text": "bald eagles"
+        },
+        {
+            "text": "Mike Tyson"
+        },
+        {
+            "text": "The Midwest"
+        },
+        {
+            "text": "motorcycles"
+        },
+        {
+            "text": "The Milky Way"
+        },
+        {
+            "text": "John Phillip Sousa"
+        },
+        {
+            "text": "spontaneous combustion"
+        },
+        {
+            "text": "Milk Duds"
+        },
+        {
+            "text": "wind surfing"
+        },
+        {
+            "text": "gall bladder"
+        },
+        {
+            "text": "Tiger Woods"
+        },
+        {
+            "text": "oxygen"
+        },
+        {
+            "text": "firestorms"
+        },
+        {
+            "text": "Thanksgiving Day"
+        },
+        {
+            "text": "taking a bath"
+        },
+        {
+            "text": "pulling weeds"
+        },
+        {
+            "text": "my future"
+        },
+        {
+            "text": "inside the sun"
+        },
+        {
+            "text": "hummingbirds"
+        },
+        {
+            "text": "strawberry shortcake"
+        },
+        {
+            "text": "brains"
+        },
+        {
+            "text": "The Beatles"
+        },
+        {
+            "text": "paying bills"
+        },
+        {
+            "text": "General George S. Patton"
+        },
+        {
+            "text": "skiing"
+        },
+        {
+            "text": "secret societies"
+        },
+        {
+            "text": "David Letterman"
+        },
+        {
+            "text": "Anne Frank"
+        },
+        {
+            "text": "Beethoven"
+        },
+        {
+            "text": "Democrats"
+        },
+        {
+            "text": "beets"
+        },
+        {
+            "text": "Ben Stiller"
+        },
+        {
+            "text": "high school football"
+        },
+        {
+            "text": "Bill Gates"
+        },
+        {
+            "text": "bingo"
+        },
+        {
+            "text": "homework"
+        },
+        {
+            "text": "Detroit"
+        },
+        {
+            "text": "Whoopi Goldberg"
+        },
+        {
+            "text": "Madame Curie"
+        },
+        {
+            "text": "women"
+        },
+        {
+            "text": "wood chippers"
+        },
+        {
+            "text": "electric eels"
+        },
+        {
+            "text": "electricity"
+        },
+        {
+            "text": "ballerinas"
+        },
+        {
+            "text": "caves"
+        },
+        {
+            "text": "goldfish"
+        },
+        {
+            "text": "science fair projects"
+        },
+        {
+            "text": "The San Andreas Fault"
+        },
+        {
+            "text": "silly putty"
+        },
+        {
+            "text": "sport utility vehicles"
+        },
+        {
+            "text": "going to church"
+        },
+        {
+            "text": "rust"
+        },
+        {
+            "text": "The Vatican"
+        },
+        {
+            "text": "Pablo Picasso"
+        },
+        {
+            "text": "oranges"
+        },
+        {
+            "text": "tidal waves"
+        },
+        {
+            "text": "violins"
+        },
+        {
+            "text": "Tom Hanks"
+        },
+        {
+            "text": "rubber gloves"
+        },
+        {
+            "text": "quicksand"
+        },
+        {
+            "text": "getting a hug"
+        },
+        {
+            "text": "sharks"
+        },
+        {
+            "text": "ghost towns"
+        },
+        {
+            "text": "Disneyland"
+        },
+        {
+            "text": "divorce"
+        },
+        {
+            "text": "postal workers"
+        },
+        {
+            "text": "Death Valley"
+        },
+        {
+            "text": "New Orleans"
+        },
+        {
+            "text": "King Henry VIII"
+        },
+        {
+            "text": "London"
+        },
+        {
+            "text": "Walt Disney"
+        },
+        {
+            "text": "George W. Bush"
+        },
+        {
+            "text": "George Washington"
+        },
+        {
+            "text": "ginseng"
+        },
+        {
+            "text": "skunks"
+        },
+        {
+            "text": "snakes"
+        },
+        {
+            "text": "Anthony Hopkins"
+        },
+        {
+            "text": "whips"
+        },
+        {
+            "text": "driving off a cliff"
+        },
+        {
+            "text": "big business"
+        },
+        {
+            "text": "Eleanor Roosevelt"
+        },
+        {
+            "text": "salads"
+        },
+        {
+            "text": "going to the gym"
+        },
+        {
+            "text": "South Africa"
+        },
+        {
+            "text": "bankruptcy"
+        },
+        {
+            "text": "Stephen King"
+        },
+        {
+            "text": "Jimmy Stewart"
+        },
+        {
+            "text": "poodles"
+        },
+        {
+            "text": "Manhattan"
+        },
+        {
+            "text": "rock concert"
+        },
+        {
+            "text": "Big Macs"
+        },
+        {
+            "text": "bubbles"
+        },
+        {
+            "text": "black holes"
+        },
+        {
+            "text": "Swiss cheese"
+        },
+        {
+            "text": "Stonehenge"
+        },
+        {
+            "text": "stunt people"
+        },
+        {
+            "text": "olive oil"
+        },
+        {
+            "text": "science fiction"
+        },
+        {
+            "text": "the far left"
+        },
+        {
+            "text": "duct tape"
+        },
+        {
+            "text": "going to the dentist"
+        },
+        {
+            "text": "Grace Kelly"
+        },
+        {
+            "text": "VW Beetles"
+        },
+        {
+            "text": "The NY Yankees"
+        },
+        {
+            "text": "Judge Judy"
+        },
+        {
+            "text": "outlet malls"
+        },
+        {
+            "text": "Denzel Washington"
+        },
+        {
+            "text": "being in love"
+        },
+        {
+            "text": "Indiana Jones"
+        },
+        {
+            "text": "feathers"
+        },
+        {
+            "text": "earwigs"
+        },
+        {
+            "text": "board games"
+        },
+        {
+            "text": "my personality"
+        },
+        {
+            "text": "Bruce Willis"
+        },
+        {
+            "text": "glaciers"
+        },
+        {
+            "text": "Miles Davis"
+        },
+        {
+            "text": "Crazy Horse"
+        },
+        {
+            "text": "bubble gum"
+        },
+        {
+            "text": "Beauty and the Beast"
+        },
+        {
+            "text": "Schindler's List"
+        },
+        {
+            "text": "six pack"
+        },
+        {
+            "text": "Cuba"
+        },
+        {
+            "text": "Pokemon"
+        },
+        {
+            "text": "Oprah Winfrey"
+        },
+        {
+            "text": "psychics"
+        },
+        {
+            "text": "fireworks"
+        },
+        {
+            "text": "worms"
+        },
+        {
+            "text": "4th of July"
+        },
+        {
+            "text": "The 1950s"
+        },
+        {
+            "text": "ragweed"
+        },
+        {
+            "text": "Michael Jordan"
+        },
+        {
+            "text": "Bullwinkle"
+        },
+        {
+            "text": "rolling the car"
+        },
+        {
+            "text": "Jamaica"
+        },
+        {
+            "text": "Bigfoot"
+        },
+        {
+            "text": "boy scouts"
+        },
+        {
+            "text": "summer camp"
+        },
+        {
+            "text": "Steven Spielberg"
+        },
+        {
+            "text": "recreational vehicles"
+        },
+        {
+            "text": "The 1980s"
+        },
+        {
+            "text": "the beach"
+        },
+        {
+            "text": "video games"
+        },
+        {
+            "text": "The Eiffel Tower"
+        },
+        {
+            "text": "Elizabeth Taylor"
+        },
+        {
+            "text": "Goldie Hawn"
+        },
+        {
+            "text": "watermelons"
+        },
+        {
+            "text": "The Rolling Stones"
+        },
+        {
+            "text": "Emily Dickinson"
+        },
+        {
+            "text": "Dolly Parton"
+        },
+        {
+            "text": "Homer Simpson"
+        },
+        {
+            "text": "fly fishing"
+        },
+        {
+            "text": "The Three Tenors"
+        },
+        {
+            "text": "Dr. Kevorkian"
+        },
+        {
+            "text": "Rosa Parks"
+        },
+        {
+            "text": "the mafia"
+        },
+        {
+            "text": "social security"
+        },
+        {
+            "text": "salsa dancing"
+        },
+        {
+            "text": "the ocean"
+        },
+        {
+            "text": "mosquitos"
+        },
+        {
+            "text": "chameleons"
+        },
+        {
+            "text": "cactus"
+        },
+        {
+            "text": "The Indy 500"
+        },
+        {
+            "text": "The Williams Sisters"
+        },
+        {
+            "text": "nuclear power plants"
+        },
+        {
+            "text": "noisy neighbors"
+        },
+        {
+            "text": "meat cleavers"
+        },
+        {
+            "text": "Michael Jackson"
+        },
+        {
+            "text": "picking your nose"
+        },
+        {
+            "text": "James Dean"
+        },
+        {
+            "text": "buying a house"
+        },
+        {
+            "text": "looking for a job"
+        },
+        {
+            "text": "Puff Daddy"
+        },
+        {
+            "text": "blizzard"
+        },
+        {
+            "text": "my hair"
+        },
+        {
+            "text": "Brad Pitt"
+        },
+        {
+            "text": "Fort Knox"
+        },
+        {
+            "text": "lemons"
+        },
+        {
+            "text": "Swiss bank accounts"
+        },
+        {
+            "text": "knock-knock jokes"
+        },
+        {
+            "text": "funerals"
+        },
+        {
+            "text": "Garth Brooks"
+        },
+        {
+            "text": "geishas"
+        },
+        {
+            "text": "paying taxes"
+        },
+        {
+            "text": "The Great Chicago Fire"
+        },
+        {
+            "text": "whipped cream"
+        },
+        {
+            "text": "plastic"
+        },
+        {
+            "text": "going to school"
+        },
+        {
+            "text": "incense"
+        },
+        {
+            "text": "The Smithsonian Institution"
+        },
+        {
+            "text": "graffiti"
+        },
+        {
+            "text": "dating"
+        },
+        {
+            "text": "junk mail"
+        },
+        {
+            "text": "Austin Powers"
+        },
+        {
+            "text": "baked beans"
+        },
+        {
+            "text": "hooligans"
+        },
+        {
+            "text": "my family"
+        },
+        {
+            "text": "The Supreme Court"
+        },
+        {
+            "text": "Las Vegas"
+        },
+        {
+            "text": "The YMCA"
+        },
+        {
+            "text": "Rosie O'Donnell"
+        },
+        {
+            "text": "snow"
+        },
+        {
+            "text": "sleeping pills"
+        },
+        {
+            "text": "The Dallas Cowboys"
+        },
+        {
+            "text": "Bates Motel"
+        },
+        {
+            "text": "gold chains"
+        },
+        {
+            "text": "skateboarding"
+        },
+        {
+            "text": "Beanie Babies"
+        },
+        {
+            "text": "Saturday cartoons"
+        },
+        {
+            "text": "gang members"
+        },
+        {
+            "text": "rocket scientists"
+        },
+        {
+            "text": "pyromaniacs"
+        },
+        {
+            "text": "top of a roller coaster"
+        },
+        {
+            "text": "shopping malls"
+        },
+        {
+            "text": "roadkill"
+        },
+        {
+            "text": "discovering America"
+        },
+        {
+            "text": "audit"
+        },
+        {
+            "text": "feminists"
+        },
+        {
+            "text": "forest fires"
+        },
+        {
+            "text": "Britney Spears"
+        },
+        {
+            "text": "Richard Nixon"
+        },
+        {
+            "text": "eyes"
+        },
+        {
+            "text": "witch hunts"
+        },
+        {
+            "text": "my boss"
+        },
+        {
+            "text": "Custer's Last Stand"
+        },
+        {
+            "text": "my bedroom"
+        },
+        {
+            "text": "power tools"
+        },
+        {
+            "text": "Porsche Boxster"
+        },
+        {
+            "text": "The Academy Awards"
+        },
+        {
+            "text": "online shopping"
+        },
+        {
+            "text": "fundraising"
+        },
+        {
+            "text": "the electric chair"
+        },
+        {
+            "text": "pitbulls"
+        },
+        {
+            "text": "United Nations"
+        },
+        {
+            "text": "The Little Mermaid"
+        },
+        {
+            "text": "speeding tickets"
+        },
+        {
+            "text": "MTV"
+        },
+        {
+            "text": "weddings"
+        },
+        {
+            "text": "bellbottoms"
+        },
+        {
+            "text": "Flipper"
+        },
+        {
+            "text": "redwood forests"
+        },
+        {
+            "text": "thunder"
+        },
+        {
+            "text": "Niagara Falls"
+        },
+        {
+            "text": "baking cookies"
+        },
+        {
+            "text": "John Glenn"
+        },
+        {
+            "text": "Mount Rushmore"
+        },
+        {
+            "text": "creamed corn"
+        },
+        {
+            "text": "Tyrannosaurus Rex"
+        },
+        {
+            "text": "popcorn"
+        },
+        {
+            "text": "Martin Luther King, Jr."
+        },
+        {
+            "text": "firefighters"
+        },
+        {
+            "text": "Vietnam - 1968"
+        },
+        {
+            "text": "Princess Di"
+        },
+        {
+            "text": "Vincent Van Gogh"
+        },
+        {
+            "text": "pirates"
+        },
+        {
+            "text": "NASCAR"
+        },
+        {
+            "text": "festering wounds"
+        },
+        {
+            "text": "my love life"
+        },
+        {
+            "text": "Romeo and Juliet"
+        },
+        {
+            "text": "stubbed toes"
+        },
+        {
+            "text": "Ireland"
+        },
+        {
+            "text": "X-rays"
+        },
+        {
+            "text": "my job"
+        },
+        {
+            "text": "my bathroom"
+        },
+        {
+            "text": "labor unions"
+        },
+        {
+            "text": "screeching"
+        },
+        {
+            "text": "vacation"
+        },
+        {
+            "text": "star fruit"
+        },
+        {
+            "text": "hand grenades"
+        },
+        {
+            "text": "Jack the Ripper"
+        },
+        {
+            "text": "east coast"
+        },
+        {
+            "text": "The Super Bowl"
+        },
+        {
+            "text": "my neighborhood"
+        },
+        {
+            "text": "marriage"
+        },
+        {
+            "text": "Thomas Edison"
+        },
+        {
+            "text": "Robin Williams"
+        },
+        {
+            "text": "Tom Cruise"
+        },
+        {
+            "text": "skydiving"
+        },
+        {
+            "text": "country music"
+        },
+        {
+            "text": "The IRS"
+        },
+        {
+            "text": "cow-pies"
+        },
+        {
+            "text": "The Metric System"
+        },
+        {
+            "text": "The JFK Assassination"
+        },
+        {
+            "text": "spilled milk"
+        },
+        {
+            "text": "glazed donuts"
+        },
+        {
+            "text": "Celine Dion"
+        },
+        {
+            "text": "bats"
+        },
+        {
+            "text": "Jim Carrey"
+        },
+        {
+            "text": "chicken pox"
+        },
+        {
+            "text": "supermodels"
+        },
+        {
+            "text": "toates marshmallows"
+        },
+        {
+            "text": "parenting"
+        },
+        {
+            "text": "penguins"
+        },
+        {
+            "text": "tornadoes"
+        },
+        {
+            "text": "Carl Sagan"
+        },
+        {
+            "text": "Neil Simon"
+        },
+        {
+            "text": "Leonardo da Vinci"
+        },
+        {
+            "text": "sushi"
+        },
+        {
+            "text": "my body"
+        },
+        {
+            "text": "my dreams"
+        },
+        {
+            "text": "oil spills"
+        },
+        {
+            "text": "warts"
+        },
+        {
+            "text": "watching football"
+        },
+        {
+            "text": "Sean Connery"
+        },
+        {
+            "text": "The Grateful Dead"
+        },
+        {
+            "text": "The Godfather"
+        },
+        {
+            "text": "sloppy joes"
+        },
+        {
+            "text": "Meg Ryan"
+        },
+        {
+            "text": "email"
+        },
+        {
+            "text": "hiccups"
+        },
+        {
+            "text": "atomic bombs"
+        },
+        {
+            "text": "fast food"
+        },
+        {
+            "text": "my first kiss"
+        },
+        {
+            "text": "diamonds"
+        },
+        {
+            "text": "reggae music"
+        },
+        {
+            "text": "Dr. Seuss"
+        },
+        {
+            "text": "zucchini"
+        },
+        {
+            "text": "mid-life crisis"
+        },
+        {
+            "text": "casinos"
+        },
+        {
+            "text": "slivers"
+        },
+        {
+            "text": "John Travolta"
+        },
+        {
+            "text": "dark alleys"
+        },
+        {
+            "text": "ticks"
+        },
+        {
+            "text": "Superman"
+        },
+        {
+            "text": "teachers"
+        },
+        {
+            "text": "trampolines"
+        },
+        {
+            "text": "rainbows"
+        },
+        {
+            "text": "deer hunting"
+        },
+        {
+            "text": "pumping iron"
+        },
+        {
+            "text": "telling the truth"
+        },
+        {
+            "text": "Captain Kirk"
+        },
+        {
+            "text": "The 1920s"
+        },
+        {
+            "text": "intellectuals"
+        },
+        {
+            "text": "red raspberries"
+        },
+        {
+            "text": "Victorian England"
+        },
+        {
+            "text": "genetic engineering"
+        },
+        {
+            "text": "wheat"
+        },
+        {
+            "text": "underwear"
+        },
+        {
+            "text": "India"
+        },
+        {
+            "text": "The National Enquirer"
+        },
+        {
+            "text": "doctors"
+        },
+        {
+            "text": "baked potatoes"
+        },
+        {
+            "text": "my friends"
+        },
+        {
+            "text": "Robert De Niro"
+        },
+        {
+            "text": "The Internet"
+        },
+        {
+            "text": "Jesse Jackson"
+        },
+        {
+            "text": "Bart Simpson"
+        },
+        {
+            "text": "The FBI"
+        },
+        {
+            "text": "The Old Man and the Sea"
+        },
+        {
+            "text": "charging rhinos"
+        },
+        {
+            "text": "The Olympics"
+        },
+        {
+            "text": "The Mississippi River"
+        },
+        {
+            "text": "Chicago"
+        },
+        {
+            "text": "The Pentagon"
+        },
+        {
+            "text": "Wimbledon"
+        },
+        {
+            "text": "Woodstock"
+        },
+        {
+            "text": "Garrison Keillor"
+        },
+        {
+            "text": "Rocky Mountains"
+        },
+        {
+            "text": "public radio"
+        },
+        {
+            "text": "mice"
+        },
+        {
+            "text": "piranha"
+        },
+        {
+            "text": "televangelists"
+        },
+        {
+            "text": "Roman numberals"
+        },
+        {
+            "text": "cabbage"
+        },
+        {
+            "text": "Canadians"
+        },
+        {
+            "text": "daytime TV"
+        },
+        {
+            "text": "Canada"
+        },
+        {
+            "text": "Napoleon Bonaparte"
+        },
+        {
+            "text": "recycling"
+        },
+        {
+            "text": "The French Riviera"
+        },
+        {
+            "text": "giant squid"
+        },
+        {
+            "text": "The Great Depression"
+        },
+        {
+            "text": "grass skirts"
+        },
+        {
+            "text": "spiders"
+        },
+        {
+            "text": "Julia Roberts"
+        },
+        {
+            "text": "Ernest Hemingway"
+        },
+        {
+            "text": "family values"
+        },
+        {
+            "text": "doing the dishes"
+        },
+        {
+            "text": "first man on the moon"
+        },
+        {
+            "text": "Jackie Chan"
+        },
+        {
+            "text": "lawyers"
+        },
+        {
+            "text": "discos"
+        },
+        {
+            "text": "Meryl Streep"
+        },
+        {
+            "text": "girlfriends"
+        },
+        {
+            "text": "the far right"
+        },
+        {
+            "text": "scene of the crime"
+        },
+        {
+            "text": "Danielle Steele"
+        },
+        {
+            "text": "Bangkok"
+        },
+        {
+            "text": "the opera"
+        },
+        {
+            "text": "Barbara Walters"
+        },
+        {
+            "text": "The Statue of Liberty"
+        },
+        {
+            "text": "French wines"
+        },
+        {
+            "text": "family vacations"
+        },
+        {
+            "text": "psychiatrists"
+        },
+        {
+            "text": "talk radio"
+        },
+        {
+            "text": "Saturn"
+        },
+        {
+            "text": "Woody Allen"
+        },
+        {
+            "text": "toasters"
+        },
+        {
+            "text": "Georgia O'Keefe"
+        },
+        {
+            "text": "Frank Sinatra"
+        },
+        {
+            "text": "my high school prom"
+        },
+        {
+            "text": "Lenin's Tomb"
+        },
+        {
+            "text": "Yellowston Park"
+        },
+        {
+            "text": "Europe"
+        },
+        {
+            "text": "friction"
+        },
+        {
+            "text": "San Francisco"
+        },
+        {
+            "text": "Ginko trees"
+        },
+        {
+            "text": "bounty hunters"
+        },
+        {
+            "text": "earwax"
+        },
+        {
+            "text": "The NRA"
+        },
+        {
+            "text": "golf-ball-sized hail"
+        },
+        {
+            "text": "infomercials"
+        },
+        {
+            "text": "body piercing"
+        },
+        {
+            "text": "body surfing"
+        },
+        {
+            "text": "rednecks"
+        },
+        {
+            "text": "Large Mouth Bass"
+        },
+        {
+            "text": "mad cow disease"
+        },
+        {
+            "text": "Madonna"
+        },
+        {
+            "text": "my past"
+        },
+        {
+            "text": "rock and roll"
+        },
+        {
+            "text": "Martha Stewart"
+        },
+        {
+            "text": "zen"
+        },
+        {
+            "text": "castles"
+        },
+        {
+            "text": "Jerry Springer"
+        },
+        {
+            "text": "socks"
+        },
+        {
+            "text": "soy sauce"
+        },
+        {
+            "text": "beer bellies"
+        },
+        {
+            "text": "The Green Bay Packers"
+        },
+        {
+            "text": "The Gulf War"
+        },
+        {
+            "text": "global warming"
+        },
+        {
+            "text": "The South"
+        },
+        {
+            "text": "beach parties"
+        },
+        {
+            "text": "scavenger hunts"
+        },
+        {
+            "text": "water parks"
+        },
+        {
+            "text": "pigs"
+        },
+        {
+            "text": "running a marathon"
+        },
+        {
+            "text": "waterfalls"
+        },
+        {
+            "text": "rain"
+        },
+        {
+            "text": "road trips"
+        },
+        {
+            "text": "new shoes"
+        },
+        {
+            "text": "James Bond"
+        },
+        {
+            "text": "bumper stickers"
+        },
+        {
+            "text": "my bank account"
+        },
+        {
+            "text": "flying monkeys"
+        },
+        {
+            "text": "rappers"
+        },
+        {
+            "text": "ghosts"
+        },
+        {
+            "text": "Wheel of Fortune"
+        },
+        {
+            "text": "going to grandma's"
+        },
+        {
+            "text": "Mark Twain"
+        },
+        {
+            "text": "elephants"
+        },
+        {
+            "text": "Elvis Presley"
+        },
+        {
+            "text": "Wall Street"
+        },
+        {
+            "text": "state fairs"
+        },
+        {
+            "text": "Halloween"
+        },
+        {
+            "text": "Antarctica"
+        },
+        {
+            "text": "Berlin - 1945"
+        },
+        {
+            "text": "billboards"
+        },
+        {
+            "text": "Eddie Murphy"
+        },
+        {
+            "text": "Mars"
+        },
+        {
+            "text": "Broadway"
+        },
+        {
+            "text": "the common loon"
+        },
+        {
+            "text": "barfing"
+        },
+        {
+            "text": "Spike Lee"
+        },
+        {
+            "text": "California"
+        },
+        {
+            "text": "steak and potatoes"
+        },
+        {
+            "text": "the ozone layer"
+        },
+        {
+            "text": "cell phones"
+        },
+        {
+            "text": "crystal balls"
+        },
+        {
+            "text": "meatloaf"
+        },
+        {
+            "text": "pushups"
+        },
+        {
+            "text": "Shania Twain"
+        },
+        {
+            "text": "water beds"
+        },
+        {
+            "text": "Fidel Castro"
+        },
+        {
+            "text": "car horns"
+        },
+        {
+            "text": "winning the lottery"
+        },
+        {
+            "text": "big bang theory"
+        },
+        {
+            "text": "brain surgeons"
+        },
+        {
+            "text": "X-ray vision"
+        },
+        {
+            "text": "freshwater pearls"
+        },
+        {
+            "text": "Samuel L. Jackson"
+        },
+        {
+            "text": "the dump"
+        },
+        {
+            "text": "the end of the world"
+        },
+        {
+            "text": "plane crashes"
+        },
+        {
+            "text": "The Grand Canyon"
+        },
+        {
+            "text": "the pyramids"
+        },
+        {
+            "text": "The Renaissance"
+        },
+        {
+            "text": "mudslides"
+        },
+        {
+            "text": "handcuffs"
+        },
+        {
+            "text": "Attack on Pearl Harbor"
+        },
+        {
+            "text": "Industrial Revolution"
+        },
+        {
+            "text": "Will Smith"
+        },
+        {
+            "text": "Men in Black"
+        },
+        {
+            "text": "Nicholas Cage"
+        },
+        {
+            "text": "giving a hug"
+        },
+        {
+            "text": "Barney"
+        },
+        {
+            "text": "spit"
+        },
+        {
+            "text": "camping trips"
+        },
+        {
+            "text": "mirrors"
+        },
+        {
+            "text": "sports channels"
+        }
+    ]
+}
