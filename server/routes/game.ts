@@ -16,6 +16,7 @@ import { ResponseCard } from "../model/cards.js";
 import * as Sentry from "@sentry/node";
 import { incrementUserStatistic } from "../database/users.js";
 import { UserStatistic } from "../model/user.js";
+import { isDeckLoaded } from "../manager/deckManager.js";
 
 export const gameRouter = express.Router();
 
@@ -39,10 +40,9 @@ gameRouter.use((req, res, next) => {
     }
 
     next();
-})
-  
+});
 
-gameRouter.post("/new", async function (req, res) {
+gameRouter.post("/new", function (req, res) {
     if (
         !req.body.channelId ||
         !req.body.userId ||
@@ -54,10 +54,17 @@ gameRouter.post("/new", async function (req, res) {
     const channelId = req.body.channelId;
     const userId = req.body.userId;
     const username = req.body.username;
+    const deckId = req.body.deckId;
 
     cacheUsername(userId, username);
 
     if (playerInGame(userId)) throw new CAHError("You're already in a game!");
+
+    if(deckId) {
+        if(!isDeckLoaded(deckId)) {
+            throw new CAHError("Sorry, that's not a valid deck id! Run `/decks` to see all available decks.");
+        }
+    }
 
     const newGame = createNewGame(channelId);
     const joinResponse = playerJoinGame(newGame.id, userId);
@@ -67,6 +74,12 @@ gameRouter.post("/new", async function (req, res) {
 
     if (req.body.channelName) newGame.details.channelName = req.body.channelName;
     if (req.body.serverName) newGame.details.serverName = req.body.serverName;
+
+    if(deckId) {
+        if(isDeckLoaded(deckId)) {
+            newGame.deckId = deckId;
+        }
+    }
 
     const botResponse = {
         gameId: newGame.id,
@@ -94,7 +107,7 @@ gameRouter.post("/new", async function (req, res) {
 
     res.json(botResponse);
 
-    await incrementUserStatistic(userId, UserStatistic.gamesCreated);
+    incrementUserStatistic(userId, UserStatistic.gamesCreated);
 });
 
 gameRouter.post("/info", function (req, res) {

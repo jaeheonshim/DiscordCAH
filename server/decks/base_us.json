@@ -1,4 +1,6 @@
 {
+    "shortDescription": "The classic Cards Against Humanity Deck (US)",
+    "longDescription": "Cards Against Humanity is a hilariously twisted party game that pushes the boundaries of humor and social etiquette. Designed for a mature audience with a taste for dark, offbeat, and often offensive humor, the game consists of a deck of black question cards and white answer cards. Players take turns as the \"Card Czar,\" reading out a question from a black card, while other players select the most inappropriate, outrageous, or clever response from their hand of white cards.",
     "prompt": [
         {
             "text": "_ + _ = _.",

@@ -5,6 +5,19 @@ import { PromptCard, ResponseCard } from "../model/cards.js";
 
 const promptCards = new Map<string, [PromptCard]>();
 const responseCards = new Map<string, [ResponseCard]>();
+const deckMetaData = new Map<string, any>();
+
+export function isDeckLoaded(id: string): boolean {
+    return promptCards.has(id) && responseCards.has(id) && deckMetaData.has(id);
+}
+
+export function getDeckMetaData(id: string) {
+    return deckMetaData.get(id);
+}
+
+export function getAllDeckIds() {
+    return Array.from(deckMetaData.keys());
+}
 
 export function loadDeck(id: string, json) {
     const prompt = json.prompt;
@@ -20,6 +33,10 @@ export function loadDeck(id: string, json) {
 
     promptCards.set(id, prompt);
     responseCards.set(id, response);
+    deckMetaData.set(id, {
+        shortDescription: json.shortDescription,
+        longDescription: json.longDescription
+    });
 }
 
 export function getAllPromptCards(id: string) {

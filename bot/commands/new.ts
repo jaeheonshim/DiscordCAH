@@ -21,6 +21,12 @@ export default {
   data: new SlashCommandBuilder()
     .setName("new")
     .setDescription("Creates a new game in this channel")
+    .addStringOption((option) => 
+      option
+        .setName("deckid")
+        .setRequired(false)
+        .setDescription("The ID of the deck you'd like to use. Leave empty for default deck.")
+    )
     .setDMPermission(false),
   async execute(interaction: Interaction) {
     if (!interaction.isChatInputCommand()) return;
@@ -38,6 +44,7 @@ export default {
         channelName: interaction.channel ? interaction.channel.name : undefined,
         serverName: interaction.guild.name,
         displayAvatarURL: interaction.user.displayAvatarURL(),
+        deckId: interaction.options.getString("deckid", false)
       })
       .then(async (res) => {
         if (res.data) {

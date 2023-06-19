@@ -1,4 +1,6 @@
 {
+    "shortDescription": "The deck from the family-friendly Apples to Apples game",
+    "longDescription": "Apples to Apples is a lighthearted and engaging party game that revolves around the power of words and the art of making connections. The game consists of two sets of cards: green cards with various descriptive words and red cards with different nouns or phrases. In each round, one player acts as the \"judge\" and selects a green card, revealing the word or phrase to the other players. Each player then chooses a red card from their hand that they believe best matches or represents the green card. The judge selects the red card they find most fitting, and the player who submitted it earns a point.",
     "prompt": [
         {
             "text": "awkward",
