@@ -2,10 +2,14 @@ export interface IUser {
     _id: string;
     isLegacy: boolean;
     statistics: {
-        gamesCreated: number;
-        gamesJoined: number;
-        gamesBegun: number;
-        totalSubmissions: number;
-        totalPoints: number;
+        [statisticId in UserStatistic]: number
     };
 }
+
+export enum UserStatistic {
+    gamesCreated = "gamesCreated",
+    gamesJoined = "gamesJoined",
+    gamesBegun = "gamesBegun",
+    totalSubmissions = "totalSubmissions",
+    totalPoints = "totalPoints"
+};

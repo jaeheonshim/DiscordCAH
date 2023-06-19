@@ -13,4 +13,4 @@ const userSchema = new Schema<IUser>({
     isLegacy: {type: Boolean, default: false}
 });
 
-const User = model<IUser>("User", userSchema);
+export const User = model<IUser>("User", userSchema);
