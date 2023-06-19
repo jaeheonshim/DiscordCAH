@@ -1,5 +1,7 @@
+import { incrementUserStatistic } from "../database/users.js";
 import { CAHError, CAHResponse, CAHSuccess } from "../model/cahresponse.js";
 import { CAHGameStatus, CAHPlayer } from "../model/classes.js";
+import { UserStatistic } from "../model/user.js";
 import { dealCardsToPlayers } from "./gamePlayManager.js";
 import { retrieveGameById } from "./gameStorageManager.js";
 import { retrieveUsername } from "./usernameManager.js";
@@ -22,6 +24,11 @@ export function playerJoinGame(gameId: string, playerId: string): CAHResponse {
 
   if(game.status == CAHGameStatus.PLAYER_SUBMIT_CARD) {
     dealCardsToPlayers(game, [player]);
+    
+    // if player is joining game for first time, increment their statistic
+    if(!game.joinedPlayerIds.has(playerId)) {
+      incrementUserStatistic(playerId, UserStatistic.gamesBegun);
+    }
   }
 
   return new CAHSuccess(`\`Successfully joined game!`);

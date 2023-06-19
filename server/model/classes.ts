@@ -44,6 +44,8 @@ export class CAHGame {
 
     lastInteraction: number;
     recordInteraction = () => this.lastInteraction = Date.now();
+
+    joinedPlayerIds: Set<string> = new Set(); // a record of all players that have ever joined this game
 }
 
 export class CAHPlayer {

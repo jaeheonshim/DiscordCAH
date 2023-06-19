@@ -2,6 +2,8 @@ import { scheduleJob } from "node-schedule";
 import { CAHError, CAHSuccess } from "../model/cahresponse.js";
 import { CAHGame, CAHGameStatus, CAHPlayer } from "../model/classes.js";
 import { getRandomPromptCard, getRandomResponseCard } from "./deckManager.js";
+import { incrementUserStatistic } from "../database/users.js";
+import { UserStatistic } from "../model/user.js";
 
 export function isReadyToBeginGame(game: CAHGame) {
     if(game.status != CAHGameStatus.PLAYER_JOIN) return false;
@@ -21,6 +23,11 @@ export function beginGame(game: CAHGame) {
 
     const date: Date = new Date();
     date.setUTCMilliseconds(date.getUTCMilliseconds() + game.timing.beginGameDelay);
+
+    for(const userId of Object.keys(game.players)) {
+        incrementUserStatistic(userId, UserStatistic.gamesBegun);
+        game.joinedPlayerIds.add(userId);
+    }
 
     return date.getTime();
 }
@@ -111,6 +118,8 @@ export function judgeSubmitCard(game: CAHGame, cardIndex: number) {
     game.judge = winner;
 
     game.status = CAHGameStatus.ROUND_END;
+
+    incrementUserStatistic(winner.id, UserStatistic.totalPoints);
 
     return new CAHSuccess("Successfully chose winning submission!");
 }

@@ -216,6 +216,8 @@ gameRouter.post("/join", function (req, res) {
     
     game.recordInteraction();
     res.json(botResponse);
+    
+    incrementUserStatistic(userId, UserStatistic.gamesJoined);
 });
 
 gameRouter.post("/leave", function (req, res) {
@@ -473,6 +475,8 @@ gameRouter.post("/submit", function (req, res) {
                     }
                 ]
             }];
+
+            incrementUserStatistic(userId, UserStatistic.totalSubmissions);
         } else {
             botResponse.response[0]["embeds"] = [
                 {
