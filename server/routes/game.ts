@@ -16,7 +16,7 @@ import { ResponseCard } from "../model/cards.js";
 import * as Sentry from "@sentry/node";
 import { incrementUserStatistic } from "../database/users.js";
 import { UserStatistic } from "../model/user.js";
-import { isDeckLoaded } from "../manager/deckManager.js";
+import { getDeckMetaData, isDeckLoaded } from "../manager/deckManager.js";
 
 export const gameRouter = express.Router();
 
@@ -32,10 +32,10 @@ gameRouter.use((req, res, next) => {
 
     try {
         let player: CAHPlayer;
-        if(req.body.userId && (player = retrievePlayerById(req.body.userId))) {
+        if (req.body.userId && (player = retrievePlayerById(req.body.userId))) {
             Sentry.setContext("game", player.game);
         }
-    } catch(e) {
+    } catch (e) {
         // ignore
     }
 
@@ -60,8 +60,8 @@ gameRouter.post("/new", function (req, res) {
 
     if (playerInGame(userId)) throw new CAHError("You're already in a game!");
 
-    if(deckId) {
-        if(!isDeckLoaded(deckId)) {
+    if (deckId) {
+        if (!isDeckLoaded(deckId)) {
             throw new CAHError("Sorry, that's not a valid deck id! Run `/decks` to see all available decks.");
         }
     }
@@ -75,8 +75,8 @@ gameRouter.post("/new", function (req, res) {
     if (req.body.channelName) newGame.details.channelName = req.body.channelName;
     if (req.body.serverName) newGame.details.serverName = req.body.serverName;
 
-    if(deckId) {
-        if(isDeckLoaded(deckId)) {
+    if (deckId) {
+        if (isDeckLoaded(deckId)) {
             newGame.deckId = deckId;
         }
     }
@@ -94,6 +94,12 @@ gameRouter.post("/new", function (req, res) {
                         },
                         description:
                             "To join this game, run `/join` inside this channel. Before joining, make sure you aren't in any other games.\n\nThe game will begin once all players are ready. **Once you're ready to begin, make sure to let the bot know by running `/begin`**!",
+                        fields: [
+                            {
+                                name: "Decks Used",
+                                value: `\`${newGame.deckId}\` - ${getDeckMetaData(newGame.deckId).shortDescription}`
+                            }
+                        ],
                         timestamp: new Date().toISOString(),
                         footer: {
                             text: "If you ever encounter issues during the game, please feel free to notify the developer using /contact"
@@ -206,7 +212,7 @@ gameRouter.post("/join", function (req, res) {
     const game = retrieveGameByChannelId(channelId);
     const joinResponse = playerJoinGame(game.id, userId);
 
-    
+
     const botResponse: any = {
         response: [
             { content: joinResponse.getMessage(), ephemeral: true }
@@ -218,18 +224,18 @@ gameRouter.post("/join", function (req, res) {
             }
         }
     }
-    
-    if(game.status == CAHGameStatus.PLAYER_SUBMIT_CARD) {
+
+    if (game.status == CAHGameStatus.PLAYER_SUBMIT_CARD) {
         botResponse.individualMessages = {};
         botResponse.individualMessages[userId] = {
             embeds: [getPlayerRoundEmbed(game, userId)],
             components: getPlayerRoundComponents(game, userId)
         }
     }
-    
+
     game.recordInteraction();
     res.json(botResponse);
-    
+
     incrementUserStatistic(userId, UserStatistic.gamesJoined);
 });
 
