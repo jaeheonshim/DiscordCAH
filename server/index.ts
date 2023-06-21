@@ -8,6 +8,7 @@ import config from "./config.json" assert {type: "json"};
 import { apiRouter } from "./routes/api.js";
 import { connect } from "mongoose";
 import { decksRouter } from "./routes/decks.js";
+import { profileRouter } from "./routes/profile.js";
 
 const app = express();
 const port = config.port;
@@ -42,6 +43,7 @@ app.listen(port, () => {
 });
 
 app.use("/bot/game", tokenAuth, gameRouter);
+app.use("/bot/profile", tokenAuth, profileRouter);
 app.use("/bot/decks", tokenAuth, decksRouter);
 app.use("/api", tokenAuth, apiRouter);
 
