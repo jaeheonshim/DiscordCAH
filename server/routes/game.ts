@@ -358,7 +358,7 @@ gameRouter.post("/newRound", function (req, res) {
     }
 
     const newRoundResponse = newRound(game);
-    const judgeBeginTime = Date.now() + game.timing.roundDuration;
+    const judgeBeginTime = Date.now() + game.configuration.roundDuration;
 
     const newRoundEmbed = {
         color: 0x0000FF,
@@ -622,7 +622,7 @@ gameRouter.post("/endRound", function (req, res) {
     const game = retrieveGameById(req.body.gameId);
 
     game.status = CAHGameStatus.PENDING_ROUND_START;
-    const nextRoundBeginTime = Date.now() + game.timing.nextRoundDelay;
+    const nextRoundBeginTime = Date.now() + game.configuration.nextRoundDelay;
 
     const response = {
         channelMessage: {

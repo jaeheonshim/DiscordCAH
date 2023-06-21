@@ -72,7 +72,7 @@ export function dealCardsToPlayers(game: CAHGame, players: CAHPlayer[]) {
     }
 
     for(const player of Object.values(players)) {
-        while(player.cards.length < game.cardHandCount) {
+        while(player.cards.length < game.configuration.cardHandCount) {
             const card = getRandomResponseCard(game.deckId, usedCards);
             player.cards.push(card);
             usedCards.add(card.id);

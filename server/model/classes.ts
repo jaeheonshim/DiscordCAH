@@ -22,14 +22,17 @@ export class CAHGame {
         channelName: "unknown"
     }
 
-    timing = {
-        beginGameDelay: 10 * 1000,
+    configuration = {
         nextRoundDelay: 35 * 1000,
         roundDuration: 2 * 60 * 1000,
-        resultDisplayWait: 10 * 1000
+        cardHandCount: 7,
+        reboot: false
     }
 
-    cardHandCount: number = 7;
+    timing = {
+        beginGameDelay: 10 * 1000,
+        resultDisplayWait: 10 * 1000
+    }
 
     deckId: string = "base_us";
     roundNumber: number = 0;
