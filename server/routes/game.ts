@@ -535,12 +535,6 @@ gameRouter.post("/beginJudging", function (req, res) {
 
     startJudgeStage(game);
 
-    const beginJudgingEmbed = {
-        color: 0x0000FF,
-        title: `Judging will now commence!`,
-        description: `The judge, ${retrieveUsername(game.judge.id)}, will now select the winner for this round.\n\nIn the meantime, here's an interesting fact:\n${randomFunFact()}`,
-    }
-
     const submitted: {
         cards: ResponseCard[],
         player: CAHPlayer
@@ -578,6 +572,32 @@ gameRouter.post("/beginJudging", function (req, res) {
 
         res.json(botResponse);
         return;
+    }
+
+    const submittedCardsList = [];
+    for(let i = 0; i < submitted.length; ++i) {
+        const cards = submitted[i].cards.reduce((prev, card) => prev + `\`${card.text}\`, `, "");
+        submittedCardsList.push(`${i+1}. ${cards.substring(0, cards.length - 2)}`);
+    }
+
+    const beginJudgingEmbed = {
+        color: 0x0000FF,
+        title: `Judging will now commence!`,
+        description: `The judge, ${retrieveUsername(game.judge.id)}, will now select the winner for this round.`,
+        fields: [
+            {
+                name: "Prompt",
+                value: game.promptCard.text
+            },
+            {
+                name: "Submitted Cards",
+                value: submittedCardsList.join("\n")
+            },
+            {
+                name: "Interesting Fact",
+                value: randomFunFact()
+            }
+        ]
     }
 
     const response = {
