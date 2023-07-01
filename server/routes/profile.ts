@@ -55,7 +55,7 @@ profileRouter.post("/me", function (req, res) {
                                 },
                                 {
                                     name: "Win Ratio",
-                                    value: user.statistics.totalPoints / user.statistics.totalSubmissions,
+                                    value: `${user.statistics.totalPoints / user.statistics.totalSubmissions}`,
                                     inline: true
                                 }
                             ]
