@@ -8,5 +8,5 @@ export async function incrementUserStatistic(userId: string, statisticId: UserSt
 }
 
 export async function retrieveUser(userId: string): Promise<IUser> {
-    return await User.findOneAndUpdate({}, {}, findOneOptions);
+    return await User.findOneAndUpdate({_id: userId}, {}, findOneOptions);
 }
